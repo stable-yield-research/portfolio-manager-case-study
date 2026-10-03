@@ -108,10 +108,11 @@ def render():
                 lend=f"{lend:.1f}%", rew=f"{rew:.1f}%", borrow=f"{bor:.1f}%", net=f"{lend + rew + bor:.1f}%")
     st.subheader("Case study scope")
     st.markdown(T("scope.intro"))
-    items = [("01", "Sourcing", "sourcing"), ("02", "Auditability", "current-record"), ("03", "Liquidity", "current-record"),
-             ("04", "Yield decomposition", "current-yield"), ("05", "Risk map", "current-controls-matrix"),
-             ("06", "Monitoring", "current-ops"), ("07", "Team support", "current-ops"), ("08", "Sanity check", "current-ops"),
-             ("09", "Pre-mortem", "current-ops")]
+    items = [("01", "Sourcing", "sourcing#repeatable-process"), ("02", "Auditability", "current-record#track-record"),
+             ("03", "Liquidity", "current-record#position-build"), ("04", "Yield decomposition", "current-yield#yield-decomposition"),
+             ("05", "Risk map", "current-controls-matrix#controls-matrix"), ("06", "Monitoring", "current-ops#exit-triggers"),
+             ("07", "Team support", "current-ops#team-support"), ("08", "Sanity check", "current-ops#opportunity-rationale"),
+             ("09", "Pre-mortem", "current-ops#pre-mortem")]
     rows = ["| | Item | Answer | Section |", "| --- | --- | --- | --- |"]
     for num, name, url in items:
         rows.append(f"| {num} | {name} | {T('scope.' + num, **sfmt)} | [open]({url}) |")
