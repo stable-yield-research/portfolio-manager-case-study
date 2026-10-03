@@ -1,0 +1,1822 @@
+# Stablecoin Carry on Current Finance: full report
+
+Full text export of the interactive report: every page, table, metric and chart data series, in page order. Interactive controls are shown at their default values.
+
+## Contents
+
+**Report**
+
+- [Investment Summary](#summary) - The recommendation, how the position works, its returns, the main risks and how I would run it
+    - [Strategy](#summary--strategy)
+    - [Assessment](#summary--assessment)
+    - [Returns](#summary--returns)
+    - [Risks](#summary--risks)
+    - [Execution](#summary--execution)
+    - [Opportunity rationale](#summary--opportunity-rationale)
+    - [Alternatives](#summary--alternatives)
+    - [Conclusion](#summary--conclusion)
+    - [Case study scope](#summary--case-study-scope)
+
+**Technical appendix**
+
+- [Structure and Yield](#current-yield) - How the two positions fit together, where the return comes from, and how interest rates respond to size
+    - [Structure](#current-yield--structure)
+    - [Rationale for two vaults](#current-yield--rationale-for-two-vaults)
+    - [Yield decomposition](#current-yield--yield-decomposition)
+    - [Interest rate model](#current-yield--interest-rate-model)
+    - [Historical returns](#current-yield--historical-returns)
+- [Track Record, Capacity and Costs](#current-record) - Monthly returns since April, room within Current Finance's limits, entry, exit and their costs
+    - [Track record](#current-record--track-record)
+    - [Capacity](#current-record--capacity)
+    - [Position build](#current-record--position-build)
+    - [Exit](#current-record--exit)
+    - [Exit capacity](#current-record--exit-capacity)
+    - [Limitations of the exit plan](#current-record--limitations-of-the-exit-plan)
+    - [Execution costs](#current-record--execution-costs)
+- [Risk and Leverage](#current-risk) - Why 3.5 times, when a position would be liquidated, the two stablecoins, SUI reward exposure and the risk map
+    - [Leverage policy](#current-risk--leverage-policy)
+    - [Stablecoin analysis](#current-risk--stablecoin-analysis)
+    - [Reward token exposure](#current-risk--reward-token-exposure)
+    - [Risk map](#current-risk--risk-map)
+- [Controls and Security](#current-controls) - Audits, who controls the platform and its code, price feeds, limits and the insurance quote
+    - [Audits and security partners](#current-controls--audits-and-security-partners)
+    - [On-chain review](#current-controls--on-chain-review)
+    - [Admin and upgrade controls](#current-controls--admin-and-upgrade-controls)
+    - [Insurance](#current-controls--insurance)
+- [Monitoring and Operations](#current-ops) - The nine alarms, the monitoring screen, response steps, custody, team support and the pre-mortem
+    - [Exit triggers](#current-ops--exit-triggers)
+    - [Monitoring console](#current-ops--monitoring-console)
+    - [Runbook](#current-ops--runbook)
+    - [Custody and signing](#current-ops--custody-and-signing)
+    - [Team support](#current-ops--team-support)
+    - [Opportunity rationale](#current-ops--opportunity-rationale)
+    - [Pre-mortem](#current-ops--pre-mortem)
+- [Risk Controls and Stress Tests](#current-controls-matrix) - The 57 controls checked against standard risk lists, and how the return holds up under stress
+    - [Stress tests](#current-controls-matrix--stress-tests)
+    - [Controls matrix](#current-controls-matrix--controls-matrix)
+- [Allocation Tool](#allocation) - Interactive sizing: leverage, return, liquidation levels and costs
+    - [Fund limits](#allocation--fund-limits)
+
+**Process**
+
+- [Sourcing and Screening](#sourcing) - How the opportunity was found, the investment tests and every candidate considered
+    - [Investment criteria](#sourcing--investment-criteria)
+    - [Candidates screened](#sourcing--candidates-screened)
+    - [Repeatable process](#sourcing--repeatable-process)
+    - [Pipeline](#sourcing--pipeline)
+- [Data Sources and Methods](#methodology) - Where every number comes from, the assumptions, the disclosure and how AI tools were used
+    - [Data sources](#methodology--data-sources)
+    - [Disclosure](#methodology--disclosure)
+    - [Assumptions](#methodology--assumptions)
+    - [AI use](#methodology--ai-use)
+    - [Data freshness](#methodology--data-freshness)
+    - [Data files](#methodology--data-files)
+    - [Data refresh](#methodology--data-refresh)
+
+**On hold**
+
+- [USD1 Carry (Dolomite)](#usd1) - A second strategy, fully researched and on hold, with the conditions for revisiting it
+    - [Tab: Structure and yield](#usd1--tab-structure-and-yield)
+    - [Structure](#usd1--structure)
+    - [Net APR by leverage](#usd1--net-apr-by-leverage)
+    - [Historical returns](#usd1--historical-returns)
+    - [Yield decomposition over time](#usd1--yield-decomposition-over-time)
+    - [Tab: Track record and liquidity](#usd1--tab-track-record-and-liquidity)
+    - [Track record](#usd1--track-record)
+    - [Guardrail events](#usd1--guardrail-events)
+    - [Live pilot](#usd1--live-pilot)
+    - [Entry and exit](#usd1--entry-and-exit)
+    - [Tab: Risk, WLFI stress and controls](#usd1--tab-risk-wlfi-stress-and-controls)
+    - [Risk map](#usd1--risk-map)
+    - [WLFI-backed borrowers](#usd1--wlfi-backed-borrowers)
+    - [WLFI stress test](#usd1--wlfi-stress-test)
+    - [Expected shortfall](#usd1--expected-shortfall)
+    - [Distance to liquidation](#usd1--distance-to-liquidation)
+    - [Liquidation capacity](#usd1--liquidation-capacity)
+    - [Protocol history](#usd1--protocol-history)
+    - [Stablecoin analysis](#usd1--stablecoin-analysis)
+    - [Admin and upgrade controls](#usd1--admin-and-upgrade-controls)
+    - [Reward durability](#usd1--reward-durability)
+    - [Tab: Monitoring, team and sizing](#usd1--tab-monitoring-team-and-sizing)
+    - [Exit triggers](#usd1--exit-triggers)
+    - [Trigger coverage](#usd1--trigger-coverage)
+    - [Monitoring tools](#usd1--monitoring-tools)
+    - [Runbook](#usd1--runbook)
+    - [Review cadence](#usd1--review-cadence)
+    - [Monitoring console](#usd1--monitoring-console)
+    - [Team support](#usd1--team-support)
+    - [Opportunity rationale](#usd1--opportunity-rationale)
+    - [Pre-mortem](#usd1--pre-mortem)
+    - [Sizing](#usd1--sizing)
+    - [Fund limits](#usd1--fund-limits)
+    - [Size limits](#usd1--size-limits)
+    - [Position legs per $1 of equity](#usd1--position-legs-per-1-of-equity)
+- [reUSD Liquidity (Resupply)](#reusd) - A third strategy, fully researched and on hold, with the conditions for revisiting it
+    - [Tab: Structure and yield](#reusd--tab-structure-and-yield)
+    - [Tab: Depeg and exit rules](#reusd--tab-depeg-and-exit-rules)
+    - [Tab: Insurance pool and record](#reusd--tab-insurance-pool-and-record)
+    - [Tab: Liquidity](#reusd--tab-liquidity)
+    - [Tab: Risk](#reusd--tab-risk)
+    - [Tab: Monitoring](#reusd--tab-monitoring)
+    - [Tab: Sourcing and pre-mortem](#reusd--tab-sourcing-and-pre-mortem)
+    - [Tab: Stablecoins and controls](#reusd--tab-stablecoins-and-controls)
+
+---
+
+# Section: Report
+
+---
+
+<a id="summary"></a>
+Investment memorandum
+
+# Stablecoin Carry on Current Finance: Allocation Proposal
+
+_Live rates from Current Finance's API, latest day: 2026-10-02_
+
+_Investment memorandum · October 2026 · Current Finance data to 2 October 2026_
+
+I recommend putting $1.5M, about 4% of the fund, into a leveraged USDC and USDSUI carry on Current Finance (current.finance), a lending platform on Sui, at 3.5 times leverage. In September it earned about 15% a year after costs at that size, from lending interest and SUI rewards net of borrowing costs. The USDSUI the fund holds equals the USDSUI it owes, so its capital stays in USDC with no net exposure to USDSUI's price. Only a USDSUI move of 16% or more would force a sale. SUI rewards are sold or hedged daily.
+
+This is a small, higher-risk position next to the fund's simpler stablecoin holdings. I left out the well-known options, such as lending on Aave and Morpho or fixed-rate products on Pendle, because I assume the team already uses them and their returns tend to fall quickly as more money arrives. Positions that earn more than 12% at this size are rare today without automated trading. This one needs no automation, but it takes more steps than plain lending, so I would keep it small and set the exit rules in advance.
+
+The table at the end of this page shows where each question in the case study brief is answered.
+
+<a id="summary--strategy"></a>
+### Strategy
+
+In plain terms: the fund deposits USDC, borrows USDSUI against it, swaps the USDSUI into USDC and deposits that as well. Doing this until the deposits are 3.5 times the fund's own money is the leverage. A second, mirror-image position deposits USDSUI and borrows USDC. The USDSUI the fund owes in the first position equals the USDSUI it holds in the second, so small changes in USDSUI's price cancel out. Each position on its own is still exposed, which is why a USDSUI move of 16% or more would force the sale of one of them.
+
+The fund earns interest and SUI rewards on everything it deposits, and pays interest on what it borrows. The difference is the return. On Current Finance each position is a "Multiply vault", a tool that builds the leveraged position in a single transaction.
+
+- **Return, September:** 14.8% (At $1.5M and 3.5x, before costs. Lowest day 11.2%.)
+
+- **Return after costs, one year:** 14.7% (Round trip $2.1K.)
+
+- **USDSUI move before forced sale:** +19% / -16% (Move in USDSUI against USDC that would liquidate the first / second position.)
+
+- **Entry cost, earned back in:** 1.7 days ($1.0K entry in tranches.)
+
+<a id="summary--assessment"></a>
+### Assessment
+
+The case for it is straightforward. The fund's money stays in USDC, it has no net exposure to USDSUI's price, and the SUI rewards are easy to sell every day. Current Finance's code has been reviewed by five independent security firms and in a public bug-finding contest, and an outside risk firm, Allez Labs, reviews its settings.
+
+There are three weaknesses. Current Finance is only six months old. Without the SUI rewards the position would lose about 4% a year, so the return depends on Current Finance continuing to pay them. And USDSUI's issuer, Bridge, a regulated Stripe company, reports its own reserves, but no independent firm has checked them yet.
+
+I would review the position if either stablecoin moved more than 0.5% away from one dollar. I would exit if it moved more than 2%, if Current Finance were hacked or its administrators made an unexplained change, or if the return stayed below 12% for two weeks.
+
+<a id="summary--returns"></a>
+### Returns
+
+**Chart: Monthly return at 3.5 times leverage and $1.5M**
+
+- net at $1.5M: 2026-04: 7.021, 2026-05: 13.303, 2026-06: 9.672, 2026-07: 10.91, 2026-08: 14.626, 2026-09: 14.839
+
+_In June and July Current Finance's pools were about a third of today's size, so a $1.5M position would have diluted the rewards more and earned less._
+
+| Investment criterion                          | Current Finance carry                                                                    |
+|:----------------------------------------------|:-----------------------------------------------------------------------------------------|
+| Return of 12% or more after costs             | 14.7% at $1.5M in September conditions                                                   |
+| Held for at least a month                     | Above 12% at $1.5M in August and September, and every month since May at small size      |
+| Takes $1.5M without falling below 12%         | Within all of Current Finance's limits, about 8% of the USDSUI pool                      |
+| Can be exited at full size                    | Exit in batches over about two days, with costs set aside at 0.10% of the money invested |
+| Income from on-chain lending and paid rewards | Lending spread and SUI rewards, claimable at any time                                    |
+| No reliance on token prices                   | The USDSUI owed equals the USDSUI held, and SUI is sold daily                            |
+| Every part of the return can be traced        | Hourly rates and reward rates from Current Finance's own data                            |
+| Protocol maturity                             | Live since March 2026, which is the main open point                                      |
+
+<a id="summary--risks"></a>
+### Risks
+
+1. The biggest risk is a hack of Current Finance. If an attacker found a flaw, Current Finance could freeze withdrawals and the fund could not get its money out quickly. The code has been reviewed by five security firms and in a public contest, and every serious finding was fixed. Outside firms review every change to the code and settings, and a change to the settings must wait a day after it is proposed before it takes effect. A monitoring firm watches for attacks in real time, and daily withdrawal limits slow down any theft. Insurance is available from Nexus Mutual, but at about 4.3% a year it would cost too much of the return. In the end, the small size of the position is what limits the damage.
+2. The second risk is a stablecoin losing its dollar value, or a wrong price reaching the platform. The fund's positions would only be forcibly closed (liquidated) if USDSUI moved about 16% to 19% against USDC. Its largest move so far is 1.3%. Bridge exchanges USDSUI for dollars one to one, and Current Finance ignores any price more than 5% away from one dollar, so a wrong price cannot cause a liquidation. One specific risk: Bridge creates new USDSUI with a single key. If that key were stolen, the thief could create USDSUI with nothing behind it and use it to borrow real USDC from the pool the fund lends into. Current Finance's daily borrowing limit would cap the fund's loss at about 7% of its money in a day.
+3. The third risk is a cut in the SUI rewards. A cut of 15% would take the return below 12%. I would check the reward rate every day and exit if a cut lasted two weeks.
+
+<a id="summary--execution"></a>
+### Execution
+
+I would build the position in batches of $150,000 to $300,000, as fast as the market allows without moving USDSUI's price. Current Finance limits new USDSUI borrowing to $0.7M a day across all users, so this takes three to four days. To keep entry costs down, the fund can receive USDC on Sui directly from an exchange or through a bridge, and, with an account at Bridge, can create USDSUI one to one instead of buying it on the market.
+
+Leverage starts at 3.5 times. I would rebalance once a month, because interest slowly eats into the safety margin, and would only consider going up to 4.5 times after six to twelve months without problems, an independent review of the price feed and insurance at a reasonable price.
+
+The SUI rewards would be claimed every day and either sold or protected against a fall in price with a short futures position.
+
+The size of the position depends on how quickly it can be closed. Today about $1M of USDSUI can be exchanged for USDC at a cost below 0.03%, so the whole position can be closed in a few batches. If that becomes more expensive, I would reduce the position. Closing costs are set aside at 0.10% of the money invested and tested at 0.62% in a bad market.
+
+<a id="summary--opportunity-rationale"></a>
+### Opportunity rationale
+
+Most active curators and allocators work on EVM networks and Solana. Sui is not EVM-compatible, so their integrations, tooling and infrastructure do not carry over and have to be built from scratch, and few funds have done that. Current Finance only launched in March 2026, so many funds have not yet approved it. The position also takes more work than a single deposit. Together these keep the return higher than on the better-known platforms.
+
+Most of my time went into the risks. I measured how Current Finance's interest rates move using its own hourly data, checked who controls the platform and its code, worked out the cost of getting out, and set the leverage from USDSUI's actual price history rather than from the maximum the platform allows.
+
+<a id="summary--alternatives"></a>
+### Alternatives
+
+The simplest alternative is to lend USDC on Current Finance without leverage, which pays about 8.3% with the same platform risk. The leveraged position adds about 6.4 points in exchange for the risk of a forced sale if USDSUI moved 16% or more, and some sensitivity to USDSUI interest rates. Apart from the two strategies on hold, I looked at 24 other opportunities. The stablecoin positions advertising 20% to 30% elsewhere do not have enough borrowing room for $1.5M. The others fell short on size, ease of exit or where the return comes from. The screening page lists them all, including those that could work with automation or a longer record.
+
+Two more strategies were fully researched and are on hold until specific conditions are met: a [USD1 carry on Dolomite](usd1) and a [reUSD liquidity position on Curve](reusd). Each has its own page at the end of the report.
+
+<a id="summary--conclusion"></a>
+### Conclusion
+
+Current Finance can take $1.5M today at about 14.7% a year after costs, with the fund's money kept in dollar stablecoins. It is a small position at the riskier end of the fund and needs close watching. On those terms I am comfortable running it.
+
+<a id="summary--case-study-scope"></a>
+### Case study scope
+
+Each question in the case study brief, with a short answer and a link to the page that covers it.
+
+| | Item | Answer | Section |
+| --- | --- | --- | --- |
+| 01 | Sourcing | Every candidate went through the same investment tests (24 in total). This strategy came from searching lending platforms on newer blockchains for rewards paid on both sides of a stablecoin pair. The search can be repeated every week from the same data sources. | [open](sourcing) |
+| 02 | Auditability | Returns are rebuilt from Current Finance's own published data since launch: hourly interest rates, how much is deposited and how much is lent out, and its SUI reward rates. At $1.5M and 3.5 times leverage the position earned 14.6% in August and 14.8% in September. The scripts and data are in the repository, and a small live test confirmed that the positions and reward payouts work as described. | [open](current-record) |
+| 03 | Liquidity | Entry in batches of $150,000 to $300,000 over three to four days. To exit, each position is partly closed and the proceeds repay the other position's debt, which reduces the amount swapped. The swaps run in batches of up to $1M. A full exit takes about two days. Entry costs about $1,035. Exit costs are set aside at 0.10% of the money invested and tested at 0.62%. A hack that freezes withdrawals is outside this plan. | [open](current-record) |
+| 04 | Yield decomposition | At 3.5 times leverage and $1.5M, over the last 30 days: interest earned 11.0%, SUI rewards 18.7%, interest paid -15.0%, return 14.7%. Leverage adds to the return because the deposits, including rewards, earn more than the loans cost. | [open](current-yield) |
+| 05 | Risk map | The main risks are ranked in this summary and covered in detail on the risk pages. A table of 57 controls checks the position against three standard risk lists: the Enterprise Ethereum Alliance's list of DeFi risks, traditional credit risks, and the EU's ESMA guidelines. Stress tests cover reward cuts, jumps in interest rates, a stablecoin losing its dollar value, price-feed failures and USDSUI created without backing. | [open](current-controls-matrix) |
+| 06 | Monitoring | Nine alarms (K1 to K9), each with a warning level and an action level, shown on a monitoring screen with live data. They use Current Finance's own data, events recorded on the Sui blockchain, an independent stablecoin rating service (Pharos) and a security monitoring firm (Hypernative). | [open](current-ops) |
+| 07 | Team support | A review of the code that builds the leveraged positions and of the administrators' powers, secure handling of the fund's keys and transactions, a review of the USDSUI price feed before any increase above 3.5 times, and the trading desk for the daily SUI sales and the batches in and out. | [open](current-ops) |
+| 08 | Sanity check | Most curators and allocators work on EVM networks and Solana, and Sui is not EVM-compatible, so their tooling has to be rebuilt from scratch. Current Finance only launched in March 2026. The position needs two linked parts, and the room is limited: Current Finance's pools only became large enough for this size in August. | [open](current-ops) |
+| 09 | Pre-mortem | Most likely, a hack of Current Finance that froze withdrawals before the fund could get out. Second, a cut in the SUI rewards followed by a late exit, since without the rewards the position loses money. | [open](current-ops) |
+
+_Performance figures are reconstructed from public on-chain and protocol data at the stated position sizes. They are not the record of a live book. Small live pilots confirmed the mechanics, including reward payouts. The sourcing framework, risk checklist, process manual and dashboard tooling behind this report were built before the case study. The work this week went into applying them to current opportunities and running the analysis._
+
+---
+
+# Section: Technical appendix
+
+---
+
+<a id="current-yield"></a>
+Current Finance carry · technical analysis
+
+# Structure and Yield
+
+_Live rates from Current Finance's API, latest day: 2026-10-02_
+
+_Control: Leverage of each vault = 3.5 (default)_
+
+<a id="current-yield--structure"></a>
+### Structure
+
+The position has two vaults, both Multiply positions on Current Finance.
+
+| | Deposits | Borrows | Swaps the loan into |
+| --- | --- | --- | --- |
+| Vault 1 | USDC | USDSUI | USDC |
+| Vault 2 | USDSUI | USDC | USDSUI |
+
+At 3.5x, 58% of the equity goes into vault 1 and 42% into vault 2. With that split, the USDSUI owed in vault 1 equals the USDSUI held in vault 2. The fund has no net USDSUI, and the position behaves as USDC.
+
+The income is the lending spread on both stablecoins plus the SUI rewards paid on both deposits. Rewards accrue continuously and can be claimed daily. Current Finance's points programme and locked season rewards are not counted.
+
+| per $1 of equity                           |   amount |
+|:-------------------------------------------|---------:|
+| USDC supplied                              |     2.04 |
+| USDSUI borrowed (vault 1) = held (vault 2) |     1.46 |
+| USDC borrowed (vault 2)                    |     1.04 |
+
+<a id="current-yield--rationale-for-two-vaults"></a>
+### Rationale for two vaults
+
+One position on its own would leave the fund owing USDSUI while holding USDC, so a rise in USDSUI's price would cost the fund money. The second position holds the same amount of USDSUI that the first one owes, which cancels that exposure. It also lets the fund earn the SUI rewards paid on USDSUI deposits as well as those on USDC.
+
+Building the position means swapping about $2.2M between USDC and USDSUI. That is done in batches, so each swap is small enough not to move the price, and the swaps in the two positions run in opposite directions and partly offset each other. USDSUI's share of the pool that is lent out rises by only about two points.
+
+Current Finance only lets an account lend or borrow a given coin in one direction, so the two directions sit in separate positions. A small pilot confirmed that both can be held at the same time and that SUI rewards arrive and can be withdrawn.
+
+<a id="current-yield--yield-decomposition"></a>
+### Yield decomposition
+
+**Chart: Yield by source at 3.5x on $1.5M, last 30 days: net 14.7%**
+
+- waterfall: USDC lending (base): 3.755, SUI rewards on USDC: 12.892, USDSUI lending (base): 7.214, SUI rewards on USDSUI: 5.815, USDSUI borrow cost: -10.994, USDC borrow cost: -4.017
+
+_Rates come from Current Finance's hourly history, and rewards from Current Finance's reward rate for each market. At this size the fund's own deposits dilute the rewards, and its borrowing pushes utilization along the rate curve shown below._
+
+<a id="current-yield--interest-rate-model"></a>
+### Interest rate model
+
+Both markets follow the same rate curve, measured from Current Finance's hourly data. Borrowing costs about 0.5% plus 5.6% per unit of utilization up to an 80% kink, where the rate is about 5%. Above the kink the rate rises by roughly 0.9 points for every extra 1% of utilization.
+
+USDSUI usually sits near the kink, so its borrow rate is the one to watch. Because the fund lends and borrows the same amount of USDSUI, part of any rise in the borrow rate comes back as higher lending income. Net, the fund carries only about a third of a USDSUI rate spike.
+
+**Chart: Borrow APR vs utilization (%)**
+
+- borrow APR: 91 points from 0.0 to 90.0; first 0.5, last 13.98, min 0.5, max 13.98, mean 3.53
+- USDSUI, daily: 170 points from 73.1389315 to 78.2136707; first 4.612, last 4.9, min 3.379, max 8.314, mean 5.248
+- USDC, daily: 170 points from 39.2968305 to 60.5919348; first 2.713, last 3.908, min 2.713, max 5.649, mean 4.034
+
+<a id="current-yield--historical-returns"></a>
+### Historical returns
+
+| month   |   3.0x zero |   3.0x $1.5M |   3.5x zero |   3.5x $1.5M |   4.5x zero |   4.5x $1.5M |
+|:--------|------------:|-------------:|------------:|-------------:|------------:|-------------:|
+| 2026-04 |        18.4 |          7.5 |        20.9 |          7   |        25.8 |          5.6 |
+| 2026-05 |        15.9 |         12.3 |        17.9 |         13.3 |        21.9 |         14.9 |
+| 2026-06 |        13.4 |          9.3 |        14.8 |          9.7 |        17.7 |          9.9 |
+| 2026-07 |        15.1 |         10.5 |        16.8 |         10.9 |        20.2 |         11.2 |
+| 2026-08 |        16.7 |         13.7 |        18.7 |         14.6 |        22.5 |         16.2 |
+| 2026-09 |        15.4 |         13.7 |        17.2 |         14.8 |        20.8 |         16.9 |
+| 2026-10 |        14.7 |         13.7 |        16.3 |         15.1 |        19.7 |         17.5 |
+
+**Chart: Net yield, 7-day average (%)**
+
+- 3.5x at $1.5M: 170 points from 2026-04-16 to 2026-10-02; first 2.235, last 16.154, min 2.235, max 19.938, mean 11.979
+- 3.5x, zero size: 170 points from 2026-04-16 to 2026-10-02; first 13.856, last 17.577, min 11.569, max 32.71, mean 17.362
+
+---
+
+<a id="current-record"></a>
+Current Finance carry · technical analysis
+
+# Track Record, Capacity and Costs
+
+_Live rates from Current Finance's API, latest day: 2026-10-02_
+
+<a id="current-record--track-record"></a>
+### Track record
+
+The returns are rebuilt from Current Finance's own data since launch on 23 March 2026: hourly borrow and supply rates, utilization, amounts supplied and borrowed, and prices. The SUI reward rates are Current Finance's own figures. Today's come straight from its reward API, and the daily history is the record DefiLlama keeps of the same figures.
+
+The pools grew about four times between July and September, and that growth is what makes $1.5M fit today. At this size the strategy would have cleared 12% in May, August and September. In June and July the pools were about a third of today's size, so the yield at $1.5M would have been lower.
+
+| month   | net at 3.5x, $1.5M   | meets 12%   | USDC supplied   | USDSUI supplied   |
+|:--------|:---------------------|:------------|:----------------|:------------------|
+| 2026-04 | 7.0%                 | no          | $4.2M           | $1.6M             |
+| 2026-05 | 13.3%                | yes         | $11.9M          | $8.2M             |
+| 2026-06 | 9.7%                 | no          | $8.5M           | $6.4M             |
+| 2026-07 | 10.9%                | no          | $10.6M          | $6.8M             |
+| 2026-08 | 14.6%                | yes         | $23.3M          | $11.9M            |
+| 2026-09 | 14.8%                | yes         | $41.1M          | $17.4M            |
+
+- **Net, last 30 days:** 14.9%
+
+- **Net, September:** 14.8%
+
+- **Lowest day, September:** 11.2%
+
+<a id="current-record--capacity"></a>
+### Capacity
+
+| market        | fund needs   | room under cap   | fund share after entry   |
+|:--------------|:-------------|:-----------------|:-------------------------|
+| USDC supply   | $3.06M       | $16.73M          | 5.4%                     |
+| USDC borrow   | $1.56M       | $3.34M           | 4.6%                     |
+| USDSUI supply | $2.19M       | $4.88M           | 8.0%                     |
+| USDSUI borrow | $2.19M       | $5.65M           | 10.2%                    |
+
+_Daily caps, shared by all users: new borrowing $2.0M of USDC and $0.7M of USDSUI, withdrawals $5.0M of USDC and $1.3M of USDSUI._
+
+<a id="current-record--position-build"></a>
+### Position build
+
+I would build it as fast as the market allows without moving the price. Tranches of $150k to $300k a side alternate between the two vaults, so each vault's swap partly offsets the other's. The next tranche goes in only when USDSUI is back at par and the quoted slippage is within limits.
+
+The real limit is Current Finance's cap on new USDSUI borrowing, $0.7M a day across all users. That puts the full build at about three to four days.
+
+Entry costs can be cut further. USDC can arrive on Sui directly from an exchange that supports Sui withdrawals or through a bridge, and with an account at Bridge the fund can create USDSUI one to one instead of buying it on the market.
+
+<a id="current-record--exit"></a>
+### Exit
+
+A Multiply position cannot borrow or withdraw on its own. It can be partly closed, which swaps part of the collateral to repay part of the debt and returns the rest in USDC or USDSUI, and its debt can be repaid with coins from outside. The pilot vaults confirmed both.
+
+The exit alternates between the two positions. Part of vault 1 is closed into USDC, which repays part of vault 2's USDC debt. Part of vault 2 is then closed into USDSUI, which repays part of vault 1's USDSUI debt, and so on. Each repayment from outside means less has to be swapped inside the next close, so the exit is cheaper than closing each position on its own. It is not free: every partial close still swaps part of the collateral.
+
+Each close also withdraws collateral, so it needs free cash in the lending pools. Today the USDSUI pool has about $5.8M free against the $2.2M the fund would withdraw. In a run on Current Finance that cash can disappear, and the exit then waits for borrowers to repay. The daily withdrawal caps ($1.3M of USDSUI and $5M of USDC) are shared by all users, so a full exit takes about two days, and longer if others are leaving at the same time.
+
+<a id="current-record--exit-capacity"></a>
+### Exit capacity
+
+Today about $1M of USDSUI can be swapped for less than 0.03%, out of roughly $8M of pool liquidity on Bluefin, Cetus and Turbos. Bridge mints and redeems USDSUI 1:1, which pulls the price back to par between tranches. I size the position so the whole exit fits in a few of these tranches. Trigger K9 checks the quoted cost of a $1M swap every day. If that cost rises, the position shrinks until the exit fits again.
+
+<a id="current-record--limitations-of-the-exit-plan"></a>
+### Limitations of the exit plan
+
+A depeg is unlikely, since Bridge issues and redeems at par. The plan has three limits. First, a protocol exploit that pauses withdrawals: the exit then depends on the protocol rather than on market liquidity, which is the main reason the position stays small. Second, a run that drains free cash from the two lending pools: the exit waits for repayments, which rising rates speed up. Third, the shared daily caps can be deliberately kept full. The Sherlock contest found that an attacker can time withdrawals across the caps' rolling windows to keep them artificially exhausted, and the team acknowledged the finding without a fix. That could stretch the exit by several days.
+
+<a id="current-record--execution-costs"></a>
+### Execution costs
+
+Costs come from live swap quotes and Current Finance's 0.01% Multiply fee on the leveraged size. Buying USDSUI costs about 0.02% to 0.03%, because it trades slightly above par. Selling it costs close to nothing.
+
+In the fund's accounts I would provision the cost of a fast exit at 0.028% of equity per unit of leverage. I also stress-test the exit at the full 0.2% slippage limit on every swap. Both figures assume every swap is made in full. Repaying one position's debt with the other's proceeds reduces the swaps, so the real cost should be somewhat lower.
+
+| item                                                      | amount   | note                                      |
+|:----------------------------------------------------------|:---------|:------------------------------------------|
+| Leveraged size (Multiply fee base)                        | $5.3M    |                                           |
+| Swapped each way at entry                                 | $2.2M    |                                           |
+| Entry in tranches                                         | $1.0K    | 0.069% of equity, earned back in 1.7 days |
+| Normal round trip                                         | $2.1K    | 0.138%                                    |
+| Fast exit at today's prices                               | $1.3K    | 0.084%                                    |
+| Exit provision in the fund's accounts (0.028% x leverage) | $1.5K    | 0.098%                                    |
+| Stressed exit (0.2% slippage on every swap)               | $9.3K    | 0.618%. One month's yield is 1.24%        |
+
+---
+
+<a id="current-risk"></a>
+Current Finance carry · technical analysis
+
+# Risk and Leverage
+
+<a id="current-risk--leverage-policy"></a>
+### Leverage policy
+
+I set leverage so that a liquidation needs a move many times larger than anything the pair has done. USDSUI's widest moves on record are +1.30% and -0.63%.
+
+Current Finance prices USDSUI and USDC from Pyth and rejects any price more than 5% away from a reference price set by its admin. A faulty or manipulated feed therefore cannot push a vault into liquidation. A real depeg beyond 5% would also stop price-dependent actions until the admin updates the reference, and the governance module lets the admin change those tolerances without a timelock.
+
+At 3.5x a vault is only liquidated by a move of about 16% to 19%, more than ten times the widest on record. At 4.5x the distance falls to about 8.5% to 9%, still about 6.5 times the widest move and outside the 5% band, so 4.5x is the ceiling. I would only move towards it after six to twelve months without problems and with insurance at a price that keeps the yield above the 12% hurdle.
+
+| leverage   | vault 1 liquidated at USDSUI/USDC   | vault 2 liquidated at   | distance vs widest USDSUI move   | beyond the ±5% oracle band   | net at $1.5M, September   | policy                    |
+|:-----------|:------------------------------------|:------------------------|:---------------------------------|:-----------------------------|:--------------------------|:--------------------------|
+| 3x         | 1.275 (+27.5%)                      | 0.784 (-21.6%)          | 17x                              | yes                          | 13.7%                     |                           |
+| 3.5x       | 1.190 (+19.0%)                      | 0.840 (-16.0%)          | 12x                              | yes                          | 14.8%                     | start                     |
+| 4x         | 1.133 (+13.3%)                      | 0.882 (-11.8%)          | 9x                               | yes                          | 15.9%                     |                           |
+| 4.5x       | 1.093 (+9.3%)                       | 0.915 (-8.5%)           | 7x                               | yes                          | 16.9%                     | maximum, after conditions |
+| 4.8x       | 1.074 (+7.4%)                       | 0.931 (-6.9%)           | 5x                               | yes                          | 17.4%                     | protocol maximum          |
+
+_USDSUI's widest recorded moves are +1.30% and -0.63%. On Current Finance's own price feed since April, USDSUI/USDC has stayed between 0.9999 and 1.0024 hourly. The largest one-hour move was 0.085% and the largest one-day move 0.2%._
+
+<a id="current-risk--stablecoin-analysis"></a>
+### Stablecoin analysis
+
+|                          | USDC                                                              | USDSUI                                                                                                   |
+|:-------------------------|:------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------|
+| Issuer / mechanism       | Circle, 1:1 fiat-backed                                           | Bridge (a Stripe company), 1:1 fiat-backed, Open Issuance                                                |
+| Backing                  | Cash and short-dated T-bills (reserve fund managed by BlackRock)  | T-bills, repos, government money-market funds, cash (Lead Bank, BlackRock, Fidelity)                     |
+| Reserve evidence         | Monthly attestations                                              | Issuer proof of reserves                                                                                 |
+| Holder exit              | Redemption through Circle, deep markets everywhere                | Redemption for Bridge customers, DEX otherwise                                                           |
+| Freeze or seizure        | Yes, issuer can freeze                                            | Yes, issuer can freeze                                                                                   |
+| Peg record               | Fell to 0.877 in March 2023 (bank failure), recovered within days | Widest moves +1.30% / -0.63%, and within 0.25% of USDC on Current Finance's feed since April             |
+| Independent rating       | A+ (90/100)                                                       | C- (50/100)                                                                                              |
+| Backing / exit / control | 89 / 100 / 84                                                     | 59 / 41 / 53                                                                                             |
+| Reserve assurance        | Monthly Deloitte examinations                                     | Self-reported, no independent attestation                                                                |
+| Exit capacity            | 77% of $25M executable immediately at 5 bps                       | Institutional redemption in 1 to 7 days, about $1.5M of effective DEX depth within $8M of pool liquidity |
+| Mint and upgrade control | Circle (issuer-controlled)                                        | Single-key Bridge addresses (minter, upgrade)                                                            |
+| Peg incidents on record  | 3 (incl. March 2023)                                              | 0                                                                                                        |
+| Early-warning score      | 15/100, calm                                                      | 7/100, calm                                                                                              |
+| Role                     | The fund's equity and the collateral of vault 1                   | Owed in vault 1 and held in vault 2, in equal amounts                                                    |
+
+_Independent rating, pillar scores, reserve assurance, exit capacity, controls and early-warning score: Pharos (pharos.watch), 1 October 2026. Other rows: issuer disclosures and on-chain checks._
+
+USDSUI is issued by Bridge, a Stripe company registered with FinCEN as a money transmitter. Bridge mints and redeems it 1:1 for eligible institutional customers. Reserves are about 90% short-dated Treasury bills and 10% cash, held in segregated accounts at Lead Bank, BlackRock and Fidelity. Supply is about $77M and growing.
+
+Bridge publishes the reserves through its own real-time feed, but no independent firm attests to them yet. That is the main reason Pharos, an independent rating service, grades USDSUI C- (50/100). Redemption limited to institutional customers and minting controlled by a single key also weigh on the grade. The peg record itself is clean, with no incidents and widest moves of +1.30% and -0.63%. For comparison, USDC is rated A+ (90/100) and is examined monthly by Deloitte.
+
+In this structure the fund owes exactly the USDSUI it holds, so it never needs to redeem or sell USDSUI in size. The weaknesses that matter are a depeg, which the liquidation distance covers, and the single-key mint, which Current Finance's borrow caps limit. Both are covered on the Risk Controls and Stress Tests page. Bridge's package upgrade key is also a single wallet, so an upgrade could in principle freeze the USDSUI the fund holds in vault 2. And Current Finance prices USDSUI from a Pyth feed with a minimum of only two publishers.
+
+<a id="current-risk--reward-token-exposure"></a>
+### Reward token exposure
+
+Rewards accrue continuously and can be claimed every day. I would claim daily and either sell the SUI or hedge it with a short perpetual the same day. The exposure is then never more than one day of rewards, under $800 at $1.5M. Once the monitoring tooling is built, claims and hedges can run automatically, together with responses to stress alerts.
+
+SUI trades in deep markets, with about $48M of bids within 2% of the price, $1.1B of daily spot volume and $1.4B of perpetual open interest.
+
+<a id="current-risk--risk-map"></a>
+### Risk map
+
+| Category             | Risk                                                                                                                        | Impact   | Likelihood   | Mitigation                                                                                                                                                               | Trigger   |
+|:---------------------|:----------------------------------------------------------------------------------------------------------------------------|:---------|:-------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|
+| 3.1.2 Smart contract | Exploit that pauses withdrawals: the position cannot be unwound quickly                                                     | 🔴 High   | 🟢 Low        | Modest size, event monitoring, Nexus Mutual cover, exit sized to the market                                                                                              | K6        |
+| 3.1.2 Smart contract | Young protocol (live since March 2026)                                                                                      | 🔴 High   | 🟢 Low        | Five audits and a Sherlock contest with every critical and high finding fixed, formal verification, Asymptotic reviews every change, Hypernative monitoring, modest size | K6        |
+| 3.2 Governance       | Admin capabilities in one governance object. SuperAdmin cannot be revoked, and some actions skip the one-day timelock       | 🟠 Medium | 🟢 Low        | Event monitoring on admin actions, ask who holds SuperAdmin and how it is secured                                                                                        | K6        |
+| 3.2 Governance       | Caller capabilities (flash loans, E-Mode entry) held by two single-key wallets                                              | 🟢 Low    | 🟢 Low        | Flash loans repay in the same transaction, admin can revoke                                                                                                              | K6        |
+| 3.1.5 Oracle         | Oracle: a thin USDSUI feed (minimum 2 publishers), and an admin reference price whose 5% band can change without a timelock | 🔴 High   | 🟢 Low        | Prices more than 5% from the reference are rejected, at 3.5x a liquidation needs a 16% to 19% move, average price for valuation                                          | K1        |
+| 3.1.2 Smart contract | Daily caps can be kept full by an attacker (Sherlock finding, acknowledged and not fixed), stretching the exit              | 🟠 Medium | 🟢 Low        | Exit starts early on warnings, size kept modest                                                                                                                          | K3        |
+| 3.4 Standards        | USDSUI package upgrade held by a single Bridge key: an upgrade could freeze the USDSUI held in vault 2                      | 🟠 Medium | 🟢 Low        | Issuer watch, net USDSUI zero, exit on any unexplained USDSUI upgrade                                                                                                    | K7        |
+| 3.1.2 Smart contract | Vault health drifts down as interest accrues on the USDSUI debt                                                             | 🟢 Low    | 🔴 High       | Monthly rebalance back to 3.5x                                                                                                                                           | K2        |
+| 3.4 Standards        | USDSUI or USDC depeg                                                                                                        | 🟠 Medium | 🟢 Low        | Net USDSUI zero, vault liquidation needs a move of about 16% to 19%                                                                                                      | K1, K2    |
+| 3.2.3 Tokenomics     | SUI rewards are about 60% of gross yield                                                                                    | 🟠 Medium | 🟠 Medium     | Monthly test against 12%, rotate if it fails for two weeks                                                                                                               | K4        |
+| 3.7 Market           | SUI price between claims                                                                                                    | 🟢 Low    | 🔴 High       | Claim daily, sell or hedge with a short SUI perpetual the same day, automate later                                                                                       | K5        |
+| 3.7.2 Liquidity      | USDSUI rate above the 80% kink                                                                                              | 🟠 Medium | 🟠 Medium     | The fund owes and holds equal USDSUI, so it pays only about a third of any spike                                                                                         | K3        |
+| 3.7.2 Liquidity      | Exit speed limited by shared daily withdrawal caps                                                                          | 🟠 Medium | 🟢 Low        | Partial closes alternating between the two positions, swaps sized to fit a few $1M batches, exit cost provisioned as if every swap were made                             | K3, K9    |
+| 3.1.3 Blockchain     | Sui chain halt or congestion                                                                                                | 🟠 Medium | 🟢 Low        | Size limit, monitoring                                                                                                                                                   | K6        |
+| 3.3 Compliance       | Bridge (USDSUI issuer) can freeze tokens                                                                                    | 🟢 Low    | 🟢 Low        | USDSUI held equals USDSUI owed                                                                                                                                           | K6        |
+| 3.5 Credit           | USDSUI unbacked mint: single-key minter, fake USDSUI posted on Current Finance to borrow the USDC the fund supplies         | 🔴 High   | 🟢 Low        | Bounded by the room under Current Finance's USDC borrow cap and its $2M daily borrow limit, Current Finance attack monitoring, supply-jump trigger                       | K7        |
+| 3.4 Standards        | USDSUI reserves reported by the regulated issuer, not independently attested (rated C-, USDC A+)                            | 🟠 Medium | 🟢 Low        | USDSUI owed equals USDSUI held, so the fund never redeems it. Issuer watch                                                                                               | K7        |
+
+_Trigger IDs refer to the Monitoring and Operations page._
+
+---
+
+<a id="current-controls"></a>
+Current Finance carry · technical analysis
+
+# Controls and Security
+
+<a id="current-controls--audits-and-security-partners"></a>
+### Audits and security partners
+
+Current Finance's contracts were audited by Asymptotic (lending, leverage and governance), MoveBit (protocol and oracle in September 2025, governance earlier), ScaleBit (a penetration test) and Zellic, and went through a public Sherlock contest in March 2026. Asymptotic also verified the contracts formally at launch, using the Sui Prover it built for this work, and it has reviewed every code change since.
+
+| Review | Findings | Status |
+| --- | --- | --- |
+| MoveBit, protocol and oracle (Sep 2025) | 1 critical, 4 major, 3 medium, 6 minor or informational | Critical fixed. Two major findings acknowledged as design choices: self-liquidation, now removed by separate borrowing and liquidation thresholds, and a strict price-freshness rule that requires a price update in the same transaction. |
+| Asymptotic, lending | 1 high, 4 medium, plus low and advisory | All remediated |
+| Asymptotic, leverage and governance | 4 medium, 9 low, 6 advisory | All remediated, including the timelock raised from 10 seconds to one day |
+| MoveBit, governance | 2 medium, 2 informational | One medium fixed, one acknowledged |
+| Sherlock contest (Mar 2026) | 2 high, 4 medium, 4 low | All fixed or acknowledged. One acknowledged medium lets an attacker keep the daily caps full. |
+
+Allez Labs reviews every listing, cap and parameter change. It was founded by Aave's founding risk manager and also works on risk for Aave and Kamino. Hypernative monitors the protocol in real time, Pyth supplies the prices, and Nexus Mutual sells cover.
+
+Formal verification proves that the contracts do what their specification says. It does not cover the Sui chain itself, admin decisions or oracle inputs, which is why the other controls still matter.
+
+<a id="current-controls--on-chain-review"></a>
+### On-chain review
+
+I checked the controls on-chain through Sui's GraphQL interface, against the five audit reports and against Current Finance's published security material and code interfaces.
+
+| Area | What I found |
+| --- | --- |
+| Admin capabilities | All admin capabilities sit inside one shared governance object. Parameter changes go through a one-day timelock: proposed, then executed after the delay. The Asymptotic audit found the delay set to a 10-second test value, and it was raised to one day. |
+| Immediate actions | Emergency halts, oracle tolerance changes, liquidation-programme cancellations, referral settings and revenue transfers to the treasury act without a timelock. The SuperAdmin role cannot be revoked if compromised, so its key security matters most. |
+| Code upgrades | Signed by a 3-of-5 multisig. The last upgrade was on 14 August 2026. The signers are not published, which is a question for the team. |
+| Caller capabilities | Two single-key wallets hold caller capabilities. Their permissions cover flash loans, which must be repaid in the same transaction, and opening E-Mode positions, which affects only the holder's own position. The admin can revoke them. |
+| Oracles | Pyth, with a minimum of 2 publishers for USDSUI and 3 for USDC. Prices more than 5% away from the admin reference are rejected. Valuations use an average price and alarms use the spot price. |
+| Liquidations | Partial, at most 20% of a debt at a time, run by vetted liquidators using flash loans. A Sherlock finding that let liquidators exploit the lag of the average price was fixed. Auto-deleveraging only starts after a delay. |
+| Limits | Daily caps on new borrowing and on withdrawals for each asset. An acknowledged Sherlock finding shows they can be kept artificially full. |
+| Insurance | Nexus Mutual quoted cover for the position (see below). |
+
+<a id="current-controls--admin-and-upgrade-controls"></a>
+### Admin and upgrade controls
+
+| Contract                               | Controls                                                          | Who Controls                                                                                             | Delay                                                                                                  | Assessment                                                              |
+|:---------------------------------------|:------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|
+| Current Finance protocol package       | Code upgrades                                                     | 3-of-5 Sui multisig (last upgrade 14 Aug 2026)                                                           | One-day timelock on parameter changes                                                                  | Good. Signers not published                                             |
+| Admin capabilities (governance object) | Markets, assets, E-Mode, caps, auto-deleveraging, rewards, oracle | All admin capabilities held in one shared governance object, operated by multisig roles                  | One day for parameter changes. Emergency halts, oracle tolerance and revenue transfers act immediately | Sound design. SuperAdmin cannot be revoked if compromised               |
+| Integration capability                 | Flash loans and E-Mode entry for the holder's own positions       | Two single-key wallets                                                                                   | None needed                                                                                            | Low risk: flash loans repay in the same transaction, revocable by admin |
+| Oracle (xOracle)                       | Prices                                                            | Pyth (USDSUI feed with minimum 2 publishers, USDC 3), checked against an admin reference price within 5% | Tolerance changes act immediately                                                                      | Feed errors beyond 5% are rejected. Thin USDSUI feed                    |
+| Risk parameters                        | Listings, caps, LTVs                                              | Reviewed by Allez Labs                                                                                   | Versioned risk-governance module                                                                       | Good                                                                    |
+| USDC (Circle)                          | Freeze, upgrade                                                   | Circle                                                                                                   | Issuer controls                                                                                        | Standard issuer risk                                                    |
+
+_Checked on-chain through Sui GraphQL, against the five audit reports and against Current Finance's published security material and code interfaces, 2 October 2026._
+
+<a id="current-controls--insurance"></a>
+### Insurance
+
+Nexus Mutual quoted cover of $1.4M for about $5,059 a month, about 4.3% of the cover amount a year, or 4.0% of the fund's equity. It covers smart contract exploits, oracle failure or manipulation, liquidation failure and governance takeover. It excludes depegs, private key breaches and front-end attacks, carries a 5% deductible ($70,000), and pays only after a 14-day wait, through a claims assessment by the mutual's members rather than under an insurance contract.
+
+| Leverage | Net after costs | After cover at the quoted price | Liquidation distance |
+| --- | --- | --- | --- |
+| 3.5x | 14.7% | 10.7% | +19% / -16% |
+| 4.0x | 15.7% | 11.7% | +13% / -12% |
+| 4.5x | 16.7% | 12.7% | +9% / -8.5% |
+
+At the quoted price, only 4.5x clears the hurdle with cover, by 0.7 points, and a reward cut of about 3% would take it below 12%. The cover protects against the largest risk, a protocol exploit, but not against the main extra risk of higher leverage, which is liquidation in a real depeg. An unbacked USDSUI mint from a stolen Bridge key would probably fall under the key-breach exclusion, which is worth confirming. At about 2.2% a year, insured 4.5x would earn the same as uninsured 3.5x. That is the price I would negotiate towards before considering it.
+
+---
+
+<a id="current-ops"></a>
+Current Finance carry · technical analysis
+
+# Monitoring and Operations
+
+_Live rates from Current Finance's API, latest day: 2026-10-02_
+
+<a id="current-ops--exit-triggers"></a>
+### Exit triggers
+
+_At the warning level I investigate and prepare the exit. At the action level I act without waiting for a meeting._
+
+| Id   | Metric                                                                                                        | Warn                                                 | Act                                                   | Action                                                                                | Source                                            |
+|:-----|:--------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------|:------------------------------------------------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------|
+| K1   | USDSUI/USDC price on Current Finance's feed                                                                   | Outside 0.995 to 1.005: review the cause, pause adds | Outside 0.98 to 1.02                                  | Warn: find the cause, prepare the exit, act: staged exit                              | Current Finance API, Pyth                         |
+| K2   | Vault health (each), target 1.19 at 3.5x                                                                      | Below 1.15 (about a 13% move from par)               | Below 1.10 (about a 9% move)                          | Repay debt in the affected vault                                                      | Current Finance positions                         |
+| K3   | USDSUI utilization, daily withdrawal cap used                                                                 | > 85%, > 60% of cap                                  | > 90%, > 80% of cap                                   | Reduce, begin staged exit                                                             | Current Finance API                               |
+| K4   | Net yield at the fund's leverage, 14 days                                                                     | < 13%                                                | < 12% for 14 days                                     | Rotate                                                                                | Current Finance APIs                              |
+| K5   | Unclaimed or unhedged SUI rewards                                                                             | > 1 day                                              | > 3 days                                              | Claim and sell, or short SUI perpetual, automate once tooling is live                 | Wallet                                            |
+| K6   | Admin, upgrade or capability actions, proposed settings changes, oracle configuration changes, incidents      | Any                                                  | Unexplained                                           | Stop adds, staged exit                                                                | Sui events, Hypernative, news and social channels |
+| K7   | Stablecoin issuer watch (independent rating): grade, early-warning score, peg incidents, USDSUI supply change | Downgrade, early-warning > 20, supply +3% in a day   | Early-warning > 30, peg incident, supply +5% in a day | Stop adds, staged exit (a supply jump can signal an unbacked mint)                    | Pharos API and alerts, Sui supply                 |
+| K8   | SUI reward APR per market vs its 30-day average                                                               | -10%                                                 | -15% (net falls below 12%)                            | Recheck yield, rotate if it persists two weeks                                        | Current Finance reward API                        |
+| K9   | Exit capacity: quoted cost of a $1M USDSUI swap across Sui DEXs, USDSUI pool liquidity                        | Above 0.1%                                           | Above 0.3%                                            | Shrink the position until the full exit fits again in the same number of $1M tranches | Cetus / aggregator quotes, Pharos liquidity data  |
+
+<a id="current-ops--monitoring-console"></a>
+### Monitoring console
+
+_This is a mock-up. Each check runs on the latest data shown above, and in production the same checks would run on live data every few minutes._
+
+- **OK:** 12
+
+- **Warn:** 0
+
+- **Act:** 0
+
+- **No data yet:** 2
+
+| trigger   | check                                           | value             | status    |
+|:----------|:------------------------------------------------|:------------------|:----------|
+| K1        | USDSUI/USDC on Current Finance's feed           | 1.00017           | 🟢 OK      |
+| K2        | Vault health at 3.5x (target)                   | 1.19              | 🟢 OK      |
+| K3        | USDSUI utilization                              | 78.2%             | 🟢 OK      |
+| K3        | USDSUI borrow cap used                          | 77%               | 🟢 OK      |
+| K4        | Net yield at 3.5x on $1.5M, 14 days             | 16.4%             | 🟢 OK      |
+| K5        | Unclaimed or unhedged SUI rewards               | no live position  | ⚪ NO DATA |
+| K7        | USDSUI independent rating / early-warning score | C- (50) / 7       | 🟢 OK      |
+| K7        | USDSUI supply change, 1 day                     | +0.3%             | 🟢 OK      |
+| K7        | USDC independent rating / early-warning score   | A+ (90) / 15      | 🟢 OK      |
+| K8        | SUI reward APR on USDC vs 30-day average        | -5.3%             | 🟢 OK      |
+| K8        | SUI reward APR on USDSUI vs 30-day average      | -2.4%             | 🟢 OK      |
+| K9        | Exit capacity: quoted cost of a $1M USDSUI swap | 0.028%            | 🟢 OK      |
+| K3        | USDC borrow cap room                            | $3.3M             | 🟢 OK      |
+| K6        | Admin, upgrade or capability actions            | no event feed yet | ⚪ NO DATA |
+
+<a id="current-ops--runbook"></a>
+### Runbook
+
+1. On a warning, confirm the data, find the cause and prepare the exit transactions.
+2. If price or vault health reaches an action level (K1, K2), repay debt in the affected vault or cut both vaults to 2.5x.
+3. If utilization, caps, exit capacity or an admin event reach an action level (K3, K6, K9), stop adding and start the exit in tranches.
+4. If the net yield stays below 12% (K4, K8), unwind over a few days and rotate.
+5. Every day, claim the SUI rewards and sell them or hedge them with a short perpetual.
+6. Every month, rebalance both vaults back to 3.5x, since interest on the USDSUI debt slowly lowers vault 1's health.
+7. Log each event with the trigger, time, size, cost and outcome.
+
+<a id="current-ops--custody-and-signing"></a>
+### Custody and signing
+
+Each vault is controlled by its owner capability object, and every action on a Multiply position, including claiming rewards, requires that object. Sui has no equivalent of the Safe Roles Modifier for scoping what a signer may do. I would hold both owner capabilities in a Sui multisig, build every transaction through the SDK rather than the web app, and simulate it before signing. Daily claims then need the multisig as well, so claims could move to weekly until automation is in place, at a cost of a few thousand dollars of unhedged SUI.
+
+<a id="current-ops--team-support"></a>
+### Team support
+
+These are the parts where I would rely on the team.
+
+| Area | What I would ask for |
+| --- | --- |
+| Smart contracts | A review of the Multiply router, the caller capabilities and the governance functions that act without a timelock. |
+| Keys and signing | A separate wallet setup per vault, simulation and decoding of every transaction before signing, protection against spoofed addresses, and no blind signing. |
+| Governance | Who holds the SuperAdmin and parameter roles, how those keys are secured, and the multisig signers. |
+| Oracles | How the USDSUI feed, with only two publishers, and the admin reference price behave in a depeg, before any step above 3.5x. |
+| Trading | Daily SUI sales, and the build and exit in tranches. |
+
+<a id="current-ops--opportunity-rationale"></a>
+### Opportunity rationale
+
+Most active curators and allocators work on EVM networks and Solana. Sui is not EVM-compatible. Their integrations, tooling and infrastructure do not carry over and have to be built from scratch, and few desks have done that.
+
+Current Finance launched in March 2026. It is not yet on most approved lists, or it is still in an observation period.
+
+The structure also takes work, since the yield needs two linked vaults built in tranches rather than a single deposit. Capacity is limited too. The pools have grown quickly, but a much larger allocation would dilute the rewards.
+
+<a id="current-ops--pre-mortem"></a>
+### Pre-mortem
+
+The most likely way this loses money is a protocol exploit at Current Finance that pauses withdrawals before the position can be unwound.
+
+The second is a cut in SUI rewards. Without rewards the lending spread is negative, so staying in too long would turn the carry into a loss.
+
+A modest position keeps both risks small, together with monitoring of Current Finance's admin actions, a daily check of the reward rate, an exit sized to the market, and insurance if it can be bought at a sensible price.
+
+---
+
+<a id="current-controls-matrix"></a>
+Current Finance carry · technical analysis
+
+# Risk Controls and Stress Tests
+
+_Live rates from Current Finance's API, latest day: 2026-10-02_
+
+This page maps every risk in the EEA DeFi risk list, the TradFi credit additions and the ESMA suitability guidelines to this position. For each one it shows how the risk applies, what covers it, where the data comes from and when to act. Checks K1 to K9 run in the console on the Monitoring and Operations page. The stress tests use September conditions at the fund's size.
+
+<a id="current-controls-matrix--stress-tests"></a>
+### Stress tests
+
+| scenario                       | net yield or loss          | note                                                                      |
+|:-------------------------------|:---------------------------|:--------------------------------------------------------------------------|
+| Base, September conditions     | 14.8%                      |                                                                           |
+| SUI rewards -15% (break-even)  | 12.0%                      | the tightest limit: trigger K8                                            |
+| SUI rewards -30%               | 9.2%                       |                                                                           |
+| SUI rewards -50%               | 5.5%                       |                                                                           |
+| SUI rewards end                | -3.9%                      | rotate                                                                    |
+| USDSUI borrow +300 bps         | 13.4%                      |                                                                           |
+| Both borrow rates +300 bps     | 13.2%                      |                                                                           |
+| USDSUI ±5% against USDC        | no liquidation             | vaults liquidate at 0.840 / 1.190                                         |
+| Oracle stale or rejected       | no forced loss             | Current Finance blocks new borrowing, while repayment and exits stay open |
+| USDSUI unbacked mint, one day  | -$109k (7.2% of equity)    | $2.0M daily USDC borrow cap, fund share of the USDC pool 5.4%             |
+| USDSUI unbacked mint, full cap | -$182k (12.1% of equity)   | $3.3M room under the USDC borrow cap                                      |
+| No liquidator bids             | protocol auto-deleveraging | exit on activation (K6)                                                   |
+
+<a id="current-controls-matrix--controls-matrix"></a>
+### Controls matrix
+
+Each control has one of three statuses. In place means a trigger in the monitoring console, a stress test or a step in the plan already covers it. Partly in place means part of it is covered, for example the stablecoin price is watched but not yet the number of oracle publishers. To build means the data or tooling still has to be set up. The priority says when: P1 before funding, P2 within the first month, and P3 once the monitoring infrastructure is in place.
+
+_Control: Status = [] (default)_
+
+_Control: Priority = [] (default)_
+
+- **In place:** 13
+
+- **Partly in place:** 10
+
+- **To build:** 34
+
+| Area                 | Risk                                        | How It Applies                                                                                                                                   | Metric Or Control                                                                                                                                                                                                                          | Status                             | Source                                                              | Warn Act                                                      | Priority   |
+|:---------------------|:--------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------|:--------------------------------------------------------------------|:--------------------------------------------------------------|:-----------|
+| 3.1 Software         | Upgrade risk                                | Current Finance package upgraded by multisig, new version could add bugs                                                                         | New package version published, auditor bytecode-match confirmation received                                                                                                                                                                | To build                           | Sui GraphQL (package versions), Current Finance/Asymptotic notices  | Any upgrade: review within 24h / unconfirmed match: stop adds | P1         |
+| 3.1 Software         | Supply-chain risk                           | Multiply routes swaps through DEX aggregators (Cetus), Pyth package                                                                              | Version or incident watch on Cetus, aggregator, Pyth packages                                                                                                                                                                              | To build                           | Sui GraphQL, security feeds                                         | Incident at a dependency: stop adds                           | P2         |
+| 3.1.2 Smart contract | Unpatched or new bug                        | Six-month-old code. Five audits and a Sherlock contest, every critical and high finding fixed                                                    | Audit coverage of the live version (date of last audit vs last upgrade), bug-bounty size                                                                                                                                                   | Partly in place                    | Current Finance security page, Sherlock                             | Live version unaudited > 30 days                              | P2         |
+| 3.1.3 Blockchain     | Chain halt or congestion                    | Sui outage blocks exits and liquidations                                                                                                         | Checkpoint lag, epoch status, reference gas price                                                                                                                                                                                          | To build                           | Sui RPC / GraphQL                                                   | Lag > 1 min / halt                                            | P2         |
+| 3.1.3 Blockchain     | Validator intervention                      | Sui validators froze exploited funds after the 2025 Cetus hack: a precedent for chain-level freezes                                              | Track validator governance actions and denylist changes                                                                                                                                                                                    | To build                           | Sui announcements                                                   | Any freeze affecting Current Finance                          | P3         |
+| 3.1.4 User interface | Front-end compromise                        | The fund signs through Current Finance's app                                                                                                     | Transaction simulation and decoding before signing, app bundle hash check                                                                                                                                                                  | Partly in place                    | The fund's signing process                                          | Unexpected call: do not sign                                  | P1         |
+| 3.1.5 Oracle         | Stale or wrong price                        | Liquidations use Pyth average price, checked against an admin reference price within 5%                                                          | USDSUI and USDC: Pyth price against the admin reference, staleness, confidence width, publisher count                                                                                                                                      | Partly in place (K1 price only)    | Current Finance oracle audit trail, Pyth                            | Deviation > 0.5% / > 2%                                       | P1         |
+| 3.1.5 Oracle         | Average vs spot divergence                  | Average price lags in a fast depeg                                                                                                               | USDSUI spot vs average price gap                                                                                                                                                                                                           | To build                           | Pyth                                                                | > 0.3% / > 1%                                                 | P2         |
+| 3.1.6 Bridge         | Bridged-asset risk                          | USDC on Sui is native (Circle CCTP), USDSUI is native                                                                                            | The fund's bridging route and CCTP attestation status when moving capital                                                                                                                                                                  | To build                           | Circle CCTP status                                                  | Delay > 1h on transfers                                       | P3         |
+| 3.1.7 MEV            | Sandwich or bad fills                       | Multiply swaps on entry and exit                                                                                                                 | Realized slippage per tranche vs quote                                                                                                                                                                                                     | To build                           | The fund's transaction log                                          | > 0.05% / > 0.2%                                              | P2         |
+| 3.2 Governance       | Parameter changes                           | Caps, LTVs, rates set by admin with Allez review                                                                                                 | Parameter change log for USDC and USDSUI (LTV, caps, rate curve, reserve factor)                                                                                                                                                           | To build                           | Sui events, Current Finance docs                                    | Any cut to LTV or caps: review                                | P1         |
+| 3.2 Governance       | Admin key dependence                        | 3-of-5 multisig signs upgrades, capability objects                                                                                               | Multisig signer set and threshold changes, capability transfers                                                                                                                                                                            | Partly in place (K6)               | Sui GraphQL                                                         | Any change: review                                            | P1         |
+| 3.2 Governance       | Privileged capability                       | E-Mode entry capability held by two single-key wallets                                                                                           | Calls made with that capability                                                                                                                                                                                                            | To build                           | Sui events                                                          | Unexpected use                                                | P2         |
+| 3.2.2 Custody        | Loss or theft of the fund's keys            | Fund keys sign entry, claims and exits                                                                                                           | Signer health, hardware keys, a multisig for the fund, address allowlist                                                                                                                                                                   | To build                           | Internal                                                            | Any anomaly                                                   | P1         |
+| 3.2.3 Tokenomics     | Reward emissions end or fall                | SUI rewards are ~60% of gross, a 15% cut breaks the 12% hurdle                                                                                   | SUI reward APR per market vs 30-day average, reward budget remaining                                                                                                                                                                       | In place (K8)                      | Current Finance reward API and announcements                        | Reward APR -10% / -15%                                        | P1         |
+| 3.2.3 Tokenomics     | SUI supply unlocks                          | Scheduled unlocks can weigh on SUI price, so on reward value                                                                                     | SUI unlock calendar                                                                                                                                                                                                                        | To build                           | Token unlock trackers                                               | Large unlock within 7 days: hedge rewards                     | P3         |
+| 3.3 Compliance       | Issuer or regulatory action                 | Bridge (USDSUI) and Circle (USDC) can freeze, regulation changes                                                                                 | Issuer news, freeze events touching Current Finance's pools                                                                                                                                                                                | To build                           | News, Sui events                                                    | Any action                                                    | P2         |
+| 3.3 Compliance       | Sanctions exposure                          | Pools are permissionless                                                                                                                         | Sanctioned-address screening of counterparties the fund deals with directly                                                                                                                                                                | To build                           | Screening tool                                                      | Any hit                                                       | P3         |
+| 3.4 Standards        | Valuation method                            | USDSUI marked at market vs par, rewards accrued                                                                                                  | Daily mark: positions at market, rewards at SUI price, exit provision 0.10%                                                                                                                                                                | Partly in place                    | Current Finance API, the fund's books                               | Mark vs par > 0.5%                                            | P1         |
+| 3.4 Standards        | On-chain vs book mismatch                   | Two vaults, accrued interest, unclaimed rewards                                                                                                  | Daily reconciliation of on-chain balances against the fund's books                                                                                                                                                                         | To build                           | Sui GraphQL, the fund's books                                       | Any break                                                     | P1         |
+| 3.5 Credit           | Bad debt in the markets the fund lends into | The fund's USDC supply (2.0x equity) and USDSUI supply (1.5x) carry losses from other borrowers                                                  | Bad debt per reserve, liquidations 24h, debt within 10% of liquidation                                                                                                                                                                     | To build                           | Current Finance API (liquidation-health), Current Finance dashboard | Any bad debt / at-risk debt > 5% of supply                    | P1         |
+| 3.5 Credit           | Collateral behind other borrowers           | USDC borrowers post SUI, BTC, LSTs                                                                                                               | Composition of collateral backing USDC and USDSUI debt                                                                                                                                                                                     | To build                           | Current Finance API, Sui GraphQL                                    | Volatile collateral share rising                              | P1         |
+| 3.5 Credit           | Liquidator shortfall                        | Allowlisted liquidators with flash loans, auto-deleveraging as backstop                                                                          | Liquidator activity and auto-deleveraging events                                                                                                                                                                                           | To build                           | Current Finance dashboard, Sui events                               | ADL activated: exit                                           | P2         |
+| 3.5 Credit           | Liquidation of the fund's vaults            | Vault health 1.21 at 3.5x                                                                                                                        | Vault health (each)                                                                                                                                                                                                                        | In place (K2)                      | Current Finance positions                                           | < 1.20 / < 1.10                                               | P1         |
+| 3.6 Counterparty     | Key service providers                       | Pyth, Allez, Hypernative, Cetus, Bridge, Circle                                                                                                  | Provider status and incidents                                                                                                                                                                                                              | To build                           | Status pages, news                                                  | Incident: review                                              | P2         |
+| 3.6 Counterparty     | Insurance counterparty                      | Nexus Mutual quoted $1.4M of cover at about 4.3% a year, 5% deductible, depegs and key breaches excluded                                         | Cover price against the yield it costs, capacity, claim terms                                                                                                                                                                              | Partly in place                    | Nexus Mutual                                                        | Price above about 2.2% a year makes it uneconomic             | P2         |
+| 3.7 Market           | Stablecoin depeg                            | USDSUI owed = held, vault liquidation needs ±16% to 19%                                                                                          | USDSUI/USDC on Current Finance's feed and on DEXs, independent peg record and early-warning score                                                                                                                                          | In place (K1)                      | Current Finance API, Cetus                                          | ±0.5% review / ±2% exit                                       | P1         |
+| 3.7 Market           | Reward token price                          | SUI between claims                                                                                                                               | Unclaimed or unhedged SUI                                                                                                                                                                                                                  | In place (K5)                      | Wallet                                                              | > 1 day / > 3 days                                            | P1         |
+| 3.7 Market           | Confidence shock                            | An exploit elsewhere on Sui triggers withdrawals                                                                                                 | Sui DeFi TVL and incident feed                                                                                                                                                                                                             | To build                           | Sui ecosystem data, security feeds                                  | Major Sui incident: review                                    | P2         |
+| 3.7.2 Liquidity      | Utilization spike                           | USDSUI near the 80% kink                                                                                                                         | USDSUI and USDC utilization                                                                                                                                                                                                                | In place (K3)                      | Current Finance API                                                 | > 85% / > 90%                                                 | P1         |
+| 3.7.2 Liquidity      | Withdrawal throttling                       | Daily caps shared by all users                                                                                                                   | Daily withdrawal cap used, the fund's time to exit                                                                                                                                                                                         | In place (K3)                      | Current Finance reserve pages                                       | > 60% / > 80% of cap                                          | P1         |
+| 3.7.2 Liquidity      | Depositor concentration                     | A large depositor leaving spikes utilization                                                                                                     | Top 10 depositors' share of USDC and USDSUI supply                                                                                                                                                                                         | To build                           | Sui GraphQL                                                         | Top depositor > 20% of supply                                 | P2         |
+| 3.7.2 Liquidity      | Exit cost                                   | Swap depth for USDSUI / USDC                                                                                                                     | Quoted cost of a $1M USDSUI swap, daily, position resized to keep the exit within the same tranches                                                                                                                                        | In place (K9)                      | Cetus quotes                                                        | > 0.1% / > 0.3%                                               | P2         |
+| 3.7.2 Liquidity      | Cap headroom                                | Borrow and supply caps limit adding or rebalancing                                                                                               | Room under each cap                                                                                                                                                                                                                        | In place (console)                 | Current Finance reserve pages                                       | < $2M room                                                    | P2         |
+| TF Credit            | Expected loss                               | Probability of a protocol failure x loss given failure                                                                                           | Annual expected-loss estimate, reviewed quarterly                                                                                                                                                                                          | To build                           | Internal model                                                      | Expected loss > yield spread                                  | P2         |
+| TF Concentration     | Single-name and chain concentration         | $1.5M on one protocol and one chain (about 4% of NAV)                                                                                            | % NAV per protocol, chain, stablecoin issuer                                                                                                                                                                                               | Partly in place                    | Fund book                                                           | > limit                                                       | P1         |
+| TF Counterparty      | Wrong-way risk                              | A Sui crisis would cut SUI reward value and raise chain risk together                                                                            | Correlation flag: SUI price fall plus Sui incident                                                                                                                                                                                         | To build                           | Market data                                                         | SUI -30% in 7 days: review                                    | P2         |
+| TF Market            | Interest-rate risk                          | USDSUI near the kink, +300 bps on both borrow rates leaves 12.9%                                                                                 | Borrow APR vs model, rate-shock P&L                                                                                                                                                                                                        | Partly in place                    | Current Finance API                                                 | USDSUI borrow > 7%                                            | P2         |
+| TF Market            | Basis risk                                  | Vault 1 and vault 2 marked by the same oracle, DEX price can differ                                                                              | Oracle vs DEX USDSUI price gap                                                                                                                                                                                                             | To build                           | Pyth, Cetus                                                         | > 0.5%                                                        | P3         |
+| TF Valuation         | Model risk                                  | Rate curve and dilution model drive the size decision                                                                                            | Realized monthly yield vs model forecast                                                                                                                                                                                                   | To build                           | The fund's books against the model                                  | Miss > 2 pts                                                  | P2         |
+| TF Portfolio         | Correlation with the rest of the book       | Shared exposure to USDC, Sui or reward-driven yield                                                                                              | Overlap with other positions                                                                                                                                                                                                               | To build                           | Fund book                                                           | Overlap > limit                                               | P2         |
+| TF Portfolio         | Tail risk                                   | Stress scenarios                                                                                                                                 | Stress P&L: rewards -30% (9.0%), -50% (5.2%), end (-4.2%), rates +300 bps (12.9%), USDSUI ±5%, oracle stale, no liquidators                                                                                                                | In place (stress table)            | Model                                                               | Any scenario below limit                                      | P1         |
+| TF Operational       | Failed or wrong transactions                | Two vaults, staged tranches, daily claims                                                                                                        | Transaction checklist, second-signer review for size                                                                                                                                                                                       | To build                           | Internal                                                            | Any failed or reverted step                                   | P1         |
+| TF Legal             | Enforceability                              | No legal claim on a DeFi protocol                                                                                                                | Terms of use review, Current Finance entity and jurisdiction                                                                                                                                                                               | To build                           | Legal                                                               | Unresolved: note in IC pack                                   | P3         |
+| ESMA                 | Wrong-address transfer                      | Moving USDC to Sui, between vaults, to exchanges                                                                                                 | Address allowlist, test transfers                                                                                                                                                                                                          | To build                           | Internal                                                            | Any non-allowlisted address                                   | P1         |
+| ESMA                 | Product complexity                          | Two-vault structure with equal and opposite USDSUI                                                                                               | Written structure note and runbook                                                                                                                                                                                                         | In place (report)                  | This report                                                         | -                                                             | P3         |
+| ESMA                 | Holding period mismatch                     | Fund offers monthly liquidity, exit takes about two days                                                                                         | Time to exit vs redemption notice                                                                                                                                                                                                          | In place                           | Exit plan                                                           | Exit > 7 days                                                 | P1         |
+| ESMA                 | Issuer group concentration                  | Bridge (Stripe) and Circle across the book                                                                                                       | % NAV per stablecoin issuer                                                                                                                                                                                                                | To build                           | Fund book                                                           | > limit                                                       | P2         |
+| ESMA                 | Cost drag                                   | Fees, swaps, rebalancing, hedges                                                                                                                 | Realized costs vs provision (0.10% exit, 0.07% entry)                                                                                                                                                                                      | Partly in place                    | The fund's transaction log                                          | Costs > provision                                             | P2         |
+| ESMA                 | Algorithm risk                              | Future auto-claim, auto-hedge and alert bots                                                                                                     | Bot tests, change log, kill switch                                                                                                                                                                                                         | To build                           | Internal                                                            | Untested change: block                                        | P2         |
+| ESMA                 | Conflict of interest                        | Rewards, referrals, any ties to Current Finance                                                                                                  | Disclosure register                                                                                                                                                                                                                        | To build                           | Internal                                                            | Any tie: disclose                                             | P3         |
+| 3.4 Standards        | Issuer reserve assurance                    | USDSUI reserves reported by Bridge, a regulated issuer, without independent attestation (C-, backing 59), USDC examined monthly by Deloitte (A+) | Independent rating, reserve composition and attestation status per stablecoin                                                                                                                                                              | In place (K7)                      | Pharos                                                              | Downgrade / early-warning > 30                                | P1         |
+| 3.5 Credit           | Unbacked mint by the issuer                 | Single-key USDSUI minter, fake collateral could drain the USDC pool the fund supplies                                                            | USDSUI supply change per day, mint events                                                                                                                                                                                                  | In place (K7)                      | Sui supply, Pharos                                                  | +3% / +5% in a day                                            | P1         |
+| 3.2 Governance       | Proposed settings changes                   | Changes wait one day after they are proposed                                                                                                     | Alert on every new proposal in Current Finance's governance object touching USDC, USDSUI or the oracle, giving a day's notice                                                                                                              | To build                           | Sui events                                                          | Any proposal / unexplained                                    | P1         |
+| 3.1.5 Oracle         | Oracle configuration changes                | The admin can change the reference price and tolerance band without delay                                                                        | Alert on changes to the reference price, tolerance band or price feed, and on the USDSUI feed dropping below two publishers                                                                                                                | To build                           | Sui events, Pyth                                                    | Any change / unexplained                                      | P1         |
+| 3.4 Standards        | USDSUI issuer role changes                  | Bridge holds the minter and upgrade keys                                                                                                         | Alert on USDSUI package upgrades, changes to the minter or treasury, and unusually large mints                                                                                                                                             | Partly in place (K7 supply change) | Sui events                                                          | Any upgrade / unexplained                                     | P1         |
+| 3.6 Counterparty     | Early news of an incident                   | First reports often appear on social channels before on-chain alarms                                                                             | Follow the official X, Discord and Telegram channels and governance forums of Current Finance, Bridge, Pyth and Sui, plus known security researchers, with an LLM scanning posts every few minutes for incident reports on these protocols | To build                           | X, Discord, Telegram, forums                                        | Credible report / confirmed incident                          | P2         |
+
+---
+
+<a id="allocation"></a>
+Current Finance carry · technical analysis
+
+# Allocation Tool
+
+_Live rates from Current Finance's API, latest day: 2026-10-02_
+
+_Interactive. Rates and positions from Current Finance data to 2 October 2026. Fund NAV $35M._
+
+<a id="allocation--fund-limits"></a>
+### Fund limits
+
+_Control: Stressed-loss budget, % of NAV = 0.5 (default)_
+
+_Control: Max % NAV per protocol = 8.0 (default)_
+
+_Control: Max share of a pool = 2.0 (default)_
+
+_Control: Leverage of each vault = 3.5 (default)_
+
+_Control: Equity, $M = 1.5 (default)_
+
+_Control: Rates = September (default)_
+
+- **Net yield before costs:** 14.8%
+
+- **After a round trip, 12 months:** 14.7%
+
+- **Liquidation at USDSUI/USDC:** 0.840 / 1.190
+
+- **Distance vs widest USDSUI move:** 12x (USDSUI's widest recorded moves: +1.30% / -0.63%.)
+
+| limit                                                                  | max equity   |
+|:-----------------------------------------------------------------------|:-------------|
+| Room under USDSUI and USDC borrow caps                                 | $3.2M        |
+| Protocol limit: 8% of NAV on Current Finance                           | $2.8M        |
+| Pool share: 10% of the USDSUI market (5x the general pool-share limit) | $1.7M        |
+
+> **Recommended size: $1.5M** at 3.5x, against a $1.5M allocation. The limits above would allow up to $1.7M. Vault 1 holds 58% of equity and vault 2 holds 42%.
+
+| cost                               | amount   | share of equity   |
+|:-----------------------------------|:---------|:------------------|
+| Entry in tranches                  | $1.0K    | 0.069%            |
+| Normal round trip                  | $2.1K    | 0.138%            |
+| Exit provision (0.028% x leverage) | $1.5K    | 0.098%            |
+| Stressed exit (0.2% on every swap) | $9.3K    | 0.618%            |
+
+---
+
+# Section: Process
+
+---
+
+<a id="sourcing"></a>
+Process
+
+# Sourcing and Screening
+
+_Search carried out from 28 to 30 September 2026._
+
+I looked for yield that most on-chain desks would miss: structures that need a second step to work, protocols outside the usual lists, and carry that only works at a particular size. I skipped the obvious trades on purpose, such as curated lending on Morpho and Aave, fixed-rate PTs on Pendle and top-tier stablecoins. I assume the team already covers them, and their yield is competed away quickly.
+
+An idea that was not selected is not necessarily a bad one. Each candidate has one of these statuses.
+
+| Status | Meaning |
+| --- | --- |
+| Rejected | Fails one of the investment tests. |
+| Requires automation | Works, but needs hedging or rebalancing infrastructure first. |
+| Needs data or monitoring | Promising, but the record is too short or a key fact is missing. |
+| Team discussion | Depends on a policy question, such as whether a yield source qualifies. |
+| On hold | Fully researched and waiting on stated conditions. |
+
+- **Rejected:** 13
+
+- **Requires automation:** 3
+
+- **Needs data, monitoring or team discussion:** 7
+
+- **Selected:** 1
+
+**Chart: Screening funnel (approximate: some candidates fail several gates)**
+
+- funnel: 24: Screened, 15: Passed yield and capacity, 9: Passed income-source test, 1: Selected
+
+<a id="sourcing--investment-criteria"></a>
+### Investment criteria
+
+| Gate   | Name               | Requirement                                                                                            |
+|:-------|:-------------------|:-------------------------------------------------------------------------------------------------------|
+| C1     | Net yield          | 12%+ net APY in USD, sustained at least 1 month                                                        |
+| C2     | All costs in       | Net of gas, slippage, hedging, rebalancing                                                             |
+| C3     | Capacity           | $1.5M absorbed without falling below 12%                                                               |
+| C4     | Exitability        | Deployable and exitable within defined windows                                                         |
+| C5     | Native DeFi income | Fees, funding, lending spreads, leverage carry                                                         |
+| C6     | Exclusions         | No off-chain loans, RWA income, CeFi arbitrage, reinsurance or CLOs, T-bills inside a reserve are fine |
+| C7     | Market neutral     | No reliance on token price appreciation                                                                |
+| C8     | Attribution        | Every basis point traced to a source                                                                   |
+| C9     | Incentives         | Only incentives paid and claimable in the period                                                       |
+| C10    | Timing             | Within the last 6 months                                                                               |
+| C11    | Auditability       | Source-of-truth on-chain data                                                                          |
+
+The income-source test asks where the yield ultimately comes from. It passes for on-chain lending spreads, funding, trading fees and carry, and for stablecoins backed by T-bills or by a transparent on-chain book. It fails for off-chain loans, listed equities or preferreds, reinsurance, CLOs and CeFi arbitrage.
+
+<a id="sourcing--candidates-screened"></a>
+### Candidates screened
+
+_Control: Filter by status = [] (default)_
+
+| Id   | Strategy                                     | Protocols                      | Chain           | Yield Source                                  | Headline Apy                          | Deciding Issue                                                                   | Status                        | Name                            |
+|:-----|:---------------------------------------------|:-------------------------------|:----------------|:----------------------------------------------|:--------------------------------------|:---------------------------------------------------------------------------------|:------------------------------|:--------------------------------|
+| C1   | PT-USD3 loop (~1.2x)                         | Pendle, Morpho                 | Ethereum        | USD3 senior credit PT yield + carry           | ~14% at $1.5M                         | C6: ~75% off-chain SMB/consumer credit                                           | Rejected                      | nan                             |
+| C2   | Re Protocol reinsurance PT loop              | Pendle, Morpho                 | Ethereum        | Reinsurance-backed PT yield                   | 11.5% unlevered                       | C6 reinsurance excluded, C1                                                      | Rejected                      | Re Protocol reinsurance PT loop |
+| C3   | PT-sUSDat                                    | Pendle                         | Ethereum        | STRC preferred dividends                      | 13.1%                                 | C3 pool $1.35M, C6, M3                                                           | Rejected                      | nan                             |
+| C4   | Axis sUSDx staking                           | Axis                           | Ethereum        | CEX and cross-venue arbitrage                 | 22.9% 30d avg                         | CeFi arbitrage. Whether it counts as an on-chain yield source is a team decision | Team discussion               | nan                             |
+| C6   | DUSD/frxUSD LP on Stake DAO                  | Curve, Stake DAO               | Ethereum        | CRV emissions                                 | 15.8% now                             | Pool $4.7M: fits about $0.5M to $1M                                              | Needs data or monitoring      | nan                             |
+| C7   | aHYPER loop                                  | Accountable, Hyperithm, Morpho | Monad           | Managed delta-neutral book                    | 11.5% unlevered                       | C1, C3, C8                                                                       | Rejected                      | nan                             |
+| C8   | bUSD0 loop on Fira                           | Usual, Fira                    | Ethereum        | Pull-to-par on discounted bUSD0               | ~15% advertised                       | C4 exit, M1 mark-to-market                                                       | Rejected                      | nan                             |
+| C9   | 40 Acres USDC vault                          | 40 Acres, Aerodrome            | Base            | Aerodrome fees and bribes                     | 12% to 16% typical                    | Vault often at 100% utilization, exits wait for repayments                       | Needs data or monitoring      | nan                             |
+| C10  | Accountable USDC vault                       | Accountable                    | Monad           | Unidentified manager                          | 16.9% 30d avg                         | Manager and strategy not disclosed                                               | Needs data or monitoring      | nan                             |
+| C11  | Flowdesk Confidential USDT vault             | Morpho, Flowdesk               | Ethereum        | USDT lending + rewards                        | 13.8% incl. rewards                   | Only about $0.6M instantly withdrawable                                          | Needs data or monitoring      | nan                             |
+| C12  | Hedged Aerodrome v2 LP                       | Aerodrome + perps              | Base            | Fees and emissions, hedged                    | Up to 131% APY at 4x                  | Up to 131% APY at 4x, needs automated hedging                                    | Requires automation           | nan                             |
+| C13  | Aave v4 USDT loop                            | Aave v4                        | Avalanche       | ~98% WAVAX incentives                         | ~10% at size                          | Incentive programme about one month old, dilutes at size                         | Needs data or monitoring      | nan                             |
+| C14  | PT-sUSDx (Axis)                              | Pendle, Axis                   | Ethereum        | Fixed yield on CeFi arbitrage                 | 19.6% fixed                           | Same yield-source question as C4, market under one month old                     | Team discussion               | nan                             |
+| C15  | Lend HYBOND on Euler                         | Euler, OpenEden, Merkl         | Ethereum        | EDEN incentives                               | 40.7% in EDEN                         | C6 corporate bonds, C7 must hold EDEN                                            | Rejected                      | nan                             |
+| C16  | LlamaLend stable loops (5 markets)           | Curve LlamaLend                | Ethereum        | Collateral yield minus crvUSD borrow          | 7.5% best at $1.5M                    | C3 (exact rate curves)                                                           | Rejected (too small at $1.5M) | nan                             |
+| C17  | PT-AUSD loop on Aave                         | Aave, Pendle                   | Monad           | PT fixed yield minus borrow                   | PT 6.7%                               | C3 PT pool $2.1M, expiry 8 Oct                                                   | Rejected                      | nan                             |
+| C18  | GHO/USDT0 loop                               | Aave                           | Plasma          | GHO supply + incentives minus USDT0 borrow    | ~6% to 7.5% at size                   | C3 dilution, C4 free GHO $3.5M                                                   | Rejected                      | nan                             |
+| C19  | fxSAVE loop                                  | Morpho, f(x)                   | Ethereum        | fxSAVE yield minus USDC borrow                | ~7.4% at 1.3x                         | C1, C3                                                                           | Rejected                      | nan                             |
+| C20  | USDat PT and sUSDat loops                    | Morpho, Euler                  | Monad, Ethereum | STRC preferred                                | 8% to 10%                             | C6                                                                               | Rejected                      | nan                             |
+| C22  | HYPE funding carry, portfolio margin         | Hyperliquid                    | Hyperliquid     | Funding                                       | Not presented                         | Funding carry needs automated hedging and rebalancing                            | Requires automation           | nan                             |
+| C23  | PURR funding carry sleeve                    | Hyperliquid                    | Hyperliquid     | Funding                                       | Not presented                         | Small market, needs automated ladder and hedging                                 | Requires automation           | nan                             |
+| C24  | sUSDat staking                               | Saturn                         | Ethereum        | STRC preferred dividends                      | 13.9% now                             | C6 RWA, M3                                                                       | Rejected                      | nan                             |
+| C25  | USDC / USDSUI single loop (either direction) | Current                        | Sui             | Lending spread + SUI rewards                  | 14.0% to 14.9% at zero size           | Dilutes to 9% to 10% at $1.5M, USDSUI price risk, DEX depth                      | Rejected                      | nan                             |
+| C26  | USDC / USDSUI carry, two Multiply vaults     | Current                        | Sui             | Lending spread + SUI rewards on both deposits | 14.9% at 3.5x, $1.5M (Sep conditions) | Young protocol (Mar 2026), rewards ~60% of gross                                 | Selected: Current carry       | nan                             |
+
+<a id="sourcing--repeatable-process"></a>
+### Repeatable process
+
+The screen can be repeated every week in four steps.
+
+1. Scan every stablecoin market with a headline yield of 12% or more on the main lending, liquidity and yield venues.
+2. Filter automatically on capacity at $1.5M (free borrow liquidity, pool size, rate curve) and on the source of the income.
+3. Review the rest by hand: where the yield comes from, admin keys, oracle, exit path and reward terms.
+4. For each one left, check whether a hedge or a two-position structure improves it.
+
+<a id="sourcing--pipeline"></a>
+### Pipeline
+
+_These are not proposed today, but they are not dismissed either. Each needs automation, more data or a team decision first._
+
+| Idea                                                      | Link                                                                                                                            | Mechanism                                                      | Yield                                 | Why not now                                                                    |
+|:----------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------|:--------------------------------------|:-------------------------------------------------------------------------------|
+| Axis sUSDx                                                | https://www.axis.to/                                                                                                            | CEX and cross-venue arbitrage                                  | 10% to 20%                            | G6 CeFi arbitrage, opaque book                                                 |
+| Superstate / Bitwise USCC                                 | https://app.3f.xyz/asset/superstate-uscc                                                                                        | Tokenized crypto basis fund                                    | ~5.3% base, 6.6% 30d, leveraged on 3F | KYC fund, leverage venue small                                                 |
+| BitFi bfUSD                                               | https://app.bitfi.one/bfusd/stake                                                                                               | CeDeFi funding arbitrage via Ceffu MirrorX                     | Target APY                            | G6 CeFi custody                                                                |
+| Piku USD/TRY carry                                        | https://piku.co/app/detail/CarryTradeUSDTRYLeverage/transparency                                                                | Lira overnight rate + USDTRY futures via a CMB-regulated fund  | High FX carry                         | Off-chain FX carry, transparency page is a plus                                |
+| RockawayX Tori vault                                      | https://app.morpho.org/ethereum/vault/0x3BD9AdAE6643dDcddD02746b8B60075E56DF9478/rockawayx-tori-ecosystem#overview              | Morpho vault lending to the Tori ecosystem                     | 21.6% now, 10.2% average              | $0.42M instantly withdrawable                                                  |
+| NEMO USDC Prime                                           | https://app.upshift.finance/vaults/ethereum/nemo-usdc-prime                                                                     | Rate arbitrage and options                                     | 23.9% shown                           | Hard to trace, 30-day withdrawals                                              |
+| frxUSD / DUSD LP on Stake DAO                             | https://www.curve.finance/dex/ethereum/pools/                                                                                   | Curve LP, boosted CRV                                          | 15.8% now, 21.3% 30-day               | Pool $4.7M: fits about $0.5M to $1M before rewards dilute below 12%            |
+| Hedged Aerodrome v2 LP (e.g. AERO/USDC)                   | https://aerodrome.finance/                                                                                                      | Trading fees and AERO emissions, AERO hedged with perpetuals   | Up to 131% APY at 4x                  | Requires automated hedging and rebalancing                                     |
+| 40 Acres USDC vault                                       | https://app.40acres.finance/                                                                                                    | Loans to veAERO holders, repaid from Aerodrome fees and bribes | 12% to 16% typical                    | Vault often at 100% utilization, so exits wait for repayments                  |
+| LlamaLend stable loops (sDOLA, sfrxUSD, sUSDe, syrupUSDC) | https://www.curve.finance/lend/ethereum/markets/                                                                                | Collateral yield minus crvUSD borrow, levered                  | 20% to 33% at 10x to 15x              | Free crvUSD per market $1.5M to $3M: good for small books, about 7.5% at $1.5M |
+| Flowdesk Confidential High Yield USDT                     | https://app.morpho.org/ethereum/vault/0xb48C056C5608bA2Ee4cD94AF2bF4b1F25295Bd7e/flowdesk-confidential-high-yield-usdt#overview | Morpho USDT lending plus rewards                               | 13.8% incl. rewards                   | About $0.6M instantly withdrawable                                             |
+| Aave v4 USDT loop, Avalanche                              | https://pro.aave.com/explore/reserve/avalanche/core/main/USDT                                                                   | Supply rewards in WAVAX, cheap USDT borrow                     | ~18% at 3x before dilution            | Rewards dilute to ~10% at $1.5M, program about a month old                     |
+| GHO / USDT0 loop, Plasma                                  | https://app.aave.com/                                                                                                           | GHO supply plus incentives minus USDT0 borrow                  | ~15% at 4x before dilution            | The fund's size dilutes the GHO reserve, $3.5M GHO free to withdraw            |
+
+_Open item: the scan script and its scheduled output._
+
+---
+
+<a id="methodology"></a>
+Process
+
+# Data Sources and Methods
+
+<a id="methodology--data-sources"></a>
+### Data sources
+
+Every figure the result depends on comes from Current Finance itself. DefiLlama is used only as a record of past reward rates, which it copies once a day from Current Finance's own API.
+
+| Source | What it provides |
+| --- | --- |
+| Current Finance chart API | Hourly history since launch: borrow and supply rates, utilization, amounts supplied and borrowed, and prices |
+| Current Finance market API | Live rates, supply, borrow, caps and LTVs for each market |
+| Current Finance reward API | Live SUI reward rates for each market, the same figures the app shows |
+| Current Finance reserve pages and documentation | Daily borrowing and withdrawal limits, E-Mode settings, security material |
+| Sui GraphQL | Package, upgrade and capability objects, and multisig signatures |
+| Cetus | Live USDSUI / USDC swap quotes |
+| Pharos (pharos.watch) | Independent ratings for USDC and USDSUI: reserves, assurance, controls, peg history and early-warning score |
+| DefiLlama | Daily record of Current Finance's past SUI reward rates, used for the reward history only |
+| CoinGecko | SUI order-book depth and derivatives open interest |
+| Hyperliquid info API | Daily SUI prices for the reward-exposure measures |
+| CertiK Skynet | Protocol security score |
+
+_The query scripts write CSV files to the data folder, and the pages only read them._
+
+<a id="methodology--disclosure"></a>
+### Disclosure
+
+Performance figures are reconstructed from public on-chain and protocol data at the stated position sizes. They are not the record of a live book. Small live pilots confirmed the mechanics, including reward payouts. The sourcing framework, risk checklist, process manual and dashboard tooling behind this report were built before the case study. The work this week went into applying them to current opportunities and running the analysis.
+
+<a id="methodology--assumptions"></a>
+### Assumptions
+
+| Item | Assumption |
+| --- | --- |
+| Structure | Two Multiply vaults at the stated leverage, sized so the USDSUI owed equals the USDSUI held. |
+| Size effects | The fund's deposits dilute SUI rewards pro rata. Its borrowing moves utilization along the rate curve measured from Current Finance's hourly data. |
+| Rewards | Only SUI rewards paid directly on deposits. Points and locked season rewards are excluded. Rewards are claimed daily and sold or hedged the same day. |
+| Costs | A 0.01% Multiply fee on the leveraged size and swap costs from live Cetus quotes. A fast-exit provision of 0.028% of equity per unit of leverage, and a stressed exit at 0.2% slippage on every swap. |
+| Period | Daily history from 16 April 2026, when rewards start in the data. September conditions are the current base. |
+
+<a id="methodology--ai-use"></a>
+### AI use
+
+I designed and directed the work: the strategy, the risk framework, what to test and how, the structure of the report and every decision in it. AI tools carried out the execution under my direction.
+
+| Area | What I did | What the AI tools did |
+| --- | --- | --- |
+| Framework | Compiled the risk checklist and the process document, choosing the sources and the structure | Formatting |
+| Screening | Chose where to look and which candidates to test, and made every call | Pulled protocol and market data and ran the checks I specified |
+| Strategy and backtests | Designed the strategy (two-position structure, leverage policy, entry and exit), set the assumptions and the tests, and interpreted the results | Wrote the code for the data pulls and backtests I specified |
+| Dashboard | Set the structure, what to show and the standard for review | Built the pages from my templates |
+| Writing | Set the argument and the tone, and edited throughout | Drafted text for my review |
+
+<a id="methodology--data-freshness"></a>
+### Data freshness
+
+> Live figures come from Current Finance's API and change each time the data is refreshed. Pinned figures, such as swap quotes, issuer ratings and the on-chain control checks, were taken between 29 September and 2 October 2026 and do not change between runs.
+
+| Metric                                                                  | Source               | Type      | Note                                                                                                                                                                        |
+|:------------------------------------------------------------------------|:---------------------|:----------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Current Finance USDC / USDSUI rates, utilization, supply, borrow, price | current_daily.csv    | PINNED    | Current Finance chart API, hourly, averaged daily. SUI reward rates: Current Finance reward API for today, and DefiLlama's daily record of the same figures for the history |
+| Current Finance live rates, supply, borrow, caps, reward rates          | current_snapshot.csv | CURRENT   | Current Finance market and reward APIs, refreshed with the data block. Daily limits from the reserve pages, swap quotes from Cetus                                          |
+| Candidates, risk maps, triggers, pipeline, AI log                       | editorial CSVs       | EDITORIAL | Hand-written from the research workbook                                                                                                                                     |
+
+<a id="methodology--data-files"></a>
+### Data files
+
+| file                     | status   | size   | modified             |
+|:-------------------------|:---------|:-------|:---------------------|
+| candidates.csv           | ok       | 4 KB   | 2026-10-03 10:30 UTC |
+| gates.csv                | ok       | 1 KB   | 2026-10-03 10:30 UTC |
+| monitoring_triggers.csv  | ok       | 4 KB   | 2026-10-03 10:30 UTC |
+| pipeline.csv             | ok       | 2 KB   | 2026-10-03 10:30 UTC |
+| ai_use_log.csv           | ok       | 1 KB   | 2026-10-03 10:30 UTC |
+| current_daily.csv        | ok       | 60 KB  | 2026-10-03 10:30 UTC |
+| current_snapshot.csv     | ok       | 1 KB   | 2026-10-03 10:30 UTC |
+| risk_map_current.csv     | ok       | 3 KB   | 2026-10-03 10:30 UTC |
+| risk_controls_matrix.csv | ok       | 12 KB  | 2026-10-03 10:30 UTC |
+
+<a id="methodology--data-refresh"></a>
+### Data refresh
+
+_Runs the query scripts and rewrites the data files. On Streamlit Cloud, refreshed files last until the app restarts._
+
+_Control: Blocks = ['current'] (default)_
+
+---
+
+# Section: On hold
+
+---
+
+<a id="usd1"></a>
+On hold · strategy 2
+
+# USD1 Carry on Dolomite
+
+- **Net at 3x since rewards began:** 15.2%
+
+- **Net at 3x, last 30 days:** 13.5%
+
+- **Status:** On hold
+
+The strategy lends USDC and USD1 on Dolomite through two linked positions. The first uses USDC as collateral to borrow USD1. The second uses that USD1 as collateral to borrow USDC. The USD1 owed equals the USD1 held. The income is Dolomite's lending spread plus WLFI rewards paid weekly through Merkl. At 3x it earned 15.2% a year since the rewards began, above 12% every month, with room for $1.5M.
+
+> This strategy is fully researched and could be funded, but I am holding it back for three reasons. The yield rests on WLFI rewards with no published budget, paid in weekly campaigns from one wallet that holds about two and a half weeks of rewards. Most of the USD1 borrowed on Dolomite is backed by WLFI, which liquidators could not sell at size. And Dolomite is administered by a 2-of-3 multisig with a 5-minute delay. I would reconsider it if a multi-month reward budget were confirmed and either the WLFI-backed share of USD1 debt or Dolomite's admin setup improved.
+
+<a id="usd1--tab-structure-and-yield"></a>
+#### Tab: Structure and yield
+
+_Realized rates from interest indexes, as of 29 September 2026._
+
+<a id="usd1--structure"></a>
+### Structure
+
+The strategy uses two positions on Dolomite, on Ethereum mainnet.
+
+| | Supplies | Borrows |
+| --- | --- | --- |
+| Position A | USDC | USD1 |
+| Position B | The USD1 borrowed in A | USDC, which goes back into A |
+
+The USD1 supplied equals the USD1 borrowed, so a move in USD1's price cancels out and the net exposure is the fund's equity in USDC. The WLFI campaign pays on USD1 supply minus borrowing of other listed assets. Keeping the USD1 supply apart from the USDC debt keeps the whole supply eligible, and a live pilot on 29 September confirmed this. Rewards would be claimed weekly and sold for USDC, with any unsold balance hedged with a short WLFI perpetual.
+
+_Control: Leverage for this page (total collateral / equity) = 3.0 (default)_
+
+**Chart: Yield by source at 3.0x, last 30 days: net 13.5%**
+
+- waterfall: USDC lending (base): 5.713, USD1 lending (base): 2.748, USD1 borrow cost: -5.182, USDC borrow cost: -4.069, WLFI rewards on USDC: 7.295, WLFI rewards on USD1: 7.015
+
+Base lending spread: **-0.8%**. WLFI rewards: **+14.3%**. The lending spread on its own is negative, and the return comes from the WLFI rewards. Every basis point traces back to a Dolomite interest index or a reward payout.
+
+<a id="usd1--net-apr-by-leverage"></a>
+### Net APR by leverage
+
+|                             | 2x    | 2.5x   | 3x    | 3.5x   | 4x    |
+|:----------------------------|:------|:-------|:------|:-------|:------|
+| Last 30 days                | 10.5% | 12.0%  | 13.5% | 15.0%  | 16.5% |
+| Last 90 days                | 11.0% | 12.7%  | 14.4% | 16.0%  | 17.6% |
+| Since 22 Apr                | 11.9% | 13.8%  | 15.6% | 17.4%  | 19.2% |
+| 30 days, WLFI rewards -50%  | 5.8%  | 6.1%   | 6.4%  | 6.6%   | 6.9%  |
+| 30 days, no WLFI rewards    | 1.2%  | 0.2%   | -0.8% | -1.8%  | -2.8% |
+| Health, both positions      | 1.80  | 1.50   | 1.35  | 1.26   | 1.20  |
+| USD1 fall that liquidates B | 44%   | 33%    | 26%   | 21%    | 17%   |
+| USD1 rise that liquidates A | 80%   | 50%    | 35%   | 26%    | 20%   |
+
+<a id="usd1--historical-returns"></a>
+### Historical returns
+
+**Chart: Net APR, 7-day average (%)**
+
+- 2.5x: 161 points from 2026-04-22 to 2026-09-29; first 19.755, last 11.212, min 11.212, max 19.755, mean 13.913
+- 3.0x: 161 points from 2026-04-22 to 2026-09-29; first 22.073, last 12.529, min 12.529, max 22.133, mean 15.762
+- 3.5x: 161 points from 2026-04-22 to 2026-09-29; first 24.388, last 13.84, min 13.84, max 24.809, mean 17.604
+
+<a id="usd1--yield-decomposition-over-time"></a>
+### Yield decomposition over time
+
+**Chart: 7-day average, %**
+
+- USD1 supply minus borrow (base): 396 points from 2025-08-26 to 2026-09-29; first -3.582, last -2.006, min -6.293, max -1.136, mean -2.477
+- WLFI reward on USD1 supply: 396 points from 2025-08-26 to 2026-09-29; first 0.0, last 5.217, min 0.0, max 9.416, mean 2.587
+- WLFI reward on USDC supply: 396 points from 2025-08-26 to 2026-09-29; first 0.0, last 3.91, min 0.0, max 5.905, mean 1.852
+
+_Open item: reward value actually claimed against the rate shown, from the pilot wallet._
+
+<a id="usd1--tab-track-record-and-liquidity"></a>
+#### Tab: Track record and liquidity
+
+_Reconstructed from public on-chain data, as of 29 September 2026._
+
+<a id="usd1--track-record"></a>
+### Track record
+
+Returns are rebuilt from the same numbers a live position earns: Dolomite's interest indexes (the exact growth a lender or borrower received each day), the daily WLFI reward rate, and the WLFI price for the guardrails. Scripts and data are included, so every figure can be reproduced.
+
+| what                       | source                                                                                         | note                                                                  |
+|:---------------------------|:-----------------------------------------------------------------------------------------------|:----------------------------------------------------------------------|
+| Supply and borrow interest | Dolomite interest indexes, Ethereum subgraph (Goldsky), USD1 market 1, USDC market 2           | Index ratio over each day: exact growth a lender or borrower received |
+| Live rate cross-check      | DolomiteMargin 0x003C...2b97D: getMarketInterestRate, getMarketTotalPar, getMarketCurrentIndex | Matches the subgraph to the second decimal                            |
+| WLFI rewards               | DefiLlama apyReward for the Dolomite USD1 and USDC pools, and the Merkl campaign page          | Paid since 22 Apr 2026 with no gaps                                   |
+| WLFI price                 | Hyperliquid WLFI perp daily candles                                                            | Used for guardrails and stress                                        |
+| Live pilot                 | Two-position pilot, $100, 29 Sep                                                               | Confirmed full USD1 supply earns WLFI                                 |
+
+- **Net APR with guardrails:** 15.2% (PINNED. 22 Apr to 29 Sep, 3x.)
+
+- **Without guardrails:** 15.6%
+
+- **Days at reduced leverage:** 11
+
+**Chart: Reconstructed net APR, 7-day average (%)**
+
+- 3x, no guardrails: 161 points from 2026-04-22 to 2026-09-29; first 22.073, last 12.529, min 12.529, max 22.133, mean 15.762
+- 3x with guardrails: 161 points from 2026-04-22 to 2026-09-29; first 22.073, last 12.529, min 9.335, max 22.133, mean 15.421
+
+| month   | guarded   | plain   | meets 12%   |
+|:--------|:----------|:--------|:------------|
+| 2026-04 | 19.0%     | 19.6%   | yes         |
+| 2026-05 | 14.0%     | 15.6%   | yes         |
+| 2026-06 | 17.9%     | 17.9%   | yes         |
+| 2026-07 | 15.2%     | 15.2%   | yes         |
+| 2026-08 | 14.4%     | 14.4%   | yes         |
+| 2026-09 | 13.5%     | 13.5%   | yes         |
+
+<a id="usd1--guardrail-events"></a>
+### Guardrail events
+
+| date       | action          | reason                  |
+|:-----------|:----------------|:------------------------|
+| 2026-04-30 | T1: cut to 1.5x | WLFI -21.9% over 7 days |
+| 2026-05-01 | T1: cut to 1.5x | WLFI -27.6% over 7 days |
+| 2026-05-02 | T1: cut to 1.5x | WLFI -26.0% over 7 days |
+| 2026-05-03 | T1: cut to 1.5x | WLFI -22.2% over 7 days |
+
+<a id="usd1--live-pilot"></a>
+### Live pilot
+
+| position   | collateral   | debt         |   health |
+|:-----------|:-------------|:-------------|---------:|
+| A          | USDC $196.21 | USD1 $154.72 |     1.14 |
+| B          | USD1 $154.72 | USDC $96.22  |     1.44 |
+
+_Open item: reward accrual from the pilot wallet, and a wallet-level P&L export._
+
+<a id="usd1--entry-and-exit"></a>
+### Entry and exit
+
+- **Free USD1 to borrow:** $89.7M (CURRENT, utilization 71%)
+
+- **Free USDC:** $31.5M (CURRENT, utilization 78%)
+
+- **Fund USD1 borrow at 3x:** $1.8M (2.0% of free USD1)
+
+- **Equity to withdraw on exit:** $1.5M (4.8% of free USDC today)
+
+Entry needs no market trades. USDC goes into position A, USD1 is borrowed and moved to position B as collateral, and USDC is borrowed in B and added back to A. The steps repeat until the target leverage is reached, with both positions at equal health. Everything happens on Dolomite's ledger, so there is no swap and no slippage. The only cost is gas.
+
+| scenario                                       | action                                                                                             | time                         | cost                                                              |
+|:-----------------------------------------------|:---------------------------------------------------------------------------------------------------|:-----------------------------|:------------------------------------------------------------------|
+| Normal                                         | Repay and withdraw in reverse order                                                                | Hours                        | Gas only                                                          |
+| Stressed (utilization 90% to 97%)              | Net USD1 supply against USD1 debt between the two positions, then withdraw equity as USDC frees up | Hours to days                | Gas, plus a higher borrow rate while waiting                      |
+| Frozen pool (100% utilization, as in Apr 2026) | Net internally first, so only equity waits for repayments or new supply                            | Days                         | Carry keeps accruing, with exposure to a shortfall on equity only |
+| WLFI crash with bad debt                       | Net to 1x at trigger T2, before insolvency levels                                                  | Hours if triggers fire first | Share of any shortfall on the remaining USDC                      |
+
+_To test before funding: netting USD1 supply against USD1 debt across the two positions without pool liquidity. This is the fast exit if the pools freeze._
+
+<a id="usd1--tab-risk-wlfi-stress-and-controls"></a>
+#### Tab: Risk, WLFI stress and controls
+
+_Positions and pools as of 29 September 2026, with WLFI price history since listing._
+
+<a id="usd1--risk-map"></a>
+### Risk map
+
+| Category             | Risk                                                                                           | Impact   | Likelihood   | Mitigation                                                                             | Trigger    |
+|:---------------------|:-----------------------------------------------------------------------------------------------|:---------|:-------------|:---------------------------------------------------------------------------------------|:-----------|
+| 3.5 Credit           | Wrong-way risk: WLFI-backed borrowers owe 80% of USD1 borrowed                                 | 🔴 High   | 🟠 Medium     | Guardrails T1 and T2, internal netting to 1x, size cap                                 | T1, T2, T3 |
+| 3.5 Credit           | Liquidator shortfall: WLFI on-chain liquidity far below collateral size                        | 🔴 High   | 🟠 Medium     | Treat liquidation as unreliable, exit before thresholds                                | T2         |
+| 3.7.2 Liquidity      | Pool freeze at 100% utilization (happened in Apr 2026)                                         | 🔴 High   | 🟠 Medium     | Utilization triggers, netting needs no pool liquidity, only equity must leave the pool | T4, T5     |
+| TF Concentration     | One account supplies ~71% of the USDC pool                                                     | 🟠 Medium | 🟠 Medium     | Watch USDC pool supply, exit if the anchor supplier leaves                             | T5         |
+| 3.2.3 Tokenomics     | Incentive dependency: WLFI rewards exceed 100% of the carry                                    | 🔴 High   | 🟠 Medium     | Monthly APR test against 12%, rotate if it fails for 14 days                           | T6, T12    |
+| 3.7 Market           | WLFI price between claim and sale                                                              | 🟠 Medium | 🔴 High       | Claim weekly, sell to USDC, short WLFI perp on Hyperliquid for unsold balance          | T7         |
+| 3.4 Standards        | USD1 depeg                                                                                     | 🟠 Medium | 🟢 Low        | Token-matched structure, position B liquidates only after a 26% fall at 3x             | T8         |
+| 3.5 Credit           | USD1 above peg liquidates position A (+35% at 3x)                                              | 🟢 Low    | 🟢 Low        | Keep both healths equal, rebalance                                                     | T9         |
+| 3.1.2 Smart contract | Dolomite contract risk                                                                         | 🟠 Medium | 🟢 Low        | CertiK 87.33, audited core, exposure capped at fund level                              | T10        |
+| 3.2 Governance       | Dolomite parameter changes, co-founder is WLF's CTO (conflict of interest)                     | 🟠 Medium | 🟠 Medium     | Alert on any market parameter change, review within 24h                                | T10        |
+| 3.1.5 Oracle         | USD1 / USDC oracle deviation                                                                   | 🟠 Medium | 🟢 Low        | Chainlink feeds, deviation alert                                                       | T11        |
+| 3.3 Compliance       | USD1 regulatory and political headline risk, Pharos C+                                         | 🟠 Medium | 🟢 Low        | News watch, reduce on regulatory action                                                | T10        |
+| 3.1.6 Bridge         | Bridge risk                                                                                    | 🟢 Low    | 🟢 Low        | None used: native USDC and USD1 on Ethereum                                            | nan        |
+| 3.6 Counterparty     | CEX / venue risk                                                                               | 🟢 Low    | 🟢 Low        | Only the small WLFI reward hedge sits on Hyperliquid                                   | T7         |
+| TF Operational       | Two isolated positions, weekly claims, rebalancing                                             | 🟠 Medium | 🟢 Low        | Multisig, written runbook, second-person approval for large moves                      | T9         |
+| 3.7 Market           | Yield compression: 3x fell from 17.9% (Jun) to 13.5% (Sep)                                     | 🟠 Medium | 🔴 High       | Rotate out below 12%                                                                   | T6         |
+| 3.2 Governance       | Dolomite admin: 2-of-3 Safe with a 5-minute timelock and bypass roles                          | 🔴 High   | 🟢 Low        | Size cap, access-control monitoring, ask Dolomite about signer setup                   | T14        |
+| 3.5 Credit           | USD1 single-key minter could mint unbacked USD1 and drain the USDC pool via Dolomite           | 🔴 High   | 🟢 Low        | Monitor USD1 mints and Dolomite USD1 deposits, exit on unexplained mint                | T14        |
+| 3.1.5 Oracle         | Dolomite accepts prices up to 36 hours old, owner can swap feeds                               | 🟠 Medium | 🟢 Low        | Watch oracle config changes                                                            | T14        |
+| 3.2.3 Tokenomics     | WLFI rewards run on weekly campaigns funded from one wallet holding about 2.4 weeks of rewards | 🟠 Medium | 🟠 Medium     | Track renewals and runway                                                              | T13        |
+
+_Categories follow the EEA DeFi risk taxonomy with TradFi credit additions. Trigger IDs refer to the monitoring page._
+
+<a id="usd1--wlfi-backed-borrowers"></a>
+### WLFI-backed borrowers
+
+- **WLFI-backed positions:** 63
+
+- **WLFI collateral:** $402.1M
+
+- **Their debt:** $187.7M
+
+- **Share of all USD1 borrowed:** 80%
+
+| owner         | WLFI collateral   | other collateral   | USD1 debt   | USDC debt   |   health | liquidatable at WLFI   | insolvent at WLFI   |
+|:--------------|:------------------|:-------------------|:------------|:------------|---------:|:-----------------------|:--------------------|
+| 0x5be9...7dbb | $113.7M           | $147.5M            | $113.6M     | $0.00       |     1.77 | nan%                   | nan%                |
+| 0x44a6...5fad | $171.3M           | $0.00              | $31.2M      | $10.6M      |     2.73 | -64%                   | -76%                |
+| 0xdc38...0d4e | $103.7M           | $0.00              | $28.1M      | $0.00       |     2.21 | -55%                   | -73%                |
+| 0xc133...6522 | $10.4M            | $0.00              | $0.00       | $3.0M       |     2.07 | -52%                   | -71%                |
+| 0x70ce...73f1 | $685.3K           | $0.00              | $0.00       | $281.2K     |     1.62 | -38%                   | -59%                |
+| 0x9fec...1cec | $294.3K           | $0.00              | $0.00       | $130.6K     |     1.5  | -34%                   | -56%                |
+
+<a id="usd1--wlfi-stress-test"></a>
+### WLFI stress test
+
+_Control: Fund leverage = 3.0 (default)_
+
+| WLFI move   |   positions liquidatable | debt in them   | shortfall USD1 pool   | shortfall USDC pool   | fund loss, not netted   | fund loss, netted to 1x   |
+|:------------|-------------------------:|:---------------|:----------------------|:----------------------|:------------------------|:--------------------------|
+| -50%        |                       28 | $1.1M          | $2.8K                 | $271.60               | $21.87 (0.0%)           | $2.91 (0.0%)              |
+| -60%        |                       34 | $32.3M         | $9.1K                 | $50.3K                | $1.0K (0.1%)            | $538.51 (0.0%)            |
+| -70%        |                       42 | $74.1M         | $15.7K                | $275.8K               | $5.4K (0.4%)            | $3.0K (0.2%)              |
+| -75%        |                       44 | $74.1M         | $2.2M                 | $821.5K               | $29.0K (1.9%)           | $8.8K (0.6%)              |
+| -80%        |                       44 | $74.1M         | $13.0M                | $3.4M                 | $142.1K (9.5%)          | $36.2K (2.4%)             |
+| -85%        |                       46 | $74.1M         | $24.6M                | $6.2M                 | $265.1K (17.7%)         | $66.6K (4.4%)             |
+| -90%        |                       46 | $74.1M         | $36.2M                | $9.1M                 | $388.1K (25.9%)         | $96.9K (6.5%)             |
+
+_The shortfall is the debt minus the collateral value when no liquidation fills. It is split according to each position's debt mix and shared in proportion. In a run, whoever withdraws first is paid in full, so real losses land unevenly. Exiting early matters more than the average suggests._
+
+<a id="usd1--expected-shortfall"></a>
+### Expected shortfall
+
+- **30-day windows:** 373
+
+- **Worst 30-day WLFI move:** -75%
+
+- **VaR 95%, loss on equity:** 0.36%
+
+- **Expected shortfall 95%:** 0.62%
+
+**Chart: Worst WLFI move within 30 days of each day since listing (%)**
+
+- histogram: distribution of 373 values; min -75.16, 5th percentile -69.93, median -19.63, 95th percentile -3.7, max 0.02
+
+_Historical simulation over every 30-day window since August 2025, measured from the close to the lowest low in each window. WLFI has heavy tails: it fell 70% in a week in October 2025, so the stress table above includes a jump scenario._
+
+<a id="usd1--distance-to-liquidation"></a>
+### Distance to liquidation
+
+**Chart: WLFI price (USD) and large-position liquidation levels today**
+
+- WLFI close: 403 points from 2025-08-23 to 2026-09-29; first 0.301, last 0.057, min 0.051, max 0.326, mean 0.112
+
+<a id="usd1--liquidation-capacity"></a>
+### Liquidation capacity
+
+Liquidators would clear part of this collateral, but not all of it. On 29 and 30 September the market looked like this.
+
+| Venue | Depth |
+| --- | --- |
+| Spot exchanges | About $8.2M of bids within 2% of the price, and about $38M of daily volume |
+| Perpetual futures | About $369M of open interest and $138M of daily volume, with $136M of open interest on Binance alone |
+| Ethereum DEXs | About $6.7M of liquidity (WLFI/ETH $4.2M, WLFI/USDT $1.4M, WLFI/USDC $1.2M) |
+| Solana | The large Raydium WLFI/USDC position (about $55M) is almost all WLFI. It is a sell wall above the price and adds no bids. |
+
+Perpetuals are the largest buffer. An arbitrageur can buy discounted WLFI from a liquidation, short the perpetual to lock in the price and sell the spot over hours or days. Even so, the largest pure-WLFI position would need about $48M of WLFI sold, so the stress table shows losses under several liquidation capacities rather than one.
+
+- **Spot bids within 2%:** $8.2M
+
+- **Spot volume, 24h:** $38.3M
+
+- **Perpetual open interest:** $369.3M
+
+- **Perpetual volume, 24h:** $137.8M
+
+_Loss under different liquidation capacities, in USD of WLFI that liquidators can sell during the fall._
+
+| capacity                              | pool shortfall, WLFI -80%   | fund loss, -80%   | pool shortfall, WLFI -90%   | fund loss, -90%   | fund loss, -90%, netted   |
+|:--------------------------------------|:----------------------------|:------------------|:----------------------------|:------------------|:--------------------------|
+| none fill                             | $16.4M                      | 9.5%              | $45.3M                      | 25.9%             | 6.5%                      |
+| $20M: spot and on-chain               | $14.9M                      | 7.6%              | $42.4M                      | 22.2%             | 4.4%                      |
+| $50M: plus perpetual-hedged arbitrage | $7.5M                       | 4.6%              | $24.6M                      | 15.3%             | 4.4%                      |
+| $100M: deep, orderly market           | $0.00                       | 0.0%              | $0.00                       | 0.0%              | 0.0%                      |
+
+<a id="usd1--protocol-history"></a>
+### Protocol history
+
+Between February and April 2026, World Liberty Financial's treasury borrowed stablecoins against WLFI on Dolomite, and Dolomite raised the WLFI supply cap to 5.1B tokens to fit it. The USD1 pool then reached 100% utilization: almost everything supplied had been borrowed, so ordinary depositors could not withdraw until loans were repaid or new supply arrived. This was a liquidity squeeze from heavy borrowing, not a hack. After public scrutiny in April, World Liberty Financial repaid $25M and said it would add collateral if needed. No structural change followed: no insurance fund, no cap reduction, no parameter change.
+
+<a id="usd1--stablecoin-analysis"></a>
+### Stablecoin analysis
+
+|                          | USD1                                                  |
+|:-------------------------|:------------------------------------------------------|
+| Issuer / mechanism       | BitGo Trust Company, 1:1 fiat-backed                  |
+| Backing                  | T-bills, government money-market funds, bank deposits |
+| Reserve evidence         | Monthly attestations, real-time proof of reserve      |
+| Holder exit              | Redemption through the issuer only                    |
+| Freeze or seizure        | Yes, issuer can freeze                                |
+| Peg record               | Near par for over a year                              |
+| Independent rating       | C+ (61/100)                                           |
+| Backing / exit / control | -                                                     |
+| Reserve assurance        | Monthly attestations, KPMG examination (July 2026)    |
+| Exit capacity            | Redemption through the issuer only                    |
+| Mint and upgrade control | 3-of-6 Safe admin, one single-key minter and freezer  |
+| Peg incidents on record  | Near par for over a year                              |
+| Early-warning score      | -                                                     |
+| Role                     | Held and owed in equal amounts                        |
+
+_Independent rating, pillar scores, reserve assurance, exit capacity, controls and early-warning score: Pharos (pharos.watch), 1 October 2026. Other rows: issuer disclosures and on-chain checks._
+
+USD1 is issued 1:1 by BitGo Trust Company under a US national trust charter. Reserves are short-term Treasury bills, government money-market funds and bank deposits, all convertible within a day, with monthly attestations and a real-time proof-of-reserve feed. Supply is about $4.4B. The issuer can freeze tokens, and redemption runs only through the issuer, which is the weakest part of the design. The peg has held near par for over a year, and USD1 is not authorized under MiCA. In this strategy the fund holds and owes USD1 in equal amounts, so its price does not drive the result.
+
+<a id="usd1--admin-and-upgrade-controls"></a>
+### Admin and upgrade controls
+
+I checked every contract in the strategy on-chain on 30 September.
+
+| Area | What I found |
+| --- | --- |
+| Dolomite admin | The weakest point. A 2-of-3 Safe runs the protocol through a 5-minute timelock, and the pause and excess-token roles bypass it. That is thin for a protocol holding over $400M. |
+| USD1 mint and freeze | The admin is a 3-of-6 Safe with a 3-day delay, but one minter and one freezer are single wallets. A compromised minter could create unbacked USD1, post it on Dolomite at about $1 and borrow the USDC the fund supplies, the same pattern as the Resolv exploit in March 2026. |
+| Oracles | Chainlink's USD1, USDC and WLFI feeds. Dolomite accepts prices up to 36 hours old, and its owner can swap feeds. |
+| Rewards | Paid through Merkl, governed by a 4-of-6 Safe, with a one-hour dispute window on each payout. |
+
+| Contract                                                            | Controls                                                | Who Controls                                                                                     | Delay                                             | Assessment                                                                                                              |
+|:--------------------------------------------------------------------|:--------------------------------------------------------|:-------------------------------------------------------------------------------------------------|:--------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------|
+| DolomiteMargin (0x003C...97D)                                       | All markets, risk parameters, oracles, interest setters | DolomiteOwnerV2, top admin a 2-of-3 Safe (0xa75c...a1D4)                                         | 5 minutes, pause and excess-token roles bypass it | Weak: small signer set and a short delay for a protocol holding over $400M                                              |
+| Dolomite price oracle (OracleAggregatorV2 + ChainlinkPriceOracleV3) | Price source per token                                  | Dolomite owner (above)                                                                           | As above                                          | Good feeds (Chainlink USD1/USD, USDC/USD, WLFI/USD), staleness allowance 36 hours is long, owner can swap feeds         |
+| USD1 token (upgradeable proxy)                                      | Token code                                              | ProxyAdmin owned by a 3-of-5 Safe                                                                | None seen on upgrades                             | Upgradeable by multisig                                                                                                 |
+| USD1 TokenGovernor                                                  | Mint, burn, freeze, pause, recovery                     | Admin 3-of-6 Safe, minters include one single-key wallet, freezers include one single-key wallet | 3 days on admin transfer only                     | Weak point: a compromised minter key could mint unbacked USD1, post it on Dolomite at about $1 and borrow the USDC pool |
+| Merkl Distributor (upgradeable)                                     | WLFI reward payouts                                     | Governor 4-of-6 Safe, guardian includes one single-key wallet                                    | Reward roots disputable for 1 hour                | Acceptable, rewards at risk, not principal                                                                              |
+| Chainlink feeds                                                     | Price data                                              | Chainlink multisig                                                                               | Network standard                                  | Good                                                                                                                    |
+
+<a id="usd1--reward-durability"></a>
+### Reward durability
+
+WLFI rewards are paid through weekly Merkl campaigns of about 2.30M WLFI each, which have run without a break since late April. The current one ends on 5 October. The campaigns are funded from one wallet holding about 5.6M WLFI, roughly two and a half weeks of rewards, which is topped up as it goes. I would track each week's renewal and the wallet's balance, and treat a missed renewal as the end of the rewards. The sources are the Merkl campaign page and API, the funding wallet, World Liberty Financial's governance forum and announcements, and Dolomite's channels.
+
+<a id="usd1--tab-monitoring-team-and-sizing"></a>
+#### Tab: Monitoring, team and sizing
+
+<a id="usd1--exit-triggers"></a>
+### Exit triggers
+
+_At the warning level I investigate and prepare the exit. At the action level I act without waiting for a meeting._
+
+| Id   | Metric                                                                                 | Warn             | Act                                | Action                                     | Source                           |
+|:-----|:---------------------------------------------------------------------------------------|:-----------------|:-----------------------------------|:-------------------------------------------|:---------------------------------|
+| T1   | WLFI 7-day change                                                                      | < -15%           | < -20%                             | Cut to 1.5x for 7 days                     | Hyperliquid API                  |
+| T2   | WLFI price / nearest large-position liquidation price                                  | < 2.0x           | < 1.6x                             | Net positions to 1x (USDC only)            | Dolomite subgraph + price        |
+| T3   | WLFI-backed debt, weekly change                                                        | > +$10M          | > +$25M                            | Review, cut to 1.5x                        | Dolomite subgraph                |
+| T4   | USD1 or USDC pool utilization                                                          | > 85%            | > 92%                              | Reduce, exit above 97%                     | DolomiteMargin contract          |
+| T5   | USDC pool supply, 1-day change                                                         | < -15%           | < -25%                             | Exit (anchor supplier leaving)             | Dolomite subgraph                |
+| T6   | Net APR at current leverage, 7-day                                                     | < 13%            | < 12% for 14 days                  | Rotate to another strategy                 | Index ratios + Merkl             |
+| T7   | Unsold WLFI rewards                                                                    | > $5k            | > $20k                             | Sell, or short WLFI perp                   | Merkl + wallet                   |
+| T8   | USD1 price                                                                             | < 0.995          | < 0.985                            | Reduce position B                          | Chainlink / DEX                  |
+| T9   | Health, positions A and B                                                              | < 1.25           | < 1.15                             | Rebalance to equal health                  | DolomiteMargin contract          |
+| T10  | Dolomite admin or parameter change on USD1, USDC, WLFI                                 | Any              | Adverse                            | Review within 24h                          | Contract events                  |
+| T11  | USD1 oracle vs market price                                                            | > 0.5%           | > 1%                               | Pause adds, review                         | Chainlink / DEX                  |
+| T12  | Merkl accrual vs expected                                                              | < -20%           | < -40%                             | Check eligibility, rotate                  | Merkl API                        |
+| T13  | WLFI reward campaign: next week posted, funder wallet runway                           | Runway < 2 weeks | Not renewed                        | Assume rewards end, rotate within the week | Merkl API, funder wallet balance |
+| T14  | Access-control events: Dolomite owner roles, USD1 minters and freezers, oracle changes | Any change       | Unknown signer or unexplained mint | Stop adds, net to 1x                       | Contract event subscriptions     |
+
+<a id="usd1--trigger-coverage"></a>
+### Trigger coverage
+
+| Triggers | What they watch |
+| --- | --- |
+| T1, T2, T3 | The WLFI tail. Leverage comes down before large positions get close to liquidation. |
+| T4, T5 | A pool freeze. Utilization and the largest USDC supplier give the early signs. |
+| T6, T12 | The yield itself. Rotate when the carry no longer pays for the risk. |
+| T7 | The WLFI price between claim and sale. |
+| T8, T9, T11 | The USD1 peg, position health and the oracle. |
+| T10 | Admin or governance changes on the markets used. |
+
+<a id="usd1--monitoring-tools"></a>
+### Monitoring tools
+
+| Area | Tool |
+| --- | --- |
+| Dolomite | Subgraph for positions and pool totals, DolomiteMargin reads for rates, indexes and health, polled every 5 minutes |
+| Prices | Hyperliquid WLFI perpetual, Chainlink USD1, DEX quotes |
+| Rewards | Merkl API for accrual and claims |
+| Events | Contract event subscriptions for parameter changes, plus news and governance feeds |
+| Alerts | Telegram and email for warnings, a pager for actions |
+
+<a id="usd1--runbook"></a>
+### Runbook
+
+1. On a warning, check the cause, confirm the data and prepare the unwind transactions.
+2. If T1 reaches its action level, cut to 1.5x by repaying USD1 in A with USD1 moved from B, then USDC in B.
+3. If T2 or T5 reaches its action level, net both positions to 1x on Dolomite's ledger and withdraw equity as USDC frees up.
+4. If T6 reaches its action level, unwind over one to two days and rotate.
+5. Log each event with the trigger, time, size, cost and outcome.
+
+<a id="usd1--review-cadence"></a>
+### Review cadence
+
+| How often | What |
+| --- | --- |
+| Daily | Trigger review, position health, WLFI claims |
+| Weekly | WLFI sale, reward rate against the base spread, change in WLFI-backed debt, stress refresh |
+| Monthly | Net APR against the hurdle, re-underwriting |
+| Quarterly | Full review of the thesis and limits |
+
+<a id="usd1--monitoring-console"></a>
+### Monitoring console
+
+_This is a mock-up. Each check runs on the 29 September 2026 snapshot._
+
+- **OK:** 7
+
+- **Warn:** 1
+
+- **Act:** 0
+
+- **No data yet:** 6
+
+| trigger   | check                                                             | value               | status    |
+|:----------|:------------------------------------------------------------------|:--------------------|:----------|
+| T1        | WLFI 7-day change                                                 | -2.8%               | 🟢 OK      |
+| T2        | WLFI / nearest large-position liquidation price (debt 1M+)        | 2.07x               | 🟢 OK      |
+| T3        | WLFI-backed debt, weekly change                                   | needs two snapshots | ⚪ NO DATA |
+| T4        | USD1 pool utilization                                             | 70.6%               | 🟢 OK      |
+| T4        | USDC pool utilization                                             | 77.5%               | 🟢 OK      |
+| T5        | USDC pool supply, 1-day change                                    | needs two snapshots | ⚪ NO DATA |
+| T6        | Net APR at 3x, last 7 days                                        | 12.5%               | 🟠 WARN    |
+| T7        | Unsold WLFI rewards                                               | no live position    | ⚪ NO DATA |
+| T8        | USD1 price (oracle)                                               | 0.9993              | 🟢 OK      |
+| T9        | Health, positions A and B (target)                                | 1.35                | 🟢 OK      |
+| T10       | Dolomite admin / parameter events                                 | no event feed yet   | ⚪ NO DATA |
+| T12       | Merkl accrual vs expected                                         | no live position    | ⚪ NO DATA |
+| T13       | WLFI campaign runway (current ends 2026-10-05)                    | 2.4 weeks           | 🟢 OK      |
+| T14       | Access-control events (Dolomite roles, USD1 mint/freeze, oracles) | no event feed yet   | ⚪ NO DATA |
+
+<a id="usd1--team-support"></a>
+### Team support
+
+Before funding, I would want the team to look at every attack path, not just the strategy's own contracts.
+
+| Area | What I would ask for |
+| --- | --- |
+| Smart contracts and forensics | Dolomite's margin and admin contracts (a 2-of-3 Safe with a 5-minute timelock), USD1's mint and freeze roles, the reward contract, and how liquidations and internal transfers behave in a fully used pool. |
+| Keys | The fund's signer setup, hardware keys, a Roles Modifier allowlist so each key can only make the calls each strategy needs, and monitoring of the fund's Safe for unexpected changes. |
+| Signing | Simulation and decoding of every transaction before signing, protection against spoofed or poisoned addresses, and no blind signing through a web interface. |
+| Legal and compliance | The regulatory and reputational exposure to USD1 and WLFI, and how WLFI rewards are treated. |
+| Trading | Selling rewards, hedging WLFI, and running the unwind at size. |
+| Risk | An independent check of the stress model and the trigger levels. |
+
+<a id="usd1--opportunity-rationale"></a>
+### Opportunity rationale
+
+About 80% of the USD1 borrowed on Dolomite is backed by WLFI. Many desks will not lend next to an issuer's loan against its own token, which keeps supply thin and rewards high.
+
+The strategy also only works with the two-position structure. Without rewards the carry is -0.8% at 3x, and a single-position loop loses part of the reward. Some mandates exclude reward-driven yield altogether. Capacity is limited as well, since the rewards dilute as more supply arrives.
+
+<a id="usd1--pre-mortem"></a>
+### Pre-mortem
+
+The most likely way this loses money is a fast WLFI crash that freezes the USD1 and USDC pools before the position is reduced. Liquidators cannot sell the WLFI, the pools take bad debt, and the position is still at 3x when withdrawals stop. A 90% fall in WLFI would cost about 26% of equity, or 6% after netting the two positions.
+
+The second is that WLFI rewards end or are cut, the carry turns negative and the exit comes too late.
+
+Acting on the first day a WLFI or pool trigger fires, testing the netting step in advance and keeping a hard cap on size would limit both.
+
+<a id="usd1--sizing"></a>
+### Sizing
+
+<a id="usd1--fund-limits"></a>
+### Fund limits
+
+_Control: Stressed-loss budget, % of NAV = 0.5 (default)_
+
+_Control: Max % NAV per protocol = 8.0 (default)_
+
+_Control: Max share of a pool = 2.0 (default)_
+
+_Control: Stress scenario, WLFI move = -0.8 (default)_
+
+_Control: Leverage (total collateral / equity) = 3.0 (default)_
+
+_Control: Rates = Last 30 days (default)_
+
+_Control: Assume the position is netted to 1x before bad debt lands = False (default)_
+
+- **Net APR:** 13.5%
+
+- **Health, both positions:** 1.35
+
+- **Loss at WLFI -80%:** 9.5% of equity
+
+- **30-day expected shortfall (95%):** 0.62%
+
+<a id="usd1--size-limits"></a>
+### Size limits
+
+| limit                                     | max equity   |
+|:------------------------------------------|:-------------|
+| Capacity: at most 10% of free USD1 borrow | $7.5M        |
+| Loss budget: 0.5% of NAV / loss at -80%   | $1.8M        |
+| Protocol limit: 8% of NAV on Dolomite     | $2.8M        |
+| Pool share: 2.0% of the USD1 or USDC pool | $1.6M        |
+
+> **Recommended size: $1.6M** (the smallest limit). At 3.0x this clears the target of $1.5M at 12% net.
+
+<a id="usd1--position-legs-per-1-of-equity"></a>
+### Position legs per $1 of equity
+
+| leg                                   |   per $1 | at recommended size   |
+|:--------------------------------------|---------:|:----------------------|
+| USDC supplied (A)                     |      1.8 | $2.8M                 |
+| USD1 borrowed (A) = USD1 supplied (B) |      1.2 | $1.9M                 |
+| USDC borrowed (B)                     |      0.8 | $1.2M                 |
+
+The data comes from Dolomite's Ethereum subgraph (Goldsky) and DolomiteMargin contract reads (Ethereum RPC, Blockscout) for rates, positions and controls. Merkl provides the WLFI reward campaigns, the Hyperliquid info API and CoinGecko provide WLFI prices, depth and open interest, and Pharos provides USD1's rating.
+
+The model keeps both positions at equal health and assumes liquidation at 90% of collateral value. WLFI rewards are counted at the daily reward rate. Gas and the cost of selling rewards are not deducted, as they are small at this size.
+
+---
+
+<a id="reusd"></a>
+On hold · strategy 3
+
+# reUSD Liquidity on Curve, Funded through Resupply
+
+> reUSD has traded below par since early August and printed as low as 0.82 in April. Holding liquidity in its pool means taking on more reUSD as it falls, and Resupply has published no audit since its 2025 exploit. I would reconsider the strategy once reUSD holds par for a sustained period and the code changes have been reviewed independently.
+
+_Reconstructed from pool, Resupply pair and lending history, as of 29 September 2026._
+
+_Control: Share of the deposit borrowed as reUSD = 0.8 (default)_
+
+_Control: Borrow rewards = Interface level (about 4.2%) (default)_
+
+- **Net yield, last 30 days:** 17.4%
+
+- **Since structure launched:** 16.1% (53 days from 2026-07-31)
+
+- **Unhedged LP, last 30 days:** 9.3%
+
+- **reUSD price:** 0.9844
+
+<a id="reusd--tab-structure-and-yield"></a>
+#### Tab: Structure and yield
+
+The strategy has three steps.
+
+1. Deposit crvUSD on Resupply. It is lent in Curve Lend's sfrxUSD market and earns that lending rate.
+2. Borrow reUSD against it. Resupply pays borrowers rewards in CRV, RSUP and CVX on top of the borrow cost.
+3. Provide the reUSD as liquidity in the Curve reUSD/scrvUSD pool through Stake DAO, earning trading fees and boosted CRV.
+
+The pool holds about 77% reUSD. Borrowing the reUSD that goes into the pool cancels most of the depeg exposure. The scrvUSD side remains.
+
+The pool pays trading fees of about 1% and CRV emissions. Stake DAO deposits earn CRV at a 2.38x boost, close to Curve's 2.5x maximum, and Stake DAO keeps 15.5% as fees. Today that comes to 16.8% in CRV plus 1% in fees, 17.8% in total.
+
+For earlier days the model rebuilds the same figure from the pool's unboosted CRV rate, which matches today's reading within 0.1 point. CRV emissions to this pool rose in August. For most of the previous year the boosted CRV rate was 4.6% to 8%, so the current level depends on gauge votes holding up.
+
+There are three ways to hold the position. Buying reUSD and scrvUSD outright keeps the fund's capital out of Resupply's contracts, but leaves the fund long about three-quarters reUSD. When reUSD drifted from 0.990 to 0.984 over the last month, that cost about 5.6 points of annualized yield.
+
+Funding the reUSD with a Resupply loan removes that exposure and adds the borrow rewards, but it puts the fund's crvUSD collateral inside a protocol that was exploited in 2025 and has published no audit since. Splitting half and half halves both effects. Holding reUSD outright does not avoid Resupply risk either, because reUSD is Resupply's own liability. A protocol failure would reach the fund through the price instead of the collateral.
+
+| variant                          | last 30 days   | since 31 Jul   | last 12 months   | months at 12%+   |
+|:---------------------------------|:---------------|:---------------|:-----------------|:-----------------|
+| Plain LP (buy reUSD and scrvUSD) | 9.3%           | 6.9%           | 8.6%             | 3 of 13          |
+| Funded through Resupply          | 17.4%          | 16.1%          | 10.6%            | 8 of 13          |
+| Half and half                    | 13.3%          | 11.5%          | 9.6%             | 6 of 13          |
+
+The LP is staked through Stake DAO. The same pool is also available as an autocompounding vault on Beefy, which stakes through Convex. Beefy saves the weekly reward claims, but it yields less (16.5% after fees) and adds two more contract layers.
+
+**Chart: Yield by source, last 30 days, % of equity (net 17.4%)**
+
+- bar: LP fees and CRV (Stake DAO, after dilution): 12.191, crvUSD lending: 2.741, Borrow rewards (CRV, RSUP, CVX): 3.368, reUSD borrow cost: -2.266, reUSD price effect: 1.348
+
+Borrow rewards are paid in CRV, RSUP and CVX, all of them liquid. CRV is most of it and can be hedged. The model uses the level the Resupply interface shows today, about 4.2% (CRV about 3.9% and RSUP about 0.6%), and scales the pair's daily reward history to that level, so the shape of the history is kept. The history source records lower absolute levels (1.82% over the last 30 days). Using it instead would lower the result by about 2 to 3 points.
+
+**Chart: Monthly net yield at $1.5M, % a year (before Aug: closest proxy pair)**
+
+- funded with borrowed reUSD: 2025-09: 16.981, 2025-10: 17.555, 2025-11: 17.729, 2025-12: 12.19, 2026-01: 12.044, 2026-02: 13.55, 2026-03: 4.666, 2026-04: 3.54, 2026-05: 5.622, 2026-06: 5.374, 2026-07: 4.725, 2026-08: 15.281, 2026-09: 17.334
+- plain LP: 2025-09: 31.536, 2025-10: 10.933, 2025-11: 12.882, 2025-12: 7.204, 2026-01: 3.388, 2026-02: 11.429, 2026-03: 19.576, 2026-04: 5.113, 2026-05: 6.761, 2026-06: 3.895, 2026-07: 8.937, 2026-08: 4.099, 2026-09: 9.827
+
+<a id="reusd--tab-depeg-and-exit-rules"></a>
+#### Tab: Depeg and exit rules
+
+The Curve pool uses the StableSwap formula with an amplification of 200. Prices stay close to par much longer than in a constant-product pool, and when reUSD weakens, arbitrage adds reUSD to the pool.
+
+Because all the reUSD that goes into the pool is borrowed, and the pool is only about three-quarters reUSD, the position starts slightly short reUSD. A depeg therefore produces a small gain. As it deepens, the LP collects more reUSD, which brings the fund's reUSD holdings back towards its debt. The cost is on the other side, if reUSD recovers to 1.00 or above. Borrowing only the pool's reUSD share would make the position neutral at today's mix, but small losses would then come in both directions.
+
+**Chart: Position value if reUSD moves (StableSwap A=200, $1.5M equity)**
+
+- funded structure (all reUSD borrowed): 1.01: -0.809, 1.0: -0.269, 0.995: -0.109, 0.99: 0.001, 0.985: 0.088, 0.98: 0.162, 0.97: 0.287, 0.96: 0.391, 0.95: 0.483, 0.93: 0.639, 0.9: 0.829, 0.85: 1.077, 0.8: 1.268
+- borrow only the pool's reUSD share (77%): 1.01: -0.438, 1.0: -0.084, 0.995: -0.017, 0.99: 0.0, 0.985: -0.006, 0.98: -0.025, 0.97: -0.086, 0.96: -0.167, 0.95: -0.262, 0.93: -0.477, 0.9: -0.844, 0.85: -1.526, 0.8: -2.264
+- plain LP, no borrowing: 1.01: 0.804, 1.0: 0.536, 0.995: 0.292, 0.99: -0.003, 0.985: -0.32, 0.98: -0.649, 0.97: -1.333, 0.96: -2.036, 0.95: -2.753, 0.93: -4.213, 0.9: -6.446, 0.85: -10.239, 0.8: -14.089
+
+|   reUSD price | reUSD share of pool   | pool IL vs holding   |   reUSD in the LP | funded structure   | share-neutral borrow   | plain LP   |
+|--------------:|:----------------------|:---------------------|------------------:|:-------------------|:-----------------------|:-----------|
+|         1.01  | 24%                   | -0.52%               |           286,324 | $-12.1K            | $-6.6K                 | $12.1K     |
+|         1     | 50%                   | -0.10%               |           604,020 | $-4.0K             | $-1.3K                 | $8.0K      |
+|         0.995 | 69%                   | -0.02%               |           830,181 | $-1.6K             | $-250.16               | $4.4K      |
+|         0.99  | 76%                   | -0.00%               |           924,141 | $12.18             | $0.40                  | $-39.05    |
+|         0.985 | 80%                   | -0.01%               |           973,170 | $1.3K              | $-87.16                | $-4.8K     |
+|         0.98  | 83%                   | -0.04%               |         1,004,181 | $2.4K              | $-369.12               | $-9.7K     |
+|         0.97  | 86%                   | -0.13%               |         1,042,550 | $4.3K              | $-1.3K                 | $-20.0K    |
+|         0.96  | 88%                   | -0.24%               |         1,066,272 | $5.9K              | $-2.5K                 | $-30.5K    |
+|         0.95  | 89%                   | -0.37%               |         1,082,886 | $7.2K              | $-3.9K                 | $-41.3K    |
+|         0.93  | 90%                   | -0.68%               |         1,105,361 | $9.6K              | $-7.2K                 | $-63.2K    |
+|         0.9   | 92%                   | -1.21%               |         1,126,350 | $12.4K             | $-12.7K                | $-96.7K    |
+|         0.85  | 93%                   | -2.26%               |         1,147,511 | $16.2K             | $-22.9K                | $-153.6K   |
+|         0.8   | 94%                   | -3.50%               |         1,161,344 | $19.0K             | $-34.0K                | $-211.3K   |
+
+Compared with simply holding the tokens deposited, the pool loses little near par: 0.01% at 0.985 and 0.12% at 0.97. The loss then grows as the pool fills with reUSD, to 1.2% at 0.90 and 3.5% at 0.80. The LP also ends up holding more reUSD as the price falls, up to a quarter more at 0.80.
+
+For a plain LP this adds to the price loss. A slide from 0.990 to 0.985 already costs 0.3% of equity. In this structure the extra reUSD is matched by the reUSD owed, which is why a depeg nets out as a small gain.
+
+_reUSD price at which each setup has lost 0.1%, 0.2% and 0.3% of equity._
+
+| entry                                             | setup                         | loss 0.1%                    | loss 0.2%                   | loss 0.3%                    |
+|:--------------------------------------------------|:------------------------------|:-----------------------------|:----------------------------|:-----------------------------|
+| Entered today (pool 76% reUSD, price 0.990)       | plain LP                      | below 0.988                  | below 0.9865                | below 0.985                  |
+| Entered today (pool 76% reUSD, price 0.990)       | borrow the pool's reUSD share | above 1.001 or below 0.969   | above 1.0042 or below 0.958 | above 1.007 or below 0.948   |
+| Entered today (pool 76% reUSD, price 0.990)       | borrow all (funded structure) | above 0.9948                 | above 0.9982                | above 1.0008                 |
+| Entered after a repeg (balanced pool, price 1.00) | plain LP                      | below 0.9975                 | below 0.9955                | below 0.9935                 |
+| Entered after a repeg (balanced pool, price 1.00) | borrow the pool's reUSD share | above 1.0084 or below 0.9915 | above 1.013 or below 0.987  | above 1.0172 or below 0.9825 |
+| Entered after a repeg (balanced pool, price 1.00) | borrow all (funded structure) | above 1.0024                 | above 1.0044                | above 1.0062                 |
+
+The fund aims for a positive result every month, so the position may give back at most what it has already earned. The mark-to-market loss is capped at 0.3% of equity, about one week of income at the current yield. The exit runs in three steps.
+
+| Loss | Action |
+| --- | --- |
+| 0.1% | Stop adding, and bring the reUSD borrowed back towards the pool's reUSD share. |
+| 0.2% | Cut the position by half. |
+| 0.3% | Exit fully. |
+
+If the position is entered at par with all the reUSD borrowed, these losses only arise if reUSD trades above par, at about 1.0024, 1.0044 and 1.0062. Minting at par keeps reUSD from staying far above it. A fall in reUSD is a gain for the position, but a fall below 0.98 for a day, or the pool passing 90% reUSD, would signal distress at Resupply and trigger a full exit. Redemptions against the fund's pair are rebalanced the same day.
+
+<a id="reusd--tab-insurance-pool-and-record"></a>
+#### Tab: Insurance pool and record
+
+- **Insurance pool:** 2.1M reUSD
+
+- **reUSD supply:** 48.5M
+
+- **Coverage:** 4.3% (Before the 2025 exploit: 38.7M reUSD)
+
+Resupply's insurance pool holds reUSD deposited by users. It buys the collateral of liquidated borrowers and absorbs bad debt first if a collateral market fails. Beyond its size the protocol carries the loss, and reUSD would weaken. The pool earns 10% of protocol fees plus RSUP, and withdrawals take seven days.
+
+Today it holds 2.1M against 48.5M of reUSD, about 4.3% coverage, down from 38.7M before the 2025 exploit, when it absorbed 6M of bad debt. It matters to this position in two ways. A larger pool makes a disorderly reUSD collapse less likely, although this structure gains in a depeg. And if the Curve Lend market holding the fund's crvUSD collateral failed, the pool rather than the market would take the fund's debt and collateral. Coverage is checked daily, and below 3% the position would be reduced.
+
+In June 2025 an attacker manipulated the exchange rate of a newly listed, thin market and borrowed about 10M reUSD against almost no collateral. The treasury, partners and the insurance pool covered the bad debt, and the code was changed. The published audit list still shows only the two reviews from January and February 2025. TVL has grown since. This is the weakest part of the case, and the reason the position would stay smaller and on watch.
+
+<a id="reusd--tab-liquidity"></a>
+#### Tab: Liquidity
+
+The sources are the daily reward and TVL history of the Stake DAO vault and the Curve pool, Resupply's borrow cost and reward history for the pair, Curve Lend's lending rate for the sfrxUSD market, and the reUSD price. The exact structure has existed since 31 July 2026. Before that, the model uses the closest Resupply pair as a stand-in.
+
+| item                                     | value                        |
+|:-----------------------------------------|:-----------------------------|
+| Curve pool TVL                           | $14.4M                       |
+| LP size at $1.5M equity                  | $1.2M                        |
+| Share of the pool                        | 8.3%                         |
+| reUSD borrowed by all users in this pair | $13.6M                       |
+| Pool fee                                 | 0.02%, up to 5x when off peg |
+
+To exit, withdraw from Stake DAO, remove the liquidity (balanced, or in tranches if the pool is heavy in reUSD), repay the reUSD and withdraw the crvUSD. Resupply's communal redemption can also repay part of the debt against the fund's collateral when reUSD trades below par, which shrinks the position.
+
+_Open item: Curve withdrawal quotes at $0.5M, $1M and $1.2M._
+
+<a id="reusd--tab-risk"></a>
+#### Tab: Risk
+
+| Category             | Risk                                                                                                       | Impact   | Likelihood   | Mitigation                                                                                                                 | Trigger   |
+|:---------------------|:-----------------------------------------------------------------------------------------------------------|:---------|:-------------|:---------------------------------------------------------------------------------------------------------------------------|:----------|
+| 3.4 Standards        | reUSD depeg (pool ~76% reUSD)                                                                              | 🟢 Low    | 🟠 Medium     | Full reUSD funding leaves the position slightly short: a depeg is a small gain, recovery to par costs about 0.3% of equity | R1        |
+| 3.1.2 Smart contract | Resupply protocol risk: 2025 exploit, no published audit since, CertiK 65.58                               | 🔴 High   | 🟠 Medium     | Smaller size, watch status, exit on any pause or incident                                                                  | R6        |
+| 3.2.3 Tokenomics     | CRV emission dependency (~94% of LP yield)                                                                 | 🔴 High   | 🟠 Medium     | Monthly APR test, rotate below 12%                                                                                         | R2        |
+| 3.7 Market           | CRV price between claim and sale                                                                           | 🟠 Medium | 🔴 High       | Weekly claim and sale to stablecoins                                                                                       | R5        |
+| 3.7.2 Liquidity      | Pool imbalance and exit cost ($14.4M pool)                                                                 | 🟠 Medium | 🟠 Medium     | Withdraw balanced or in tranches, watch reUSD share                                                                        | R4        |
+| 3.5 Credit           | Bad debt in the Resupply collateral market (Curvelend WBTC)                                                | 🟠 Medium | 🟢 Low        | Watch collateral market utilization and health                                                                             | R6        |
+| 3.2 Governance       | Curve gauge votes redirect emissions                                                                       | 🟠 Medium | 🟠 Medium     | Track gauge weight each epoch                                                                                              | R2        |
+| 3.1.2 Smart contract | Stake DAO vault risk (CertiK 83.48)                                                                        | 🟠 Medium | 🟢 Low        | Audited, cap exposure                                                                                                      | R6        |
+| 3.5 Credit           | Resupply reUSD borrow rate rises                                                                           | 🟠 Medium | 🟠 Medium     | Rate trigger, repay and unwind                                                                                             | R3        |
+| 3.5 Credit           | Thin insurance pool: about 4% of reUSD supply (38.7M before the exploit)                                   | 🟠 Medium | 🟠 Medium     | Coverage trigger, reduce below 3%                                                                                          | R7        |
+| 3.7.2 Liquidity      | Communal redemptions repay the fund's debt with its collateral, leaving the LP net long reUSD              | 🟢 Low    | 🟠 Medium     | Rebalance the same day                                                                                                     | R8        |
+| 3.2 Governance       | Guardian 3-of-5 Safe can pause insurance-pool withdrawals and pairs, upgrade operator run by the same Safe | 🟠 Medium | 🟢 Low        | Condition 2 (confirm controls), event monitoring                                                                           | R10       |
+| 3.1.5 Oracle         | Collateral priced from the lending vault's share price (same oracle type as the June 2025 exploit)         | 🔴 High   | 🟢 Low        | Condition 1 (review), mature vault only                                                                                    | R10       |
+| 3.2.3 Tokenomics     | CRV emissions depend on gauge votes, largely directed by Resupply's own veCRV                              | 🟠 Medium | 🟠 Medium     | Track gauge weight weekly                                                                                                  | R9        |
+
+_Open item: loss budget for a Resupply incident on the collateral side._
+
+<a id="reusd--tab-monitoring"></a>
+#### Tab: Monitoring
+
+| Id   | Metric                                                                  | Warn                                         | Act                                              | Action                                              | Source                       |
+|:-----|:------------------------------------------------------------------------|:---------------------------------------------|:-------------------------------------------------|:----------------------------------------------------|:-----------------------------|
+| R1   | Position loss from reUSD price (share of equity)                        | 0.1%: stop adding, trim borrow to pool share | 0.2%: halve, 0.3%: exit                          | Tiered exit, below $0.98 for a day: exit (distress) | DEX / DefiLlama              |
+| R2   | LP APY after dilution, 14-day                                           | < 14%                                        | < 12%                                            | Rotate                                              | DefiLlama / Stake DAO        |
+| R3   | Resupply reUSD borrow rate                                              | > 4%                                         | > 6%                                             | Repay and unwind                                    | Resupply contracts           |
+| R4   | reUSD share of the Curve pool                                           | > 85%                                        | > 90%                                            | Exit and repay                                      | Curve API                    |
+| R5   | CRV 7-day change                                                        | < -20%                                       | < -30%                                           | Sell accrued CRV                                    | Price feed                   |
+| R6   | Resupply or Stake DAO incident, pause or exploit                        | Any                                          | Any                                              | Exit immediately                                    | Contract events, news        |
+| R7   | Insurance pool coverage (pool reUSD / reUSD supply)                     | < 5%                                         | < 3%                                             | Reduce size                                         | Resupply contracts           |
+| R8   | Redemptions against the fund's pair                                     | Any                                          | Any                                              | Rebalance LP vs debt the same day                   | hippo.army / Resupply events |
+| R9   | Curve gauge weight for reUSD/scrvUSD                                    | Down 30% week on week                        | Down 50%                                         | Recheck net yield, rotate below 12%                 | GaugeController              |
+| R10  | Resupply guardian and upgrade actions (pause, upgrade, registry change) | Any                                          | Insurance-pool withdrawals paused or pair paused | Exit and repay                                      | Contract event subscriptions |
+| R11  | Entry condition: reUSD at or above $0.998                               | Below for any day                            | Not met for 7 consecutive days                   | Do not enter                                        | Price feeds, Curve pool      |
+
+- **OK:** 5
+
+- **Warn:** 1
+
+- **Act:** 0
+
+- **No data yet:** 2
+
+| trigger   | check                                      | value             | status    |
+|:----------|:-------------------------------------------|:------------------|:----------|
+| R1        | reUSD price                                | 0.9844            | 🟢 OK      |
+| R2        | LP APY before dilution                     | 16.8%             | 🟢 OK      |
+| R3        | Resupply reUSD borrow cost                 | 2.98%             | 🟢 OK      |
+| R4        | reUSD share of the Curve pool              | 76.4%             | 🟢 OK      |
+| R7        | Insurance pool coverage                    | 4.3%              | 🟠 WARN    |
+| R8        | Redemptions against the fund's pair        | no live position  | ⚪ NO DATA |
+| R9        | Curve gauge weight, next week vs this week | +5.5%             | 🟢 OK      |
+| R10       | Resupply guardian and upgrade actions      | no event feed yet | ⚪ NO DATA |
+
+<a id="reusd--tab-sourcing-and-pre-mortem"></a>
+#### Tab: Sourcing and pre-mortem
+
+Found while screening Curve pools with high boosted yield. The reUSD exposure in the pool led to the funding-hedge idea, and Resupply is the natural place to borrow reUSD, paying rewards on top of a borrow cost near 3%.
+
+From the team I would want a code and forensic review of Resupply, since no audit has been published since the 2025 exploit. The guardian Safe, the upgrade operator and the vault-share price oracle need the most attention. The standard signing and key-management review applies too, and the trading desk would handle CRV sales and hedging.
+
+The yield exists because reUSD has a weak reputation after the exploit and most lenders avoid it. The funding structure turns its main risk, a depeg, into a small gain.
+
+The most likely cause of a loss would be a Resupply incident affecting the collateral side, or CRV emissions to the pool falling while the position stayed in.
+
+<a id="reusd--tab-stablecoins-and-controls"></a>
+#### Tab: Stablecoins and controls
+
+|                          | reUSD                                             | scrvUSD                                          |
+|:-------------------------|:--------------------------------------------------|:-------------------------------------------------|
+| Issuer / mechanism       | Resupply, crypto-collateralized debt position     | Curve savings vault over crvUSD                  |
+| Backing                  | crvUSD and frxUSD lending-vault deposits          | crvUSD (crypto-collateralized, soft liquidation) |
+| Reserve evidence         | On-chain collateral ratio ~1.08 (July)            | On-chain vault accounting                        |
+| Holder exit              | 1% communal redemption fee sets a floor near 0.99 | Withdraw from the vault, crvUSD via Curve pools  |
+| Freeze or seizure        | No                                                | No (only through upstream collateral)            |
+| Peg record               | Below par since 6 Aug 2026, printed 0.82 in April | Tracks crvUSD, value rises with the savings rate |
+| Independent rating       | D (44/100)                                        | B (72/100)                                       |
+| Backing / exit / control | 64 / 51 / 55                                      | -                                                |
+| Reserve assurance        | On-chain collateral                               | On-chain vault accounting                        |
+| Exit capacity            | 23% of $10M executable immediately at 200 bps     | Withdraw to crvUSD, Curve pools                  |
+| Mint and upgrade control | On-chain governance (7-day vote)                  | No privileged mint                               |
+| Peg incidents on record  | 101 incidents, below par since 6 Aug              | Tracks crvUSD                                    |
+| Early-warning score      | 28/100, watch                                     | -                                                |
+| Role                     | About three-quarters of the LP                    | About one-quarter of the LP                      |
+
+_Independent rating, pillar scores, reserve assurance, exit capacity, controls and early-warning score: Pharos (pharos.watch), 1 October 2026. Other rows: issuer disclosures and on-chain checks._
+
+reUSD is a crypto-collateralized stablecoin minted against Curve Lend and Fraxlend deposits of crvUSD and frxUSD, with about 97% of the collateral in crvUSD lending markets. A 1% redemption fee sets a price floor near 0.99. reUSD has traded below par, around 0.989, since 6 August 2026, and has spent most of its history on the weak side of par. Supply is about 50M and growing, and the insurance pool covers about 4.3% of it.
+
+A June 2025 exploit left about 9.6M of bad debt, which the treasury, partners and the insurance pool covered. No audit has been published since. The token cannot be frozen and is only minted under on-chain governance. In this strategy the fund both owes and holds reUSD, and a depeg works slightly in its favour, but I would still want reUSD back at par before entering.
+
+scrvUSD is a savings vault over crvUSD. Holders deposit crvUSD, and the share price rises as Curve directs part of the interest paid by crvUSD borrowers to the vault. It has no privileged mint and no freeze of its own. It does inherit crvUSD's risk, a crypto-collateralized stablecoin whose loans use soft liquidation and whose peg is supported by stabilizer pools. In the Curve pool it is the quarter of the position that is not reUSD, valued through its exchange rate of about 1.108 crvUSD per share.
+
+I checked every contract in the strategy on-chain on 30 September.
+
+| Area | What I found |
+| --- | --- |
+| Resupply governance | On-chain votes with a 7-day voting period and a 1-day delay. A 3-of-5 guardian Safe can pause pairs and insurance-pool withdrawals, and the same Safe manages an upgrade operator whose scope needs review. |
+| Collateral pricing | The fund's collateral is priced from the lending vault's share price, the same type of oracle exploited in June 2025. |
+| Stake DAO and Curve | Well controlled. The vault has a 5-day timelock, and the pool's code cannot be upgraded. |
+
+| Contract                                 | Controls                                                                                   | Who Controls                                                        | Delay                                  | Assessment                                                                                                       |
+|:-----------------------------------------|:-------------------------------------------------------------------------------------------|:--------------------------------------------------------------------|:---------------------------------------|:-----------------------------------------------------------------------------------------------------------------|
+| Resupply Core                            | Owner of pairs, reUSD, insurance pool                                                      | On-chain RSUP vote                                                  | 7-day vote, then 1-day execution delay | Good for parameter changes                                                                                       |
+| Resupply Guardian (operator)             | Pause pairs, pause insurance-pool withdrawals, cancel proposals, set guarded registry keys | 3-of-5 Safe                                                         | None (emergency role)                  | Standard emergency power, can stop insurance-pool withdrawals                                                    |
+| Resupply UpgradeOperator                 | Upgrade of listed contracts                                                                | Manager: the same 3-of-5 Safe                                       | Not visible on-chain, to confirm       | Needs review: upgrade path outside the vote                                                                      |
+| Resupply pair oracle (BasicVaultOracle)  | Values the fund's collateral from the lending vault's share price                          | Set per pair by governance                                          | Vote                                   | Same oracle type exploited in June 2025 on a new, thin vault, the fund's vault is mature ($15M), still to review |
+| Curve reUSD/scrvUSD pool (StableSwap-NG) | Fees, amplification ramps                                                                  | Curve DAO through the factory admin (per Curve design)              | Curve DAO vote                         | Good: pool code is not upgradeable                                                                               |
+| Stake DAO vault                          | Vault logic, fees, reward accounting                                                       | ProtocolTimelock, accountant Safe whose only owner is that timelock | 5 days                                 | Good                                                                                                             |
+
+CRV emissions are set every week by Curve gauge votes. The reUSD/scrvUSD gauge receives about 7.2% of all CRV emissions this week, rising to 7.6% next week. Much of that weight comes from Resupply's own veCRV voting for its pools. I would track the gauge weight each week, along with the vote-incentive markets where protocols pay for votes.
+
+The data comes from the Curve and Stake DAO APIs for the pool and the vault, the Resupply pair data (hippo.army API) and Resupply contract reads for borrow costs, rewards, the insurance pool and controls, DefiLlama for pool history, Beefy for the autocompounding comparison, and Pharos for the ratings of reUSD and scrvUSD.
+
+The model assumes the pool is about 77% reUSD, takes borrow rewards from the pair's history (lower than the interface shows), and dilutes CRV rewards by the fund's size against the pool.

@@ -28,3 +28,8 @@ python queries/runner.py
 ```
 
 Pulls live and historical data from Current Finance's own APIs (chart, market and reward endpoints). DefiLlama is used only for the daily record of past reward rates. The on-hold strategies also use the Dolomite subgraph and contracts, Curve, Resupply (hippo.army) and the Hyperliquid info API.
+
+## Read it
+
+- Live dashboard: https://portfolio-manager-case-study.streamlit.app/
+- Full text of every page, for offline reading or AI agents: [REPORT_FULL.md](REPORT_FULL.md)
