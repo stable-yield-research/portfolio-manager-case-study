@@ -1,0 +1,14 @@
+name,link,mechanism,yield,why_not_now
+Axis sUSDx,https://www.axis.to/,CEX and cross-venue arbitrage,10% to 20%,"G6 CeFi arbitrage, opaque book"
+Superstate / Bitwise USCC,https://app.3f.xyz/asset/superstate-uscc,Tokenized crypto basis fund,"~5.3% base, 6.6% 30d, leveraged on 3F","KYC fund, leverage venue small"
+BitFi bfUSD,https://app.bitfi.one/bfusd/stake,CeDeFi funding arbitrage via Ceffu MirrorX,Target APY,G6 CeFi custody
+Piku USD/TRY carry,https://piku.co/app/detail/CarryTradeUSDTRYLeverage/transparency,Lira overnight rate + USDTRY futures via a CMB-regulated fund,High FX carry,"Off-chain FX carry, transparency page is a plus"
+RockawayX Tori vault,https://app.morpho.org/ethereum/vault/0x3BD9AdAE6643dDcddD02746b8B60075E56DF9478/rockawayx-tori-ecosystem#overview,Morpho vault lending to the Tori ecosystem,"21.6% now, 10.2% average",$0.42M instantly withdrawable
+NEMO USDC Prime,https://app.upshift.finance/vaults/ethereum/nemo-usdc-prime,Rate arbitrage and options,23.9% shown,"Hard to trace, 30-day withdrawals"
+frxUSD / DUSD LP on Stake DAO,https://www.curve.finance/dex/ethereum/pools/,"Curve LP, boosted CRV","15.8% now, 21.3% 30-day",Pool \$4.7M: fits about \$0.5M to \$1M before rewards dilute below 12%
+Hedged Aerodrome v2 LP (e.g. AERO/USDC),https://aerodrome.finance/,"Trading fees and AERO emissions, AERO hedged with perpetuals",Up to 131% APY at 4x,Requires automated hedging and rebalancing
+40 Acres USDC vault,https://app.40acres.finance/,"Loans to veAERO holders, repaid from Aerodrome fees and bribes",12% to 16% typical,"Vault often at 100% utilization, so exits wait for repayments"
+"LlamaLend stable loops (sDOLA, sfrxUSD, sUSDe, syrupUSDC)",https://www.curve.finance/lend/ethereum/markets/,"Collateral yield minus crvUSD borrow, levered",20% to 33% at 10x to 15x,"Free crvUSD per market \$1.5M to \$3M: good for small books, about 7.5% at \$1.5M"
+Flowdesk Confidential High Yield USDT,https://app.morpho.org/ethereum/vault/0xb48C056C5608bA2Ee4cD94AF2bF4b1F25295Bd7e/flowdesk-confidential-high-yield-usdt#overview,Morpho USDT lending plus rewards,13.8% incl. rewards,About \$0.6M instantly withdrawable
+"Aave v4 USDT loop, Avalanche",https://pro.aave.com/explore/reserve/avalanche/core/main/USDT,"Supply rewards in WAVAX, cheap USDT borrow",~18% at 3x before dilution,"Rewards dilute to ~10% at \$1.5M, program about a month old"
+"GHO / USDT0 loop, Plasma",https://app.aave.com/,GHO supply plus incentives minus USDT0 borrow,~15% at 4x before dilution,"The fund's size dilutes the GHO reserve, \$3.5M GHO free to withdraw"

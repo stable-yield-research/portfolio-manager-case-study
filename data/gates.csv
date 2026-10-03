@@ -1,0 +1,12 @@
+gate,name,requirement
+C1,Net yield,"12%+ net APY in USD, sustained at least 1 month"
+C2,All costs in,"Net of gas, slippage, hedging, rebalancing"
+C3,Capacity,$1.5M absorbed without falling below 12%
+C4,Exitability,Deployable and exitable within defined windows
+C5,Native DeFi income,"Fees, funding, lending spreads, leverage carry"
+C6,Exclusions,"No off-chain loans, RWA income, CeFi arbitrage, reinsurance or CLOs, T-bills inside a reserve are fine"
+C7,Market neutral,No reliance on token price appreciation
+C8,Attribution,Every basis point traced to a source
+C9,Incentives,Only incentives paid and claimable in the period
+C10,Timing,Within the last 6 months
+C11,Auditability,Source-of-truth on-chain data

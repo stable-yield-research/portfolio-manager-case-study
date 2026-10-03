@@ -1,0 +1,5 @@
+area,ai_used_for,own_analysis
+Framework,Compiled the risk checklist and process doc from sources I chose,"Source selection, structure, final judgement"
+Screening,"Pulled protocol, Pharos, CertiK and market data, ran capacity and gate checks","Candidate sourcing, which ideas to test, final calls"
+Reconstruction,Wrote and ran data pulls and backtests,"Strategy design (two-vault structure, leverage policy, entry and exit plan), assumptions, interpretation"
+Dashboard,Built pages from the template,"Page structure, what to show, review"

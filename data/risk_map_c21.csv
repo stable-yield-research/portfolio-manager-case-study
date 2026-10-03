@@ -1,0 +1,21 @@
+category,risk,impact,likelihood,mitigation,trigger
+3.5 Credit,Wrong-way risk: WLFI-backed borrowers owe 80% of USD1 borrowed,High,Medium,"Guardrails T1 and T2, internal netting to 1x, size cap","T1, T2, T3"
+3.5 Credit,Liquidator shortfall: WLFI on-chain liquidity far below collateral size,High,Medium,"Treat liquidation as unreliable, exit before thresholds",T2
+3.7.2 Liquidity,Pool freeze at 100% utilization (happened in Apr 2026),High,Medium,"Utilization triggers, netting needs no pool liquidity, only equity must leave the pool","T4, T5"
+TF Concentration,One account supplies ~71% of the USDC pool,Medium,Medium,"Watch USDC pool supply, exit if the anchor supplier leaves",T5
+3.2.3 Tokenomics,Incentive dependency: WLFI rewards exceed 100% of the carry,High,Medium,"Monthly APR test against 12%, rotate if it fails for 14 days","T6, T12"
+3.7 Market,WLFI price between claim and sale,Medium,High,"Claim weekly, sell to USDC, short WLFI perp on Hyperliquid for unsold balance",T7
+3.4 Standards,USD1 depeg,Medium,Low,"Token-matched structure, position B liquidates only after a 26% fall at 3x",T8
+3.5 Credit,USD1 above peg liquidates position A (+35% at 3x),Low,Low,"Keep both healths equal, rebalance",T9
+3.1.2 Smart contract,Dolomite contract risk,Medium,Low,"CertiK 87.33, audited core, exposure capped at fund level",T10
+3.2 Governance,"Dolomite parameter changes, co-founder is WLF's CTO (conflict of interest)",Medium,Medium,"Alert on any market parameter change, review within 24h",T10
+3.1.5 Oracle,USD1 / USDC oracle deviation,Medium,Low,"Chainlink feeds, deviation alert",T11
+3.3 Compliance,"USD1 regulatory and political headline risk, Pharos C+",Medium,Low,"News watch, reduce on regulatory action",T10
+3.1.6 Bridge,Bridge risk,Low,Low,None used: native USDC and USD1 on Ethereum,
+3.6 Counterparty,CEX / venue risk,Low,Low,Only the small WLFI reward hedge sits on Hyperliquid,T7
+TF Operational,"Two isolated positions, weekly claims, rebalancing",Medium,Low,"Multisig, written runbook, second-person approval for large moves",T9
+3.7 Market,Yield compression: 3x fell from 17.9% (Jun) to 13.5% (Sep),Medium,High,Rotate out below 12%,T6
+3.2 Governance,Dolomite admin: 2-of-3 Safe with a 5-minute timelock and bypass roles,High,Low,"Size cap, access-control monitoring, ask Dolomite about signer setup",T14
+3.5 Credit,USD1 single-key minter could mint unbacked USD1 and drain the USDC pool via Dolomite,High,Low,"Monitor USD1 mints and Dolomite USD1 deposits, exit on unexplained mint",T14
+3.1.5 Oracle,"Dolomite accepts prices up to 36 hours old, owner can swap feeds",Medium,Low,Watch oracle config changes,T14
+3.2.3 Tokenomics,WLFI rewards run on weekly campaigns funded from one wallet holding about 2.4 weeks of rewards,Medium,Medium,Track renewals and runway,T13

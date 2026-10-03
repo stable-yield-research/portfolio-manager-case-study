@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.env
+.DS_Store
+.venv/
+node_modules/
+.streamlit/secrets.toml
+data/dashboard_full_text.md
+HANDOFF.md
+LLM_BRIEF_TEMPLATE.md
+PLAYBOOK.md
+notes/
+export/

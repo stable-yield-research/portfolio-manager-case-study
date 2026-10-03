@@ -1,0 +1,5 @@
+venue,contract_layers,venue_tvl_musd,yield_detail,headline,fees_on_rewards,certik_score,operations
+"Curve (direct, unboosted)",Curve,14.39,8.4% CRV + ~1% fees,~9.4% APR,None,90.69,Claim and sell CRV by hand
+Convex,Curve + Convex,8.72,15.5% (30-day avg 15.3%),15.5% APR,~17% of CRV,74.02,Claim and sell CRV and CVX by hand
+Stake DAO,Curve + Stake DAO,7.0,16.8% CRV (2.38x boost) + 1.0% fees,17.8% APR,15.5% of CRV,83.51,Claim and sell CRV weekly
+Beefy,Curve + Convex + Beefy,0.9,"13.9% after fees + 1.4% trading, compounded ~6x a day",16.5% APY,Convex ~17% + Beefy 9.5%,85.32,None: CRV sold and reinvested automatically

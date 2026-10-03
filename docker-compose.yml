@@ -1,0 +1,11 @@
+services:
+  dashboard:
+    build: .
+    container_name: case_study_dashboard
+    ports:
+      - "8502:8501"
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./data:/app/data

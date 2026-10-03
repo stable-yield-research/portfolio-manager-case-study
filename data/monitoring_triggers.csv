@@ -1,0 +1,35 @@
+proposal,id,metric,warn,act,action,source
+C21,T1,WLFI 7-day change,< -15%,< -20%,Cut to 1.5x for 7 days,Hyperliquid API
+C21,T2,WLFI price / nearest large-position liquidation price,< 2.0x,< 1.6x,Net positions to 1x (USDC only),Dolomite subgraph + price
+C21,T3,"WLFI-backed debt, weekly change",> +$10M,> +$25M,"Review, cut to 1.5x",Dolomite subgraph
+C21,T4,USD1 or USDC pool utilization,> 85%,> 92%,"Reduce, exit above 97%",DolomiteMargin contract
+C21,T5,"USDC pool supply, 1-day change",< -15%,< -25%,Exit (anchor supplier leaving),Dolomite subgraph
+C21,T6,"Net APR at current leverage, 7-day",< 13%,< 12% for 14 days,Rotate to another strategy,Index ratios + Merkl
+C21,T7,Unsold WLFI rewards,> $5k,> $20k,"Sell, or short WLFI perp",Merkl + wallet
+C21,T8,USD1 price,< 0.995,< 0.985,Reduce position B,Chainlink / DEX
+C21,T9,"Health, positions A and B",< 1.25,< 1.15,Rebalance to equal health,DolomiteMargin contract
+C21,T10,"Dolomite admin or parameter change on USD1, USDC, WLFI",Any,Adverse,Review within 24h,Contract events
+C21,T11,USD1 oracle vs market price,> 0.5%,> 1%,"Pause adds, review",Chainlink / DEX
+C21,T12,Merkl accrual vs expected,< -20%,< -40%,"Check eligibility, rotate",Merkl API
+C5,R1,Position loss from reUSD price (share of equity),"0.1%: stop adding, trim borrow to pool share","0.2%: halve, 0.3%: exit","Tiered exit, below $0.98 for a day: exit (distress)",DEX / DefiLlama
+C5,R2,"LP APY after dilution, 14-day",< 14%,< 12%,Rotate,DefiLlama / Stake DAO
+C5,R3,Resupply reUSD borrow rate,> 4%,> 6%,Repay and unwind,Resupply contracts
+C5,R4,reUSD share of the Curve pool,> 85%,> 90%,Exit and repay,Curve API
+C5,R5,CRV 7-day change,< -20%,< -30%,Sell accrued CRV,Price feed
+C5,R6,"Resupply or Stake DAO incident, pause or exploit",Any,Any,Exit immediately,"Contract events, news"
+C5,R7,Insurance pool coverage (pool reUSD / reUSD supply),< 5%,< 3%,Reduce size,Resupply contracts
+C5,R8,Redemptions against the fund's pair,Any,Any,Rebalance LP vs debt the same day,hippo.army / Resupply events
+C21,T13,"WLFI reward campaign: next week posted, funder wallet runway",Runway < 2 weeks,Not renewed,"Assume rewards end, rotate within the week","Merkl API, funder wallet balance"
+C21,T14,"Access-control events: Dolomite owner roles, USD1 minters and freezers, oracle changes",Any change,Unknown signer or unexplained mint,"Stop adds, net to 1x",Contract event subscriptions
+C5,R9,Curve gauge weight for reUSD/scrvUSD,Down 30% week on week,Down 50%,"Recheck net yield, rotate below 12%",GaugeController
+C5,R10,"Resupply guardian and upgrade actions (pause, upgrade, registry change)",Any,Insurance-pool withdrawals paused or pair paused,Exit and repay,Contract event subscriptions
+C5,R11,Entry condition: reUSD at or above $0.998,Below for any day,Not met for 7 consecutive days,Do not enter,"Price feeds, Curve pool"
+C26,K1,USDSUI/USDC price on Current Finance's feed,"Outside 0.995 to 1.005: review the cause, pause adds",Outside 0.98 to 1.02,"Warn: find the cause, prepare the exit, act: staged exit","Current Finance API, Pyth"
+C26,K2,"Vault health (each), target 1.19 at 3.5x",Below 1.15 (about a 13% move from par),Below 1.10 (about a 9% move),Repay debt in the affected vault,Current Finance positions
+C26,K3,"USDSUI utilization, daily withdrawal cap used","> 85%, > 60% of cap","> 90%, > 80% of cap","Reduce, begin staged exit",Current Finance API
+C26,K4,"Net yield at the fund's leverage, 14 days",< 13%,< 12% for 14 days,Rotate,Current Finance APIs
+C26,K5,Unclaimed or unhedged SUI rewards,> 1 day,> 3 days,"Claim and sell, or short SUI perpetual, automate once tooling is live",Wallet
+C26,K6,"Admin, upgrade or capability actions, proposed settings changes, oracle configuration changes, incidents",Any,Unexplained,"Stop adds, staged exit","Sui events, Hypernative, news and social channels"
+C26,K7,"Stablecoin issuer watch (independent rating): grade, early-warning score, peg incidents, USDSUI supply change","Downgrade, early-warning > 20, supply +3% in a day","Early-warning > 30, peg incident, supply +5% in a day","Stop adds, staged exit (a supply jump can signal an unbacked mint)","Pharos API and alerts, Sui supply"
+C26,K8,SUI reward APR per market vs its 30-day average,-10%,-15% (net falls below 12%),"Recheck yield, rotate if it persists two weeks",Current Finance reward API
+C26,K9,"Exit capacity: quoted cost of a $1M USDSUI swap across Sui DEXs, USDSUI pool liquidity",Above 0.1%,Above 0.3%,Shrink the position until the full exit fits again in the same number of $1M tranches,"Cetus / aggregator quotes, Pharos liquidity data"

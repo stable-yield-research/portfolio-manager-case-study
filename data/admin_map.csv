@@ -1,0 +1,19 @@
+strategy,contract,controls,who_controls,delay,assessment
+Current carry,Current Finance protocol package,Code upgrades,3-of-5 Sui multisig (last upgrade 14 Aug 2026),One-day timelock on parameter changes,Good. Signers not published
+Current carry,Admin capabilities (governance object),"Markets, assets, E-Mode, caps, auto-deleveraging, rewards, oracle","All admin capabilities held in one shared governance object, operated by multisig roles","One day for parameter changes. Emergency halts, oracle tolerance and revenue transfers act immediately",Sound design. SuperAdmin cannot be revoked if compromised
+Current carry,Integration capability,Flash loans and E-Mode entry for the holder's own positions,Two single-key wallets,None needed,"Low risk: flash loans repay in the same transaction, revocable by admin"
+Current carry,Oracle (xOracle),Prices,"Pyth (USDSUI feed with minimum 2 publishers, USDC 3), checked against an admin reference price within 5%",Tolerance changes act immediately,Feed errors beyond 5% are rejected. Thin USDSUI feed
+Current carry,Risk parameters,"Listings, caps, LTVs",Reviewed by Allez Labs,Versioned risk-governance module,Good
+USD1 carry,DolomiteMargin (0x003C...97D),"All markets, risk parameters, oracles, interest setters","DolomiteOwnerV2, top admin a 2-of-3 Safe (0xa75c...a1D4)","5 minutes, pause and excess-token roles bypass it",Weak: small signer set and a short delay for a protocol holding over $400M
+USD1 carry,Dolomite price oracle (OracleAggregatorV2 + ChainlinkPriceOracleV3),Price source per token,Dolomite owner (above),As above,"Good feeds (Chainlink USD1/USD, USDC/USD, WLFI/USD), staleness allowance 36 hours is long, owner can swap feeds"
+USD1 carry,USD1 token (upgradeable proxy),Token code,ProxyAdmin owned by a 3-of-5 Safe,None seen on upgrades,Upgradeable by multisig
+USD1 carry,USD1 TokenGovernor,"Mint, burn, freeze, pause, recovery","Admin 3-of-6 Safe, minters include one single-key wallet, freezers include one single-key wallet",3 days on admin transfer only,"Weak point: a compromised minter key could mint unbacked USD1, post it on Dolomite at about $1 and borrow the USDC pool"
+USD1 carry,Merkl Distributor (upgradeable),WLFI reward payouts,"Governor 4-of-6 Safe, guardian includes one single-key wallet",Reward roots disputable for 1 hour,"Acceptable, rewards at risk, not principal"
+reUSD liquidity,Resupply Core,"Owner of pairs, reUSD, insurance pool",On-chain RSUP vote,"7-day vote, then 1-day execution delay",Good for parameter changes
+reUSD liquidity,Resupply Guardian (operator),"Pause pairs, pause insurance-pool withdrawals, cancel proposals, set guarded registry keys",3-of-5 Safe,None (emergency role),"Standard emergency power, can stop insurance-pool withdrawals"
+reUSD liquidity,Resupply UpgradeOperator,Upgrade of listed contracts,Manager: the same 3-of-5 Safe,"Not visible on-chain, to confirm",Needs review: upgrade path outside the vote
+reUSD liquidity,Resupply pair oracle (BasicVaultOracle),Values the fund's collateral from the lending vault's share price,Set per pair by governance,Vote,"Same oracle type exploited in June 2025 on a new, thin vault, the fund's vault is mature ($15M), still to review"
+reUSD liquidity,Curve reUSD/scrvUSD pool (StableSwap-NG),"Fees, amplification ramps",Curve DAO through the factory admin (per Curve design),Curve DAO vote,Good: pool code is not upgradeable
+reUSD liquidity,Stake DAO vault,"Vault logic, fees, reward accounting","ProtocolTimelock, accountant Safe whose only owner is that timelock",5 days,Good
+Current carry,USDC (Circle),"Freeze, upgrade",Circle,Issuer controls,Standard issuer risk
+USD1 carry,Chainlink feeds,Price data,Chainlink multisig,Network standard,Good

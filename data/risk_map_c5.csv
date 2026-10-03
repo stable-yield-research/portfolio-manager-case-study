@@ -1,0 +1,15 @@
+category,risk,impact,likelihood,mitigation,trigger
+3.4 Standards,reUSD depeg (pool ~76% reUSD),Low,Medium,"Full reUSD funding leaves the position slightly short: a depeg is a small gain, recovery to par costs about 0.3% of equity",R1
+3.1.2 Smart contract,"Resupply protocol risk: 2025 exploit, no published audit since, CertiK 65.58",High,Medium,"Smaller size, watch status, exit on any pause or incident",R6
+3.2.3 Tokenomics,CRV emission dependency (~94% of LP yield),High,Medium,"Monthly APR test, rotate below 12%",R2
+3.7 Market,CRV price between claim and sale,Medium,High,Weekly claim and sale to stablecoins,R5
+3.7.2 Liquidity,Pool imbalance and exit cost ($14.4M pool),Medium,Medium,"Withdraw balanced or in tranches, watch reUSD share",R4
+3.5 Credit,Bad debt in the Resupply collateral market (Curvelend WBTC),Medium,Low,Watch collateral market utilization and health,R6
+3.2 Governance,Curve gauge votes redirect emissions,Medium,Medium,Track gauge weight each epoch,R2
+3.1.2 Smart contract,Stake DAO vault risk (CertiK 83.48),Medium,Low,"Audited, cap exposure",R6
+3.5 Credit,Resupply reUSD borrow rate rises,Medium,Medium,"Rate trigger, repay and unwind",R3
+3.5 Credit,Thin insurance pool: about 4% of reUSD supply (38.7M before the exploit),Medium,Medium,"Coverage trigger, reduce below 3%",R7
+3.7.2 Liquidity,"Communal redemptions repay the fund's debt with its collateral, leaving the LP net long reUSD",Low,Medium,Rebalance the same day,R8
+3.2 Governance,"Guardian 3-of-5 Safe can pause insurance-pool withdrawals and pairs, upgrade operator run by the same Safe",Medium,Low,"Condition 2 (confirm controls), event monitoring",R10
+3.1.5 Oracle,Collateral priced from the lending vault's share price (same oracle type as the June 2025 exploit),High,Low,"Condition 1 (review), mature vault only",R10
+3.2.3 Tokenomics,"CRV emissions depend on gauge votes, largely directed by Resupply's own veCRV",Medium,Medium,Track gauge weight weekly,R9
