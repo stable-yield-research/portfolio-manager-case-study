@@ -10,7 +10,7 @@ from utils.refresh import refresh_control
 import project_config as cfg
 from utils.charts import GREEN, GREY, NAVY, RED, TEAL, apply_layout
 from utils.data_loader import load_current
-from utils.strategy import cur_components, cur_curve, cur_daily, cur_legs, monthly_apr
+from utils.strategy import cur_components_avg, cur_curve, cur_daily, cur_legs, monthly_apr
 from utils.text import T
 
 
@@ -33,8 +33,7 @@ def render():
     st.markdown(T("cur.two_vaults"))
 
     st.subheader("Yield decomposition")
-    last = cur.tail(30).mean(numeric_only=True).to_dict()
-    comp = cur_components(last, L, cfg.EQUITY / 1e6)
+    comp = cur_components_avg(cur.tail(30), L, cfg.EQUITY / 1e6)
     df = pd.DataFrame({"source": list(comp), "apr": list(comp.values())})
     fig = go.Figure(go.Waterfall(x=df["source"], y=df["apr"], measure=["relative"] * len(df),
                                  increasing=dict(marker_color=GREEN), decreasing=dict(marker_color=RED)))

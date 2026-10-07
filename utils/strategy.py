@@ -364,6 +364,12 @@ def cur_components(r: dict, L: float, E: float) -> dict:
             "USDSUI borrow cost": -d1 * bs, "USDC borrow cost": -d2 * bc}
 
 
+def cur_components_avg(df: pd.DataFrame, L: float, E: float) -> dict:
+    """Average of the daily components over the rows of df, the same way the daily net yields are averaged."""
+    rows = [cur_components(r.to_dict(), L, E) for _, r in df.iterrows()]
+    return {k: sum(x[k] for x in rows) / len(rows) for k in rows[0]}
+
+
 def cur_net(r: dict, L: float, E: float) -> float:
     return sum(cur_components(r, L, E).values())
 

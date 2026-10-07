@@ -1,5 +1,5 @@
 """
-Allocation Dashboard. Size = the smallest of: capacity, loss budget / stressed loss, and each concentration limit.
+Allocation Dashboard. Size = the smallest of: room under the borrow caps, the per-protocol NAV limit and the pool-share limit.
 """
 
 import pandas as pd
@@ -18,14 +18,13 @@ FUND_NAV = 35_000_000
 
 def fund_limits():
     st.subheader("Fund limits")
-    cols = st.columns(3)
-    loss_budget = cols[0].number_input("Stressed-loss budget, % of NAV", 0.1, 5.0, 0.5, 0.1) / 100
-    max_protocol = cols[1].number_input("Max % NAV per protocol", 1.0, 30.0, 8.0, 1.0) / 100
-    max_pool_share = cols[2].number_input("Max share of a pool", 0.5, 20.0, 2.0, 0.5) / 100
-    return loss_budget, max_protocol, max_pool_share
+    cols = st.columns(2)
+    max_protocol = cols[0].number_input("Max % NAV per protocol", 1.0, 30.0, 8.0, 1.0) / 100
+    max_pool_share = cols[1].number_input("Max share of a pool", 0.5, 20.0, 2.0, 0.5) / 100
+    return max_protocol, max_pool_share
 
 
-def render_current(loss_budget, max_protocol, max_pool_share):
+def render_current(max_protocol, max_pool_share):
     cur, cs = load_current(), load_current_snapshot()
     if cur.empty or cs.empty:
         st.info("Current Finance data missing.")
@@ -76,5 +75,5 @@ def render():
     st.title("Allocation Tool")
     refresh_control("alloc")
     st.caption(T("alloc.intro", data_date=latest_data_date()))
-    lb, mp, mps = fund_limits()
-    render_current(lb, mp, mps)
+    mp, mps = fund_limits()
+    render_current(mp, mps)

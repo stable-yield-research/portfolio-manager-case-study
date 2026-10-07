@@ -24,4 +24,4 @@ C22,"HYPE funding carry, portfolio margin",Hyperliquid,Hyperliquid,Funding,Not p
 C23,PURR funding carry sleeve,Hyperliquid,Hyperliquid,Funding,Not presented,"Small market, needs automated ladder and hedging",Requires automation,
 C24,sUSDat staking,Saturn,Ethereum,STRC preferred dividends,13.9% now,"C6 RWA, M3",Rejected,
 C25,USDC / USDSUI single loop (either direction),Current,Sui,Lending spread + SUI rewards,14.0% to 14.9% at zero size,"Dilutes to 9% to 10% at $1.5M, USDSUI price risk, DEX depth",Rejected,
-C26,"USDC / USDSUI carry, two Multiply vaults",Current,Sui,Lending spread + SUI rewards on both deposits,"14.9% at 3.5x, $1.5M (Sep conditions)","Young protocol (Mar 2026), rewards ~60% of gross",Selected: Current carry,
+C26,"USDC / USDSUI carry, two Multiply vaults",Current,Sui,Lending spread + SUI rewards on both deposits,"14.8% at 3.5x, $1.5M (Sep conditions)","Young protocol (Mar 2026), rewards about 63% of gross",Selected: Current carry,

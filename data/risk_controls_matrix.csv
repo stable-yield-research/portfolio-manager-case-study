@@ -13,7 +13,7 @@ area,risk,how_it_applies,metric_or_control,status,source,warn_act,priority
 3.2 Governance,Admin key dependence,"3-of-5 multisig signs upgrades, capability objects","Multisig signer set and threshold changes, capability transfers",Partly in place (K6),Sui GraphQL,Any change: review,P1
 3.2 Governance,Privileged capability,E-Mode entry capability held by two single-key wallets,Calls made with that capability,To build,Sui events,Unexpected use,P2
 3.2.2 Custody,Loss or theft of the fund's keys,"Fund keys sign entry, claims and exits","Signer health, hardware keys, a multisig for the fund, address allowlist",To build,Internal,Any anomaly,P1
-3.2.3 Tokenomics,Reward emissions end or fall,"SUI rewards are ~60% of gross, a 15% cut breaks the 12% hurdle","SUI reward APR per market vs 30-day average, reward budget remaining",In place (K8),Current Finance reward API and announcements,Reward APR -10% / -15%,P1
+3.2.3 Tokenomics,Reward emissions end or fall,"SUI rewards are about 63% of gross, a 15% cut breaks the 12% hurdle","SUI reward APR per market vs 30-day average, reward budget remaining",In place (K8),Current Finance reward API and announcements,Reward APR -10% / -15%,P1
 3.2.3 Tokenomics,SUI supply unlocks,"Scheduled unlocks can weigh on SUI price, so on reward value",SUI unlock calendar,To build,Token unlock trackers,Large unlock within 7 days: hedge rewards,P3
 3.3 Compliance,Issuer or regulatory action,"Bridge (USDSUI) and Circle (USDC) can freeze, regulation changes","Issuer news, freeze events touching Current Finance's pools",To build,"News, Sui events",Any action,P2
 3.3 Compliance,Sanctions exposure,Pools are permissionless,Sanctioned-address screening of counterparties the fund deals with directly,To build,Screening tool,Any hit,P3
@@ -22,7 +22,7 @@ area,risk,how_it_applies,metric_or_control,status,source,warn_act,priority
 3.5 Credit,Bad debt in the markets the fund lends into,The fund's USDC supply (2.0x equity) and USDSUI supply (1.5x) carry losses from other borrowers,"Bad debt per reserve, liquidations 24h, debt within 10% of liquidation",To build,"Current Finance API (liquidation-health), Current Finance dashboard",Any bad debt / at-risk debt > 5% of supply,P1
 3.5 Credit,Collateral behind other borrowers,"USDC borrowers post SUI, BTC, LSTs",Composition of collateral backing USDC and USDSUI debt,To build,"Current Finance API, Sui GraphQL",Volatile collateral share rising,P1
 3.5 Credit,Liquidator shortfall,"Allowlisted liquidators with flash loans, auto-deleveraging as backstop",Liquidator activity and auto-deleveraging events,To build,"Current Finance dashboard, Sui events",ADL activated: exit,P2
-3.5 Credit,Liquidation of the fund's vaults,Vault health 1.21 at 3.5x,Vault health (each),In place (K2),Current Finance positions,< 1.20 / < 1.10,P1
+3.5 Credit,Liquidation of the fund's vaults,Vault health 1.19 at 3.5x,Vault health (each),In place (K2),Current Finance positions,< 1.15 / < 1.10,P1
 3.6 Counterparty,Key service providers,"Pyth, Allez, Hypernative, Cetus, Bridge, Circle",Provider status and incidents,To build,"Status pages, news",Incident: review,P2
 3.6 Counterparty,Insurance counterparty,"Nexus Mutual quoted $1.4M of cover at about 4.3% a year, 5% deductible, depegs and key breaches excluded","Cover price against the yield it costs, capacity, claim terms",Partly in place,Nexus Mutual,Price above about 2.2% a year makes it uneconomic,P2
 3.7 Market,Stablecoin depeg,"USDSUI owed = held, vault liquidation needs ±16% to 19%","USDSUI/USDC on Current Finance's feed and on DEXs, independent peg record and early-warning score",In place (K1),"Current Finance API, Cetus",±0.5% review / ±2% exit,P1
@@ -36,11 +36,11 @@ area,risk,how_it_applies,metric_or_control,status,source,warn_act,priority
 TF Credit,Expected loss,Probability of a protocol failure x loss given failure,"Annual expected-loss estimate, reviewed quarterly",To build,Internal model,Expected loss > yield spread,P2
 TF Concentration,Single-name and chain concentration,$1.5M on one protocol and one chain (about 4% of NAV),"% NAV per protocol, chain, stablecoin issuer",Partly in place,Fund book,> limit,P1
 TF Counterparty,Wrong-way risk,A Sui crisis would cut SUI reward value and raise chain risk together,Correlation flag: SUI price fall plus Sui incident,To build,Market data,SUI -30% in 7 days: review,P2
-TF Market,Interest-rate risk,"USDSUI near the kink, +300 bps on both borrow rates leaves 12.9%","Borrow APR vs model, rate-shock P&L",Partly in place,Current Finance API,USDSUI borrow > 7%,P2
+TF Market,Interest-rate risk,"USDSUI near the kink, +300 bps on both borrow rates leaves 13.2%","Borrow APR vs model, rate-shock P&L",Partly in place,Current Finance API,USDSUI borrow > 7%,P2
 TF Market,Basis risk,"Vault 1 and vault 2 marked by the same oracle, DEX price can differ",Oracle vs DEX USDSUI price gap,To build,"Pyth, Cetus",> 0.5%,P3
 TF Valuation,Model risk,Rate curve and dilution model drive the size decision,Realized monthly yield vs model forecast,To build,The fund's books against the model,Miss > 2 pts,P2
 TF Portfolio,Correlation with the rest of the book,"Shared exposure to USDC, Sui or reward-driven yield",Overlap with other positions,To build,Fund book,Overlap > limit,P2
-TF Portfolio,Tail risk,Stress scenarios,"Stress P&L: rewards -30% (9.0%), -50% (5.2%), end (-4.2%), rates +300 bps (12.9%), USDSUI ±5%, oracle stale, no liquidators",In place (stress table),Model,Any scenario below limit,P1
+TF Portfolio,Tail risk,Stress scenarios,"Stress P&L: rewards -30% (9.2%), -50% (5.5%), end (-3.9%), rates +300 bps (13.2%), USDSUI ±5%, oracle stale, no liquidators",In place (stress table),Model,Any scenario below limit,P1
 TF Operational,Failed or wrong transactions,"Two vaults, staged tranches, daily claims","Transaction checklist, second-signer review for size",To build,Internal,Any failed or reverted step,P1
 TF Legal,Enforceability,No legal claim on a DeFi protocol,"Terms of use review, Current Finance entity and jurisdiction",To build,Legal,Unresolved: note in IC pack,P3
 ESMA,Wrong-address transfer,"Moving USDC to Sui, between vaults, to exchanges","Address allowlist, test transfers",To build,Internal,Any non-allowlisted address,P1

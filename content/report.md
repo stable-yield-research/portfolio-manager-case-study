@@ -262,7 +262,7 @@ USDSUI usually sits near the kink, so its borrow rate is the one to watch. Becau
 ## cur.record
 The returns are rebuilt from Current Finance's own data since launch on 23 March 2026: hourly borrow and supply rates, utilization, amounts supplied and borrowed, and prices. The SUI reward rates are Current Finance's own figures. Today's come straight from its reward API, and the daily history is the record DefiLlama keeps of the same figures.
 
-The pools grew about four times between July and September, and that growth is what makes \$1.5M fit today. At this size the strategy would have cleared 12% in May, August and September. In June and July the pools were about a third of today's size, so the yield at \$1.5M would have been lower.
+The pools grew more than three times between July and September, and that growth is what makes \$1.5M fit today. At this size the strategy would have cleared 12% in May, August and September. In June and July the pools were about a fifth of today's size, so the yield at \$1.5M would have been lower.
 
 ## cur.costs
 Costs come from live swap quotes and Current Finance's 0.01% Multiply fee on the leveraged size. Buying USDSUI costs about 0.02% to 0.03%, because it trades slightly above par. Selling it costs close to nothing.
@@ -489,7 +489,7 @@ SUI trades in deep markets, with about \$48M of bids within 2% of the price, \$1
 Trigger IDs refer to the Monitoring and Operations page.
 
 ## summary.returns_note
-In June and July Current Finance's pools were about a third of today's size, so a \$1.5M position would have diluted the rewards more and earned less.
+In June and July Current Finance's pools were about a fifth of today's size, so a \$1.5M position would have diluted the rewards more and earned less.
 
 ## screen.date
 Search carried out from 28 to 30 September 2026.

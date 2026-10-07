@@ -25,7 +25,7 @@ C5,R9,Curve gauge weight for reUSD/scrvUSD,Down 30% week on week,Down 50%,"Reche
 C5,R10,"Resupply guardian and upgrade actions (pause, upgrade, registry change)",Any,Insurance-pool withdrawals paused or pair paused,Exit and repay,Contract event subscriptions
 C5,R11,Entry condition: reUSD at or above $0.998,Below for any day,Not met for 7 consecutive days,Do not enter,"Price feeds, Curve pool"
 C26,K1,USDSUI/USDC price on Current Finance's feed,"Outside 0.995 to 1.005: review the cause, pause adds",Outside 0.98 to 1.02,"Warn: find the cause, prepare the exit, act: staged exit","Current Finance API, Pyth"
-C26,K2,"Vault health (each), target 1.19 at 3.5x",Below 1.15 (about a 13% move from par),Below 1.10 (about a 9% move),Repay debt in the affected vault,Current Finance positions
+C26,K2,"Vault health (each), target 1.19 at 3.5x","Below 1.15 (after a USDSUI move of about 3.5%, about 13% before liquidation)","Below 1.10 (after a move of about 8%, about 9% before liquidation)",Repay debt in the affected vault,Current Finance positions
 C26,K3,"USDSUI utilization, daily withdrawal cap used","> 85%, > 60% of cap","> 90%, > 80% of cap","Reduce, begin staged exit",Current Finance API
 C26,K4,"Net yield at the fund's leverage, 14 days",< 13%,< 12% for 14 days,Rotate,Current Finance APIs
 C26,K5,Unclaimed or unhedged SUI rewards,> 1 day,> 3 days,"Claim and sell, or short SUI perpetual, automate once tooling is live",Wallet

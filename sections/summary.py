@@ -14,7 +14,7 @@ import project_config as cfg
 from utils.charts import GREY, NAVY, TEAL, apply_layout, format_usd
 from utils.data_loader import (latest_data_date, load_c21_rates, load_current, load_current_snapshot, load_dolomite_snapshot,
                                load_editorial, load_positions, load_wlfi)
-from utils.strategy import (c21_guardrail_backtest, cur_components, cur_costs, cur_daily, cur_legs, cur_liq_levels, monthly_apr,
+from utils.strategy import (c21_guardrail_backtest, cur_components_avg, cur_costs, cur_daily, cur_legs, cur_liq_levels, monthly_apr,
                             nearest_large_liquidation)
 from utils.text import T
 
@@ -31,7 +31,7 @@ def numbers():
     c = cur_costs(snap, L, E)
     up, dn = cur_liq_levels(L)
     e1, e2, a, d1, d2 = cur_legs(L)
-    comp = cur_components(cur.tail(30).mean(numeric_only=True).to_dict(), L, E)
+    comp = cur_components_avg(cur.tail(30), L, E)
     by_month = dict(zip(m["month"], m["apr"]))
     return {"comp": comp, "aug": by_month.get("2026-08"), "sep_m": by_month.get("2026-09"), "net30": d["net"].tail(30).mean(), "sep": sep["net"].mean(), "sep_min": sep["net"].min(),
             "months": m, "months_ok": int((m["apr"] >= 12).sum()), "zero_avg": d["zero"].mean(),

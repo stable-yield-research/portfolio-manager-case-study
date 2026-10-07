@@ -8,7 +8,7 @@ category,risk,impact,likelihood,mitigation,trigger
 3.4 Standards,USDSUI package upgrade held by a single Bridge key: an upgrade could freeze the USDSUI held in vault 2,Medium,Low,"Issuer watch, net USDSUI zero, exit on any unexplained USDSUI upgrade",K7
 3.1.2 Smart contract,Vault health drifts down as interest accrues on the USDSUI debt,Low,High,Monthly rebalance back to 3.5x,K2
 3.4 Standards,USDSUI or USDC depeg,Medium,Low,"Net USDSUI zero, vault liquidation needs a move of about 16% to 19%","K1, K2"
-3.2.3 Tokenomics,SUI rewards are about 60% of gross yield,Medium,Medium,"Monthly test against 12%, rotate if it fails for two weeks",K4
+3.2.3 Tokenomics,SUI rewards are about 63% of gross yield,Medium,Medium,"Monthly test against 12%, rotate if it fails for two weeks",K4
 3.7 Market,SUI price between claims,Low,High,"Claim daily, sell or hedge with a short SUI perpetual the same day, automate later",K5
 3.7.2 Liquidity,USDSUI rate above the 80% kink,Medium,Medium,"The fund owes and holds equal USDSUI, so it pays only about a third of any spike",K3
 3.7.2 Liquidity,Exit speed limited by shared daily withdrawal caps,Medium,Low,"Partial closes alternating between the two positions, swaps sized to fit a few $1M batches, exit cost provisioned as if every swap were made","K3, K9"
